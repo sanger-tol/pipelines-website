@@ -4,6 +4,8 @@
 > Currently, we plan to **download** all primary and alternative ToL assemblies, as well as non-ToL (VGP, *Lepidoptera*, and requests) assemblies, and run the analysis pipelines **only on the primary** assemblies.
 > [Let us know](https://github.com/sanger-tol/pipelines-website/issues/new?assignees=priyanka-surana&labels=pipeline%2Cenhancement&projects=&template=genome_after_party_feature_request.yaml&title=%5BFeature%5D%3A+) if some analyses would be useful to have on the other assemblies too.
 
+All pipelines listed below are being automated using the new production system, which detects the presence of available datasets and triggers the appropriate workflow.
+
 # INSDC Download {#insdcdownload}
 
 **[sanger-tol/insdcdownload](https://pipelines.tol.sanger.ac.uk/insdcdownload)** downloads assemblies from INSDC into a Tree of Life directory structure. This pipeline is run for all **primary and alternative** ToL assemblies, as well as non-ToL (VGP, *Lepidoptera*, and requests) assemblies.
