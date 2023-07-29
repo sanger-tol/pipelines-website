@@ -38,7 +38,7 @@
         "jquery-ui-dist": "^1.12.1",
         "leaflet": "^1.9.4",
         "moment": "^2.29.4",
-        "moment-timezone": "^0.5.35",
+        "moment-timezone": "^0.5.43",
         "postcss-cli": "^8.2.0",
         "sass": "^1.29.0",
         "showdown": "^1.9.1",
