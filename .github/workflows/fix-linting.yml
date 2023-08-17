@@ -10,6 +10,8 @@ jobs:
       contains(github.event.comment.html_url, '/pull/') &&
       contains(github.event.comment.body, '@pipelines-website-bot fix linting') &&
       github.repository == 'sanger-tol/pipelines-website'
+    permissions:
+      workflow: write
     runs-on: ubuntu-latest
     steps:
       # Use the @nf-core-bot token to check out so we can push later
@@ -54,4 +56,4 @@ jobs:
           git commit -m "[automated] Fix linting with Prettier"
           git push
 
-          
+
