@@ -15,14 +15,14 @@ jobs:
       # Use the @nf-core-bot token to check out so we can push later
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.pipelines_website_token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Action runs on the issue comment, so we don't get the PR by default
       # Use the gh cli to check out the PR
       - name: Checkout Pull Request
         run: gh pr checkout ${{ github.event.issue.number }}
         env:
-          GITHUB_TOKEN: ${{ secrets.pipelines_website_token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/setup-node@v2
 
@@ -53,3 +53,5 @@ jobs:
           git status
           git commit -m "[automated] Fix linting with Prettier"
           git push
+
+          
