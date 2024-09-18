@@ -39,7 +39,7 @@
         "moment": "^2.29.4",
         "moment-timezone": "^0.5.35",
         "postcss-cli": "^8.2.0",
-        "sass": "^1.29.0",
+        "sass": "^1.79.0",
         "showdown": "^1.9.1",
         "tablesorter": "^2.31.3"
     },
