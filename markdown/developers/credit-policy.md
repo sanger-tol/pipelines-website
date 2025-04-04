@@ -15,6 +15,16 @@ or
 # This script was originally conceived by @github-username
 ```
 
+## In `nextflow.config`
+
+`nextflow.config` now has space in the "manifest" for a list of "contributors".
+The list should everyone who contributed one way or the other to the pipeline.
+There are three levels of "contribution":
+
+- _maintainer_
+- _author_
+- _contributor_
+
 ## In `README.md`
 
 Under `Credits` in `README.md`
