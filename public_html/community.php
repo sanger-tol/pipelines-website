@@ -238,10 +238,88 @@ include '../includes/header.php';
     Darwin Tree of Life
     <a href="#dtol_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
 </h3>
-<p><a href="https://www.darwintreeoflife.org" target="_blank">The Darwin Tree of Life (DToL)</a>
+<p>The <a href="https://www.darwintreeoflife.org" target="_blank">Darwin Tree of Life (DToL)</a>
     project aims to sequence the genomes of 70,000 species of eukaryotic organisms in Britain and Ireland. 
     It is a collaboration between biodiversity, genomics and analysis partners that is transforming the way we do biology, 
     conservation and biotechnology.</p>
+
+<h3 id="vgp_testimonial">
+    <img width="200px" src="/assets/img/VGP_Tag_RGB_newLogo_72dpi_Dots_EDIT.png"
+        class="float-end ps-4 darkmode-image" />
+    Vertebrate Genomes Project
+    <a href="#vgp_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p>The <a href="https://vertebrategenomesproject.org/" target="_blank">Vertebrate Genomes Project (VGP)</a>,
+    a project of the G10K Consortium, aims to generate near error-free reference genome assemblies of ~70,000 extant vertebrate species.
+    The VGP Species List details our Phase 1 Progress and includes a full list of the &gt;70,000 extant, vertebrate species.
+    </p>
+
+<h3 id="psyche_testimonial">
+    <img width="200px" src="/assets/img/psyche_goddess_logo.png"
+        class="float-end ps-4 darkmode-image" />
+    Project Psyche
+    <a href="#psyche_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p><a href="https://projectpsyche.org/" target="_blank">Project Psyche</a>
+is a multinational effort to sequence the genomes of all 11,000 species of Lepidoptera - moths and butterflies - in Europe.
+Building on the Tree of Life Programme's expertise on similar biodiversity genomics projects, Project Psyche is expected to complete the 11,000 genomes in five years.
+    </p>
+
+<h3 id="erga_testimonial">
+    <img width="200px" src="/assets/img/e31d74_0696de4131f546f3bd52a4bf33a09c8a~mv2.png"
+        class="float-end ps-4 darkmode-image" />
+    European Reference Genome Atlas
+    <a href="#erga_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p>The <a href="https://www.erga-biodiversity.eu/" target="_blank">European Reference Genome Atlas (ERGA)</a>
+initiative is a pan-European scientific response to current threats to biodiversity. Reference genomes provide the most complete insight into the genetic basis that forms each species and represent a powerful resource in understanding how biodiversity functions. With approximately one fifth of the ~200,000 European species at risk of extinction, we need to act fast and together to generate high-quality complete genome resources in large scale.
+    </p>
+
+<h3 id="asg_testimonial">
+    <img width="200px" src="/assets/img/ASG_logo_nowords_transparent-1-300x300.png"
+        class="float-end ps-4 darkmode-image" />
+    Aquatic Symbiosis Genomics
+    <a href="#asg_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p>The <a href="https://www.aquaticsymbiosisgenomics.org/" target="_blank">Aquatic Symbiosis Genomics (ASG)</a>
+project is sequencing the genomes of symbiotic systems.
+The project seeks to provide the genomic foundations needed by scientists to answer key questions about the ecology and evolution of symbiosis in marine and freshwater species, where at least one partner is a microbe.
+
+ASG is jointly funded by the Wellcome Sanger Institute and the <a href="https://www.moore.org/">Gordon and Betty Moore Foundation</a>,
+with ten global partners acting as hubs for different groups of symbiotic organisms.
+    </p>
+
+<h3 id="aegis_testimonial">
+    Ancient Environmental Genomics Initiative for Sustainability
+    <a href="#aegis_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p>The <a href="https://globe.ku.dk/research/ancient-environmental-genomics-initiative-for-sustainability/" target="_blank">Ancient Environmental Genomics Initiative for Sustainability (AEGIS)</a>,
+jointly funded by the NovoNordisk Foundation and the Wellcome Trust,
+is a global consortium led by the Globe Institute at the University of Copenhagen.
+AEGIS aims to develop the essential science and methodology to use ancient environmental DNA (eDNA) – coupled with other ancient and modern biomolecule-based approaches – to identify important organismal associations and genetic adaptations in natural and agro-ecosystems that will improve future food security under climate change.
+    </p>
+
+<h3 id="bat1k_testimonial">
+    <img width="200px" src="/assets/img/Mina-logo-340-156.png"
+        class="float-end ps-4 darkmode-image" />
+    Bat1K
+    <a href="#bat1k_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p><a href="https://bat1k.com/" /target="_blank">Bat1K</a>
+is an initiative to sequence the genomes of all living bat species, approximately 1400 species in total. The main goal of this consortium is to uncover the genes and genetic mechanisms behind the unusual adaptations of bats, essentially mine the bat genome to uncover their secrets. Using the newest of our genetic tools, we will deep sequence the blue print and genetic code of every species of bat in the world. It took over 13 years and $3 billion US dollars to sequence the first human genome, and given the great advances in the field it is now much faster and cheaper. We must put these fantastic technological advances to good use and push them to achieve their full potential. Imagine uncovering the secret of longer health-spans, flight, echolocation and disease resistance hidden in the bat genome.
+    </p>
+
+<h3 id="bga_testimonial">
+    <img width="200px" src="/assets/img/BGA24_final_2.png"
+        class="float-end ps-4 darkmode-image" />
+    BioDiversity Genomics Academy
+    <a href="#bga_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
+</h3>
+<p><a href="https://thebgacademy.org/" /target="_blank">BioDiversity Genomics Academy</a>
+is a series of free, open to all, online-only, short and interactive sessions on how to use the bioinformatics tools and approaches that underpin the <a href="https://www.earthbiogenome.org/">Earth BioGenome Project</a> and the field as a whole.
+    </p>
+
+
 <div class="clearfix"></div>
 
 <?php include '../includes/footer.php';
