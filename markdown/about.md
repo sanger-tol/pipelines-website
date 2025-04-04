@@ -35,6 +35,7 @@ Current members are listed below:
 - [Cibele Sotero-Caio](#cibele-sotero-caio)
 - [Paul Davis](#paul-davis)
 - [Tyler Chafin](#tyler-chafin)
+- [Ene Göktan](#ene-goktan)
 
 #### Matthieu Muffato, Team Lead {#matthieu-muffato}
 
@@ -65,6 +66,11 @@ Current members are listed below:
 
 [<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/chafin-tyler/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/tkchafin) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/tyler-chafin-810694197) &nbsp;
 </br> Tyler, a Senior Bioinformatician, develops and maintains reproducible pipelines supporting large-scale genome assembly and analysis objectives of the Tree of Life programme.
+
+#### Ene Göktan, Data Analyst {#ene-goktan}
+
+[<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/goktan-ene/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/enegoktan) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/ene-goktan) &nbsp;
+</br> Ene, a Data Analyst, is responsible for the reading of the Tree of Life laboratory data. Ene provides support analyses and meaningful representations.
 
 #### Alumni and Friends {#alumni}
 
