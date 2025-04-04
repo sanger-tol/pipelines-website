@@ -80,6 +80,7 @@ All sanger-tol pipelines _should_ follow the following guidelines, if possible /
   - All boolean parameters evaluate to `false` by default **or** all boolean parameters evaluate to `true` by default.
   - All boolean parameters are named `--enabled-*` **or** all boolean parameters are named `--skip-*`, etc.
 - Check manifest includes DOI (if present) etc.
+- Check that the only files executable are in the `bin/` directory.
 
 ## Don't have to do {#not-needed}
 
