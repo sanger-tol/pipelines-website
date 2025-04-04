@@ -91,12 +91,21 @@ Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via 
 
 ## Other bits
 
+We're almost done. We now need to push some changes to the `main` branch to customise our pipeline a little further.
+
 ### Copyright
 
 We licence our pipelines with MIT.
 The MIT licence should already be in your repository, coming from the nf-core template, but we need to update the copyright statement to:
 
 > Copyright (c) 2025 Genome Research Ltd.
+
+### `main` vs `master` branch
+
+Support for `main` is gradually coming in nf-core but we still need to change a few things:
+
+- In `.github/workflows/ci.yml`, replace the occurrence of `master` with `main`.
+- In `.github/workflows/linting.yml`, replace the two occurrences of `master` with `main`.
 
 ### Logo
 
