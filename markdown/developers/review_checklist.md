@@ -105,9 +105,17 @@ The guidelines and actions within the code of conduct take precedence over the d
 
 ### Identity and branding
 
+**Link with nf-core**
+
 Please don't call your pipeline `nf-core/<yourpipeline>`, it _must_ be `sanger-tol/<yourpipeline>`.
 Please say that your pipeline _"uses"_ nf-core rather than rather than _"is"_ nf-core.
 When you generate a pipeline with `nf-core create`, exclude nf-core branding and select custom prefix `sanger-tol`.
+
+If reviewing a pipeline on an older nf-core version, double-check the occurrences of the keyword `nf-core` in the repository.
+Everything that is meant to be about _our_ org must rather be `sanger-tol`.
+
+Also check the occurrences of `nf-co.re`.
+We have our own website <https://pipelines.tol.sanger.ac.uk> to display all the pipeline documentation.
 
 **Development must on the sanger-tol organisation.**
 
