@@ -91,6 +91,11 @@ Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via 
 
 ## Other bits
 
+We licence our pipelines with MIT.
+The MIT licence should already be in your repository, coming from the nf-core template, but we need to update the copyright statement to:
+
+> Copyright (c) 2025 Genome Research Ltd.
+
 The repository needs to be integrated with Zenodo before making the first release.
 Better to do it now before anyone forgets !
 Ask [@muffato](https://github.com/muffato) to enable the Zenodo integration.
