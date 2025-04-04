@@ -34,6 +34,7 @@ Current members are listed below:
 - [Cibin Sadasivan Baby](#cibin-sadasivan-baby)
 - [Cibele Sotero-Caio](#cibele-sotero-caio)
 - [Paul Davis](#paul-davis)
+- [Tyler Chafin](#tyler-chafin)
 
 #### Matthieu Muffato, Team Lead {#matthieu-muffato}
 
@@ -59,6 +60,11 @@ Current members are listed below:
 
 [<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/davis-paul/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/Paul-Davis) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/paul-davis-uk/) &nbsp; [<img class="emoji" src="/assets/img/twitter.svg" height=25px>](https://twitter.com/SirPaulDavis) &nbsp;
 </br> Paul works on the main ToL Genome Engine. This system was developed by the ToL to manage and track samples from collection, onboarding, processing in the lab, sequencing and finally the publication of the assembly and Genome Note publication. As there are many steps in this process developing methodology to identify issues as early as possible is vital to avoid wasted time and resource. Paul works at all levels of the project fielding questions about data flow, data fixes and helps other ToL staff and project stakeholders with data and information. Paul also interacts with external groups and stakeholders to maintain data integrity in the public domain.
+
+#### Tyler Chafin, Senior Bioinformatician {#tyler-chafin}
+
+[<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/chafin-tyler/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/tkchafin) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/tyler-chafin-810694197) &nbsp;
+</br> Tyler, a Senior Bioinformatician, develops and maintains reproducible pipelines supporting large-scale genome assembly and analysis objectives of the Tree of Life programme.
 
 #### Alumni and Friends {#alumni}
 
