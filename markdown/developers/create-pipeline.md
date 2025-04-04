@@ -10,17 +10,21 @@ This page is heavily inspired by the nf-core page [Adding a new pipeline](https:
 ## Create the pipeline
 
 All pipelines _must_ use the [nf-core template](https://nf-co.re/docs/contributing/guidelines/requirements/use_the_template).
-This is done by using the `nf-core create` command - see [the docs](https://nf-co.re/tools#creating-a-new-pipeline) for detailed instructions.
+This is done by using the `nf-core pipelines create` command - see [the docs](https://nf-co.re/docs/nf-core-tools/pipelines/create) for detailed instructions.
 This tool does lots of things for you: it gives you the correct file structure and boiler plate code
 and also sets up the required `git` infrastructure for you to keep your pipeline in sync in the future.
 
-When asked _Do you want to customize which parts of the template are used ?_, answer `y`.
-Then, set the "Pipeline prefix" to "sanger-tol", and when asked to "Skip template areas",
-disable "iGenomes config" by:
+The command has a user interface that will ask how you want to customise the template.
+Answer these:
 
-- pressing the down arrow to choose the option,
-- pressing the space-bar to select it for disablement,
-- pressing Enter
+- _Choose pipeline type_: choose "custom"
+- _GitHub organisation_: enter `sanger-tol`
+- _Template features_: disable:
+  - _Use reference genomes_. This is only relevant when dealing _exclusively_ with model organisms.
+  - _Use multiqc_. **If** you're unsure whether you need it, or don't want to consider it a requirement of your pipeline (if you leave the option enabled, **every** template upgrade will try to update it).
+  - _Use fastqc_. Same reasoning as _multiqc_ above.
+
+There are other options such as the Microsoft Teams notifications that we don't use ourselves but are harmless to keep (and our users may find those options useful).
 
 ## Push to GitHub
 
@@ -43,6 +47,8 @@ so all you need to do is add the remote:
 ```bash
 ## Add a remote called 'origin' - this is the default name for a primary remote
 git remote add origin https://github.com/sanger-tol/PIPELINE_NAME.git
+## Or the following if you have SSH keys configured on GitHub
+git remote add origin git@github.com:sanger-tol/PIPELINE_NAME.git
 ```
 
 The create command also generated the three standard nf-core branches (`master`, `dev` and `TEMPLATE`),
