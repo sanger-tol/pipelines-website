@@ -5,7 +5,7 @@ subtitle: Suggestions for reviewing pipeline pull requests
 
 The aim is to have standardised best-practice pipelines.
 To ensure this standardisation, we maintain a set of guidelines which all sanger-tol pipelines must adhere to.
-These are adopted from [nf-core guidelines](https://nf-co.re/docs/contributing/guidelines) and [review checklist](https://nf-co.re/docs/contributing/pipeline_release_review_guidelines).
+These are adapted from [nf-core guidelines](https://nf-co.re/docs/contributing/guidelines) and [review checklist](https://nf-co.re/docs/contributing/pipeline_release_review_guidelines).
 
 Pipeline developers are recommended to create **modular and small pull requests (PRs)** to get the most out of the review process.
 Think about that _before_ writing the code and opening the pull-request, as breaking down a PR into multiple ones can be tricky.
@@ -23,7 +23,7 @@ All sanger-tol pipelines _must_ follow the following guidelines:
 - [Workflow size](#workflow-size): Not too big, not too small.
 - [Workflow name](#workflow-name): Names should be lower case and without punctuation.
 - [Use the template](#use-the-template): All sanger-tol pipelines must be built using the nf-core template and sanger-tol branding.
-- [Software license](#software-license): Pipelines must be open source, released with the MIT license.
+- [Software licence](#software-licence): Pipelines must be open source, released with the MIT licence.
 - [Bundled documentation](#bundled-documentation): Pipeline documentation must be stored in the repository and viewable on the pipeline website.
 - [Docker support](#docker-support): Software must be bundled using Docker and versioned.
 - [Continuous integration testing](#continuous-integration-testing): Pipelines must pass CI tests.
@@ -47,8 +47,8 @@ All sanger-tol pipelines _should_ follow the following guidelines, if possible /
 
 ## Do: Local code and modules {#local}
 
-- Do local scripts in `bin/` have author and license embedded?
-  - Local scripts must be licensed with the MIT license, like the pipeline code itself.
+- Do local scripts in `bin/` have author and licence embedded?
+  - Local scripts must be licenced with the MIT licence, like the pipeline code itself.
 - Do all local modules have docker/singularity/conda declarations?
   - Are they ideally in bioconda/biocontainers ?
 - Do all local modules conda/container tool declarations have versions? (and _not_ `latest`, `dev` etc.)
@@ -61,12 +61,12 @@ All sanger-tol pipelines _should_ follow the following guidelines, if possible /
 
 - Documentation is only on the pipelines website (not pointed to other places, e.g. not readthedocs )
 - Is documentation sufficiently described (`usage.md`, `output.md`, `nextflow_schema.json`)?
-  - nextflow_schema.json: check if types are correct and that `default` and `enum` are used where applicable
+  - `nextflow_schema.json`: check if types are correct and that `default` and `enum` are used where applicable
 - Are there any typos in the documentation (`usage.md`, `output.md`, `nextflow_schema.json`)
 - Is CHANGELOG sufficiently filled in?
   - Check version system is three-point SemVer e.g. 2.1.0
   - Has the date been updated?
-- Check citation formatting consistency in `CIATIONS.md`
+- Check citation formatting consistency in `CITATIONS.md`
 - Check that all tools are cited
 - Check that (all) pipeline author(s) listed themselves in the manifest and other contributors are added in the README
 
@@ -75,9 +75,10 @@ All sanger-tol pipelines _should_ follow the following guidelines, if possible /
 - Check no overly non-template components (no readthedocs, entirely custom logo etc.)
 - Check for general code readability
 - Check for possible code bugs
-- Check for consistency in parameters
+- Check for consistency in parameters to simplify the user experience
   - i.e. `snake_case`
-  - All boolean parameters evaluate to `false` by default (e.g. bad: `params.run_step = true`, good: `params.skip_step = false` )
+  - All boolean parameters evaluate to `false` by default **or** all boolean parameters evaluate to `true` by default.
+  - All boolean parameters are named `--enabled-*` **or** all boolean parameters are named `--skip-*`, etc.
 - Check manifest includes DOI (if present) etc.
 
 ## Don't have to do {#not-needed}
@@ -139,11 +140,13 @@ Workflows should be started using the `nf-core create` command which makes a new
 
 Where possible, workflow authors should do their best to follow nf-core conventions for filenames and code locations.
 
-### Software license
+### Software licence
 
-All sanger-tol pipelines must be released with an MIT license. The copyrights belong to Genome Research Ltd. as per Wellcome Sanger Institute policy.
+All sanger-tol pipelines must be released with an MIT licence. The copyrights belong to Genome Research Ltd. as per Wellcome Sanger Institute policy.
 
-Please try not bundle any third party scripts within the workflow, in case they have a different or incompatible license (for example, in the `bin` directory). If you need such a script, even a simple one, please release it on bioconda instead and reference it like any other software.
+Please try not bundle any third party scripts within the workflow, in case they have a different or incompatible licence (for example, in the `bin` directory).
+If you need such a script, even a simple one, try to release it on bioconda or as a container instead and reference it like any other software.
+If you still decide to bundle the third-party script (software) with the workflow, make sure the licence file is updated accordingly.
 
 ### Bundled documentation
 
@@ -236,7 +239,7 @@ Please acknowledge all developers, reviewers and anyone who has contributed to t
 Where previous work from other pipelines / projects is used within a pipeline, the original author(s) must be properly acknowledged. Some examples on how you could do that to make sure they feel valued:
 
 - Send them a message via Slack and let them know that you use their work and had to change something to fit your own purpose. If in doubt, check with them to see how they would like to be acknowledged.
-- Check the license of their code and/or graphics components and make sure you obey the rules that this license imposes (e.g. `CC-BY` means you have to attribute the original creator).
+- Check the licence of their code and/or graphics components and make sure you obey the rules that this licence imposes (e.g. `CC-BY` means you have to attribute the original creator).
 - If you use portions of pipeline code, even if its just tiny pieces:
   - Link to the original repository and/or authors.
   - Leave existing credits and acknowledgement sections intact - there may be more than just a single author involved.
@@ -263,6 +266,13 @@ For minor bugfixes a `patch` branch may be used and merged directly into `main`,
 
 The `TEMPLATE` branch should only contain vanilla nf-core template code.
 It is used for automated synchronisation of template updates.
+
+If reviewing a pipeline on an older nf-core version, double-check the occurrences of the keyword `master` in the repository.
+
+- GitHub Actions workflows (under `.github/`) may still contain `master` but always with `main` as well.
+  The only exceptions is those three files that we ask to update during the pipeline creation.
+- `modules.json` can refer to `master` because that's the branch used in nf-core/modules.
+- `nextflow.config` and `nextflow_schema.json` also refer to `master` as the branch used in nf-core/configs.
 
 ### Use Bioconda
 
