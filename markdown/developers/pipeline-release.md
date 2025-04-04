@@ -39,6 +39,28 @@ Follow the "Before you release" and "Steps to release" from the [nf-core release
 3. The "core team member" who can activate the integration with Zenodo is [@muffato](https://github.com/muffato).
 4. We don't have Twitter integration.
 
+### Integration with Zenodo
+
+The Zenodo record will be created automatically but we can't know the DOI until after the release !
+We have to do a release first, wait to get the DOI from Zenodo, and then we can update all references
+in the repository.
+
+You have two strategies:
+
+- Do a pre-release, e.g. 0.\*, get the DOI, and then release 1.0 with the DOI included.
+- Release 1.0 without the DOI and include the DOI in 1.0.1 (or later).
+
+Secondly, Zenodo tries to infer the authors from the history of the code and certain files,
+but it's imperfect.
+
+The best way is to create a `CITATION.cff` file.
+The file lists all the authors, their affiliation, and their ORCID, and is loaded by Zenodo.
+The information should already be in the "manifest" found in `nextflow.config`
+Therefore, when reviewing a release pull-request, compare the content of the manifest with CITATION.cff
+and flag any inconsistencies.
+
+### Versioning
+
 About version numbers and release names:
 
 1. The release _number_ is made of digits and dots **only**, and follows [Semantic Versioning](https://semver.org/).
@@ -87,7 +109,7 @@ Alternatively, GitHub can also generate release notes from the list of commits. 
 *Summary of the release*
 ```
 
-## Integration with Zenodo
+## Update the Zenodo record
 
 Once you've made a release, a record is automatically created on Zenodo.
 Tell [@muffato](https://github.com/muffato) or [@DLBPointon](https://github.com/DLBPointon) who can then do the following:
@@ -99,7 +121,7 @@ Tell [@muffato](https://github.com/muffato) or [@DLBPointon](https://github.com/
 5. Check that the licence is correctly set to MIT.
 6. In the "Software" section, link to GitHub URL, enter "Nextflow" as the language, and set the "Development Status" to "Active".
 
-## Integration with WorkflowHub
+## Upload to WorkflowHub
 
 As part of an EBP and ERGA recommendation, we should deposit our workflows into [WorkflowHub](https://workflowhub.eu/programmes/37) too.
 There isn't an automated way of doing that yet, so in the meantime we need to manually upload the releases.
