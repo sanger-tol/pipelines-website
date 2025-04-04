@@ -91,10 +91,54 @@ Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via 
 
 ## Other bits
 
+### Copyright
+
 We licence our pipelines with MIT.
 The MIT licence should already be in your repository, coming from the nf-core template, but we need to update the copyright statement to:
 
 > Copyright (c) 2025 Genome Research Ltd.
+
+### Logo
+
+To add the sanger-tol logo to your pipeline, edit `nextflow.config`
+
+Add this at the end of the `help` dictionary (under `validation`):
+
+```
+        beforeText = """
+-\033[2m----------------------------------------------------\033[0m-
+\033[0;34m   _____                               \033[0;32m _______   \033[0;31m _\033[0m
+\033[0;34m  / ____|                              \033[0;32m|__   __|  \033[0;31m| |\033[0m
+\033[0;34m | (___   __ _ _ __   __ _  ___ _ __ \033[0m ___ \033[0;32m| |\033[0;33m ___ \033[0;31m| |\033[0m
+\033[0;34m  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|\033[0m|___|\033[0;32m| |\033[0;33m/ _ \\\033[0;31m| |\033[0m
+\033[0;34m  ____) | (_| | | | | (_| |  __/ |        \033[0;32m| |\033[0;33m (_) \033[0;31m| |____\033[0m
+\033[0;34m |_____/ \\__,_|_| |_|\\__, |\\___|_|        \033[0;32m|_|\033[0;33m\\___/\033[0;31m|______|\033[0m
+\033[0;34m                      __/ |\033[0m
+\033[0;34m                     |___/\033[0m
+\033[0;35m  ${manifest.name} ${manifest.version}\033[0m
+-\033[2m----------------------------------------------------\033[0m-
+"""
+        afterText = """${manifest.doi ? "\n* The pipeline\n" : ""}${manifest.doi.tokenize(",").collect { "    https://doi.org/${it.trim().replace('https://doi.org/','')}"}.join("\n")}${manifest.doi ? "\n" : ""}
+* The nf-core framework
+    https://doi.org/10.1038/s41587-020-0439-x
+* Software dependencies
+    https://github.com/sanger-tol/blobtoolkit/blob/main/CITATIONS.md
+"""
+```
+
+And add another dictionary named `summary` at the end of the `validation` dictionary:
+
+```
+    summary {
+        beforeText = validation.help.beforeText
+        afterText = validation.help.afterText
+    }
+```
+
+You should then see this in your terminal when running the pipeline:
+<img src="/assets/img/developer-images/sanger-tol-logo-cli.png" alt="Sanger-tol logo rendered in a terminal">
+
+### Zenodo
 
 The repository needs to be integrated with Zenodo before making the first release.
 Better to do it now before anyone forgets !
