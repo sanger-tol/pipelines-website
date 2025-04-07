@@ -65,6 +65,15 @@ and flag any inconsistencies.
 
 ### Versioning
 
+`nf-core pipelines bump-version` can automatically update the version in several locations.
+Notably, it is not aware of `CITATION.cff`, which you have to update manually.
+
+As a reminder, you should be versioning your `dev` branch `${major_number}.${minor_number}dev`.
+This is to ensure that users don't inadvertently take our `dev` branch as release-ready.
+
+That means additional steps to remove the `dev` suffix right before merging into `main` / the release,
+and adding it back after the pull-request.
+
 About version numbers and release names:
 
 1. The release _number_ is made of digits and dots **only**, and follows [Semantic Versioning](https://semver.org/).
