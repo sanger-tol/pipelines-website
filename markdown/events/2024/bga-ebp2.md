@@ -1,5 +1,5 @@
 ---
-title: EBP-IT (Session 2): Genomic Informatics Tools and Databases (BGA24)
+title: EBP-IT (Session 2) Genomic Informatics Tools and Databases (BGA24)
 subtitle: Biodiversity Genomics Academy
 type: tutorial
 start_date: '2024-10-15'
