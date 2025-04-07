@@ -94,6 +94,10 @@ class RepoHealth {
         'Markdown',
         'Run workflow tests',
         'Run pipeline with test data',
+        'Prettier',
+        'EditorConfig',
+        'Run pipeline with test data (latest-everything)',
+        'PythonBlack',
     ];
     public $branch_exist_tests = ['main'];
     public $branches_protection = ['main'];
