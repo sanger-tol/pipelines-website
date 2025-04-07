@@ -13,22 +13,26 @@ First a reminder about how we use branches in sanger-tol.
 
 `main` is the release branch. Releases can only happen from the `main` branch
 and code present on the `main` branch _has_ to be released. `main` can be
-updated by merging either the staging branch, `dev`, or a bugfix branch.
+updated by merging either the staging branch, `dev`, or the bugfix branch, `patch`.
 
 `dev` is the staging branch, which accumulates new features before release.
 Code on the `dev` branch should always pass tests and be functional (this is a
 condition of our [review guidelines](/docs/contributing/review_checklist)).
 
 Bugfix branches can be used to patch a released pipeline. The branch needs to
+be named `patch`,
 be created off `main` and merged into `main` for immediate release. There needs
 to be extra caution when merging a bugfix branch into `main` as there isn't the
 `dev` branch as a buffer.
 
-Our model only supports 1 "active" release at a time. For instance, if you have
-already released 1.0.0 and 1.1.0, 1.1.0 is considered the "active" version, and
-the next version, according to [Semantic Versioning](https://semver.org/), can
-only be 1.1.1, 1.2.0, or 2.0.0. In this example, releasing 1.0.1 is **not**
-supported.
+The model implies that apart from bugfixes (patch number changes), new versions
+can only come from the tip of the development tree.
+If you have already released 1.0.0, 1.1.0, and 2.0.0,
+then https://github.com/sanger-tol/pipelines-website/actions/workflows/sync_template.yml
+the next release will be either 2.1.0, 3.0.0, or a bugfix
+(2.0.1, 1.1.1, or 1.0.1, although
+the intention of the model is that once 2.0.0 is released, versions 1.\*
+are not maintained any more.
 
 ## Release steps
 
