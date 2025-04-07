@@ -857,7 +857,7 @@ function get_gh_team_repos($team) {
     }
 }
 $gh_team_ids = [];
-get_gh_team_repos('nextflow_admin');
+// get_gh_team_repos('nextflow_admin');
 get_gh_team_repos('nextflow_all');
 
 // Loop through pipelines
