@@ -151,12 +151,7 @@ def build_cff(pipeline_obj):
     contributors = get_contributors(pipeline_obj)
     authors = []
     for contributor in contributors:
-
-        log.debug(f"Adding author: {author}")
-
-
-
-
+        log.debug(f"Adding author: {contributor}")
         author = {}
         set_if_set(author, "affiliation", contributor.get("affiliation"))
         set_if_set(author, "orcid", contributor.get("orcid"))
