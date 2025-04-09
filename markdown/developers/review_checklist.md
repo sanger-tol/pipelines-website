@@ -256,6 +256,12 @@ Where previous work from other pipelines / projects is used within a pipeline, t
 
 If in doubt about what to do, ask on Slack or discuss at the fortnightly pipeline meetings.
 
+To accurately record all contributions, Nextflow now supports a `contributors` array in the [`manifest` section of `nextflow.config`](https://www.nextflow.io/docs/latest/reference/config.html#manifest).
+Fill it in, and use the two scripts `/software/treeoflife/bin/generate_cff_from_manifest.py` and `/software/treeoflife/bin/generate_rocrate_from_manifest.py`
+to update `CITATION.cff` and `ro-crate-metadata.json` accordingly.
+
+When reviewing a release pull-request, check that all files are synchronised.
+
 ### Minimum inputs
 
 Pipelines can accept as many input files as you like, but it should be possible to run with as few as possible.
