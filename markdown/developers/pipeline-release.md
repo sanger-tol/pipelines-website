@@ -58,15 +58,18 @@ If you're based on the latest nf-core template,
 the information should already be in the "manifest" found in `nextflow.config`.
 We provide a script to automatically write `CITATION.cff` from the manifest.
 Simply run:
+
 ```
 /software/treeoflife/bin/generate_cff_from_manifest.py  # if you're at the root of the repository
 /software/treeoflife/bin/generate_cff_from_manifest.py path/to/repository  # otherwise
 ```
+
 The command will regenerate the `CITATION.cff` file in the repository.
 
 Note that the version number, as defined in `nexflow.config` is copied into `CITATION.cff`.
 If you adhere to the nf-core convention for versioning the `dev` branch, you'll have
-the `dev` suffix in `CITATION.cff` too.
+the `dev` suffix in `CITATION.cff` too if you run the script from that branch.
+For that reason, it is easier to run it at the last minute, right before merging `dev` into `main`.
 
 ### Update the record after release
 
@@ -138,6 +141,26 @@ Alternatively, GitHub can also generate release notes from the list of commits. 
 
 *Summary of the release*
 ```
+
+## RO Crate
+
+[Research Object Crates (RO-Crates)](https://www.researchobject.org/ro-crate/) are machine-readable,
+standardised, files that include metadata about a software (workflow).
+
+RO-Crates have got space to defined the authors of the software,
+and nf-core can create/update the `ro-crate-metadata.json` file automatically.
+However, it gets the list of authors **only** from the git history of `main.nf`.
+
+Just like for `CITATION.cff`, we have a script to automatically regenerate
+`ro-crate-metadata.json` from the pipeline manifest. Run:
+
+```
+/software/treeoflife/bin/generate_rocrate_from_manifest.py  # if you're at the root of the repository
+/software/treeoflife/bin/generate_rocrate_from_manifest.py path/to/repository  # otherwise
+```
+
+Unfortunately, `nf-core pipelines bump-version` regenerates the file every time it is called.
+Like `CITATION.cff`, it is easier to run it at the last minute, right before merging `dev` into `main`.
 
 ## Release steps
 
