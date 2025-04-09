@@ -159,12 +159,8 @@ class SangerToLROCrate(ROCrate):
 )
 def rocrate(pipeline_dir):
     pipeline_dir = Path(pipeline_dir)
-    try:
-        rocrate_obj = SangerToLROCrate(pipeline_dir)
-        rocrate_obj.create_rocrate(json_path=pipeline_dir)
-    except (UserWarning, LookupError, FileNotFoundError) as e:    
-        log.error(e)
-        sys.exit(1)
+    rocrate_obj = SangerToLROCrate(pipeline_dir)
+    rocrate_obj.create_rocrate(json_path=pipeline_dir)
 
 if __name__ == "__main__":
     rocrate()
