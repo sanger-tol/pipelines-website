@@ -95,7 +95,7 @@ We're almost done. We now need to push some changes to the `main` branch to cust
 
 ### Copyright
 
-We licence our pipelines with MIT.
+We licence our pipelines with the MIT license.
 The MIT licence should already be in your repository, coming from the nf-core template, but we need to update the copyright statement to:
 
 > Copyright (c) 2025 Genome Research Ltd.
