@@ -48,7 +48,10 @@ All sanger-tol pipelines _should_ follow the following guidelines, if possible /
 ## Do: Local code and modules {#local}
 
 - Do local scripts in `bin/` have author and licence embedded?
-  - Local scripts must be licenced with the MIT licence, like the pipeline code itself.
+  - We don't need to repeat the licence in our scripts, since the MIT licence is defined in the `LICENSE` file at the root.
+  - Check the origin and licensing of any third-party script included in `bin/`. Pay particular
+    attention to scripts that are licensed under something different from MIT.
+    If in doubt, ask [@muffato](https://github.com/muffato).
 - Do all local modules have docker/singularity/conda declarations?
   - Are they ideally in bioconda/biocontainers ?
 - Do all local modules conda/container tool declarations have versions? (and _not_ `latest`, `dev` etc.)
