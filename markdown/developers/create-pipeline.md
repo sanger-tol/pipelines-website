@@ -94,14 +94,14 @@ Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via 
 
 We're almost done. We now need to push some changes to the `main` branch to customise our pipeline a little further.
 
-### Copyright
+### Copyright
 
 We licence our pipelines with the MIT license.
 The MIT licence should already be in your repository, coming from the nf-core template, but we need to update the copyright statement to:
 
 > Copyright (c) 2025 Genome Research Ltd.
 
-### `main` vs `master` branch
+### `main` vs `master` branch
 
 Support for `main` is gradually coming in nf-core but we still need to change a few things:
 
@@ -148,7 +148,7 @@ And add another dictionary named `summary` at the end of the `validation` dictio
 You should then see this in your terminal when running the pipeline:
 <img src="/assets/img/developer-images/sanger-tol-logo-cli.png" alt="Sanger-tol logo rendered in a terminal">
 
-### Zenodo
+### Zenodo
 
 The repository needs to be integrated with Zenodo before making the first release.
 Better to do it now before anyone forgets !
