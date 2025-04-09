@@ -1,27 +1,28 @@
 ---
 title: Querying genome metadata and sequencing projects using GoaT
-subtitle: Biodiversity Genomics Academy
+subtitle: Cibele Sotero-Caio
 type: tutorial
 start_date: '2024-10-16'
 start_time: '12:00+00:00'
 end_date: '2024-10-16'
 end_time: '14:00+00:00'
-location_name: Zoom
+location_name: Biodiversity Genomics Academy 2024
+location: https://thebgacademy.org/
 youtube_embed: https://www.youtube.com/watch?v=zExmSnG-ht4
 ---
 
-## Session Leader(s)
+> Organised by [Biodiversity Genomics Academy](https://thebgacademy.org/)
 
-Cibele Sotero-Caio  
-Genomic Data Curator  
-Tree of Life Programme  
-Wellcome Sanger Institute
+# Introduction
 
-## Description
+Biodiversity Genomics Academy 2024 (BGA24) is a series of free, open to all,
+nline-only, short and interactive sessions on how to use the bioinformatics tools and approaches that underpin the Earth BioGenome Project and the field as a whole.
 
-![favicon-32x32](https://github.com/BGAcademy23/goat/assets/13206220/6758c870-f72e-43c9-8d05-e0c47d3de052)
+More information [on our website](https://thebgacademy.org/).
 
-**Introduction to Genomes on a Tree (GoaT) database**
+# Description
+
+Introduction to Genomes on a Tree (GoaT) database.
 
 By the end of this session you will:
 
@@ -31,22 +32,14 @@ By the end of this session you will:
 4. Have experience viewing sequencing status and target lists for Earth Biogenome Projects
 5. Create and share reports for taxon and assembly metadata
 
-## Prerequisites
+# Prerequisites
 
 1. **Access to web via desktop** (GoaT UI is not optimized for mobile)
 2. Basic knowledge of genome characteristics and descriptors (assembly, assembly span, genome size, chromosome count,
    etc.)
 3. Interest in Eukaryotic genome sequencing initiatives
 
-!!! warning "Please make sure you MEET THE PREREQUISITES and READ THE DESCRIPTION above"
-
-    You will get the most out of this session if you meet the prerequisites above.
-
-    Please also read the description carefully to see if this session is relevant to you.
-
-    If you don't meet the prerequisites or change your mind based on the description or are no longer available at the session time, please email tol-training at sanger.ac.uk to cancel your slot so that someone else on the waitlist might attend.
-
-## More information
+# More information
 
 GoaT has been built using [GenomeHubs](https://github.com/genomehubs/genomehubs) to help coordinate efforts across the [Earth Biogenome Project](https://www.earthbiogenome.org) (EBP) Network at all stages from planning through sequencing and assembly to publication.
 

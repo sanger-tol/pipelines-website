@@ -1,20 +1,26 @@
 ---
 title: Genome profiling using GenomeScope
-subtitle: Biodiversity Genomics Academy
+subtitle: Kamil Jaron
 type: tutorial
 start_date: '2024-10-11'
 start_time: '08:00+00:00'
 end_date: '2024-10-11'
 end_time: '10:00+00:00'
-location_name: Zoom
+location_name: Biodiversity Genomics Academy 2024
+location: https://thebgacademy.org/
 youtube_embed: https://www.youtube.com/watch?v=Qe06772qrnc
 ---
 
-Session Leader(s)
+> Organised by [Biodiversity Genomics Academy](https://thebgacademy.org/)
 
-Kamil Jaron
+# Introduction
 
-## Programme
+Biodiversity Genomics Academy 2024 (BGA24) is a series of free, open to all,
+nline-only, short and interactive sessions on how to use the bioinformatics tools and approaches that underpin the Earth BioGenome Project and the field as a whole.
+
+More information [on our website](https://thebgacademy.org/).
+
+# Programme
 
 - Introduction to k-mer spectra, their interpretation and running GenomeScope (~30')
 - Ex. 1: Running and understanding genome models (~30')
@@ -23,7 +29,7 @@ Kamil Jaron
 - Discussion/Interpretation of wild k-mer spectra (~20')
   - We will bring a bunch of examples; but feel free to bring your own wild k-mer spectrum to share with others!
 
-## Description
+# Description
 
 By the end of this session you will be able to:
 
@@ -33,17 +39,9 @@ By the end of this session you will be able to:
 4. Run GenomeScope in command-line and web-server
 5. (if everything goes well) Create your own GenomeScope-like extended versions;
 
-## Prerequisites
+# Prerequisites
 
 1. Basics knowledge of genomics
 2. Be ready for some non-linear regression
 3. (optional) familiarity with k-mers (Some materials developed by ourselves: <https://github.com/KamilSJaron/oh-know/wiki>)
 4. (optional) Read relevant sections of <https://www.nature.com/articles/s41467-020-14998-3>
-
-!!! warning "Please make sure you MEET THE PREREQUISITES and READ THE DESCRIPTION above"
-
-    You will get the most out of this session if you meet the prerequisites above.
-
-    Please also read the description carefully to see if this session is relevant to you.
-
-    If you don't meet the prerequisites or change your mind based on the description or are no longer available at the session time, please email tol-training at sanger.ac.uk to cancel your slot so that someone else on the waitlist might attend.

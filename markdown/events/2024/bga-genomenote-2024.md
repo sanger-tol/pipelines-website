@@ -1,23 +1,26 @@
 ---
 title: Automating Genome Note publications
-subtitle: Biodiversity Genomics Academy
+subtitle: Bethan Yates, Tyler Chafin
 type: tutorial
 start_date: '2024-10-11'
 start_time: '13:00+00:00'
 end_date: '2024-10-11'
 end_time: '15:00+00:00'
-location_name: Zoom
+location_name: Biodiversity Genomics Academy 2024
+location: https://thebgacademy.org/
 youtube_embed: https://www.youtube.com/watch?v=MDEnuE3iYp0
 ---
 
-## Session Leader(s)
+> Organised by [Biodiversity Genomics Academy](https://thebgacademy.org/)
 
-Wellcome Sanger Institute
+# Introduction
 
-- [Bethan Yates](https://uk.linkedin.com/in/bethanyates)
-- [Tyler Chafin](https://www.sanger.ac.uk/person/chafin-tyler/)
+Biodiversity Genomics Academy 2024 (BGA24) is a series of free, open to all,
+nline-only, short and interactive sessions on how to use the bioinformatics tools and approaches that underpin the Earth BioGenome Project and the field as a whole.
 
-## Description
+More information [on our website](https://thebgacademy.org/).
+
+# Description
 
 In this session you will learn how to automatically generate content for genome note publications using our suite of [ToL analysis pipelines](https://pipelines.tol.sanger.ac.uk).
 
@@ -52,15 +55,7 @@ By the end of this part you will be able to:
 - The [Blobtool viewer](https://blobtoolkit.genomehubs.org/view/GCA_963859965.1/dataset/GCA_963859965.1/blob#Filters) for the species used in this session.
 - The [Genome After Party](https://gap.cog.sanger.ac.uk/Ceramica_pisi/) for the species used in this session.
 
-## Prerequisites
+# Prerequisites
 
 1. Familiarity with linux command line basics (cd, mv, rm)
 2. Knowledge of the Nano editor will be helpful
-
-!!! warning "Please make sure you MEET THE PREREQUISITES and READ THE DESCRIPTION above"
-
-    You will get the most out of this session if you meet the prerequisites above.
-
-    Please also read the description carefully to see if this session is relevant to you.
-
-    If you don't meet the prerequisites or change your mind based on the description or are no longer available at the session time, please email damon at thebgacademy.org to cancel your slot so that someone else on the waitlist might attend.
