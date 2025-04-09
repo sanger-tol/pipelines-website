@@ -80,12 +80,13 @@ In the About section on the right, click on the cog wheel and:
    - Most pipelines also have `workflow` and `genomics`.
 3. Enter a description.
 
-Then, ask [@muffato](https://github.com/muffato) or [@mcshane](https://github.com/mcshane) to add the repository to:
+Then, ask [@muffato](https://github.com/muffato) or [@mcshane](https://github.com/mcshane) to:
 
-1. The ["nextflow_all"](https://github.com/orgs/sanger-tol/teams/nextflow_all) team with the "write" permission
-2. The ["nextflow_admin"](https://github.com/orgs/sanger-tol/teams/nextflow_admin) team with the "admin" permission
-3. Remove your individual access to the repository
-4. Share the CI secrets with your repository at <https://github.com/organizations/sanger-tol/settings/secrets/actions>
+1. Add the repository to the ["nextflow_all"](https://github.com/orgs/sanger-tol/teams/nextflow_all) team with the "write" permission.
+2. Add the repository to the ["nextflow_admin"](https://github.com/orgs/sanger-tol/teams/nextflow_admin) team with the "admin" permission.
+3. Double-check that you're part of the ["nextflow_all"](https://github.com/orgs/sanger-tol/teams/nextflow_all) team (and add you otherwise !).
+4. Remove your individual access to the repository.
+5. Allow your repository to access all the secrets from <https://github.com/organizations/sanger-tol/settings/secrets/actions>.
 
 Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via <https://pipelines.tol.sanger.ac.uk/pipeline_health>.
 
