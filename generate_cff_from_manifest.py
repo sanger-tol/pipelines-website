@@ -139,15 +139,13 @@ def build_cff(pipeline_obj):
         "type": "software",  # it's either that or "dataset"
         "url": f"https://pipelines.tol.sanger.ac.uk/{pipeline_name.split('/')[1]}",
         "license": "MIT",
-        "title": f"{pipeline_name} v{pipeline_version}",
+        "title": f"{pipeline_name} v{pipeline_version}{" - " + release_name if release_name else ""}",
         "commit": pipeline_obj.repo.head.commit.hexsha,
         "version": pipeline_version,
         "date-released": datetime.date.today().isoformat(),
     }
     set_if_set(content, "repository-code", pipeline_obj.nf_config.get("manifest.homePage"))
     set_if_set(content, "doi", pipeline_obj.nf_config.get("manifest.doi"))
-    if release_name:
-        content["title"] = content["title"] + " - " + release_name
 
     contributors = get_contributors(pipeline_obj)
     authors = []
