@@ -14,18 +14,18 @@ The `main` and `dev` branches are "protected" and can only be modified with pull
 ### Access
 
 - All our pipeline repositories are public: everyone has read access.
-- All sanger-tol Nextflow developers have write access to all Nextflow repositories.
+- All sanger-tol Nextflow developers have write access to all Nextflow repositories through the [`nextflow_all`](https://github.com/orgs/sanger-tol/teams/nextflow_all) GitHub team.
   - Direct push to `main` and `dev` is not allowed, since the two branches are protected.
-- Within each team (Tree of Life Assembly and Informatics Infrastructure), everyone has ["maintain" access](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role) to the team repositories.
-- A selection of people from the Informatics Infrastructure team have ["admin" access](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role) to all Nextflow repositories.
-- [@muffato](https://github.com/muffato) and [@mcshane](https://github.com/mcshane) are ["owners"](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#permissions-for-organization-roles).
+- A selection of people from the Informatics Infrastructure team have ["admin" access](https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization#permissions-for-each-role) to all Nextflow repositories via the [`nextflow_admin`](https://github.com/orgs/sanger-tol/teams/nextflow_admin) GitHub team..
+- [@muffato](https://github.com/muffato), [@mcshane](https://github.com/mcshane), and [@andrew-varley](https://github.com/andrew-varley), are ["owners"](https://docs.github.com/en/organizations/managing-peoples-access-to-your-organization-with-roles/roles-in-an-organization#permissions-for-organization-roles).
 - Additional contributors can be added, if sponsored by a repository admin.
 
 ## Farm environment
 
-To develop and run pipelines on our LSF compute farms, first make sure you have set up the "module" and "Conda" environments as per https://ssg-confluence.internal.sanger.ac.uk/display/TOL/Farm+environment
+The Informatics Infrastructure team maintains central installations of Nextflow.
 
-Modules are used to expose Nextflow alone
+Nextflow itself can be enabled via _modules_. This is sufficient to _run_ pipelines.
+All recent major versions are installed after release (typically in April and October each year).
 
 ```
 $ module load nextflow/23.10.0-5889
@@ -38,9 +38,11 @@ $ nextflow -version
       http://nextflow.io
 ```
 
-Conda environments are used to expose the nf-core command-line tool, together with a Nextflow and some development helpers like `prettier` or `nf-test`.
+To develop pipelines, the Conda environments named `nf-core-*` are more appropriate.
+They expose the nf-core command-line tool, together with a Nextflow and some development helpers like `prettier` or `nf-test`.
 
 ```
+$ module load conda  # if not yet loaded
 $ conda activate nf-core_2.11
 $ nextflow -version
 
