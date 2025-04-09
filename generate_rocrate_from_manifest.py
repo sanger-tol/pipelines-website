@@ -65,12 +65,16 @@ def get_contributors(pipeline_obj):
                 email = pipeline_obj.repo.git.log(f"--author={name}", "--pretty=format:%ae", "-1")
                 if email:
                     author["email"] = email
+                elif "email" in author:
+                    del author["email"]
 
             # Fix the ORCID URL
-            if "orcid" in author and author["orcid"]:
-                orcid = author["orcid"]
-                if not orcid.startswith("http"):
+            if "orcid" in author:
+                orcid = author["orcid"].strip()
+                if orcid and not orcid.startswith("http"):
                     author["orcid"] = "https://orcid.org/" + orcid
+                elif not orcid:
+                    del author["orcid"]
 
             # Fix the GitHub URL
             if "github" in author:
