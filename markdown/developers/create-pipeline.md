@@ -101,6 +101,8 @@ The MIT licence should already be in your repository, coming from the nf-core te
 
 > Copyright (c) 2025 Genome Research Ltd.
 
+(or whichever year we're in !).
+
 ### `main` vs `master` branch
 
 Support for `main` is gradually coming in nf-core but we still need to change a few things:
