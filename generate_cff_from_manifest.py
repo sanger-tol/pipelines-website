@@ -19,13 +19,9 @@ from nf_core.utils import Pipeline
 
 log = logging.getLogger(__name__)
 
-message = "If you use this software, please cite it using the metadata from this file and all references from CITATIONS.md ."
+##### Shared functions to read and transform the manifest #####
 
-def get_pipeline(path):
-    pipeline_obj = Pipeline(path)
-    pipeline_obj._load()
-    return pipeline_obj
-
+# Read and parse the manifest
 def get_contributors(pipeline_obj):
     if "manifest.contributors" not in pipeline_obj.nf_config:
         log.error("No contributors field in manifest of nextflow.config")
@@ -94,6 +90,16 @@ def set_if_set(d, k, v):
         if sv:
             d[k] = sv
 
+##### End of shared functions #####
+
+message = "If you use this software, please cite it using the metadata from this file and all references from CITATIONS.md ."
+
+def get_pipeline(path):
+    pipeline_obj = Pipeline(path)
+    pipeline_obj._load()
+    return pipeline_obj
+
+# The release name isn't in the manifest. Look for it in the CHANGELOG
 def find_release_name(pipeline_dir, version):
     changelog = pipeline_dir / "CHANGELOG.md"
     with changelog.open() as f:

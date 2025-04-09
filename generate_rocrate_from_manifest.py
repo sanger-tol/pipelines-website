@@ -8,15 +8,18 @@ import os
 import sys
 from pathlib import Path
 
-import rocrate.rocrate
 import rich_click as click
 from rich.progress import BarColumn, Progress
+import rocrate.rocrate
 from rocrate.model.person import Person
 
 from nf_core.pipelines.rocrate import ROCrate, CustomNextflowCrateBuilder
 
 log = logging.getLogger(__name__)
 
+##### Shared functions to read and transform the manifest #####
+
+# Read and parse the manifest
 def get_contributors(pipeline_obj):
     if "manifest.contributors" not in pipeline_obj.nf_config:
         log.error("No contributors field in manifest of nextflow.config")
@@ -84,6 +87,8 @@ def set_if_set(d, k, v):
         sv = v.strip()
         if sv:
             d[k] = sv
+
+##### End of shared functions #####
 
 # Future-proof the script
 # nf-core 3.3 defines the expected CI as nf-test.yml but not all our
