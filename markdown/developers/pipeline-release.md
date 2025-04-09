@@ -3,9 +3,7 @@ title: Pipeline Release Instructions
 subtitle: Instructions for releasing a sanger-tol pipeline
 ---
 
-## nf-core Release Checklist
-
-This page is heavily inspired by the [nf-core release checklist](https://nf-co.re/docs/contributing/release_checklist).
+> This page is heavily inspired by the [nf-core release checklist](https://nf-co.re/docs/contributing/release_checklist).
 
 ## Branch model
 
@@ -23,27 +21,19 @@ Bugfix branches can be used to patch a released pipeline. The branch needs to
 be named `patch`,
 be created off `main` and merged into `main` for immediate release. There needs
 to be extra caution when merging a bugfix branch into `main` as there isn't the
-`dev` branch as a buffer.
+`dev` branch to act as a buffer.
 
 The model implies that apart from bugfixes (patch number changes), new versions
 can only come from the tip of the development tree.
 If you have already released 1.0.0, 1.1.0, and 2.0.0,
-then https://github.com/sanger-tol/pipelines-website/actions/workflows/sync_template.yml
-the next release will be either 2.1.0, 3.0.0, or a bugfix
-(2.0.1, 1.1.1, or 1.0.1, although
-the intention of the model is that once 2.0.0 is released, versions 1.\*
+then the next release will be either 2.1.0, 3.0.0, or a bugfix
+(2.0.1, 1.1.1, or 1.0.1), although
+the intent of the model is that once 2.0.0 is released, versions 1.\*
 are not maintained any more.
 
-## Release steps
+## Integration with Zenodo
 
-Follow the "Before you release" and "Steps to release" from the [nf-core release checklist](https://nf-co.re/docs/contributing/release_checklist) with the following adaptations:
-
-1. Replace "nf-core" with "sanger-tol".
-2. Since we develop directly off the sanger-tol repository, the version bump happens there, not "on your fork".
-3. The "core team member" who can activate the integration with Zenodo is [@muffato](https://github.com/muffato).
-4. We don't have Twitter integration.
-
-### Integration with Zenodo
+### DOI
 
 The Zenodo record will be created automatically but we can't know the DOI until after the release !
 We have to do a release first, wait to get the DOI from Zenodo, and then we can update all references
@@ -54,25 +44,52 @@ You have two strategies:
 - Do a pre-release, e.g. 0.\*, get the DOI, and then release 1.0 with the DOI included.
 - Release 1.0 without the DOI and include the DOI in 1.0.1 (or later).
 
-Secondly, Zenodo tries to infer the authors from the history of the code and certain files,
+### Author list and other metadata
+
+Zenodo tries to infer the authors from the history of the code and certain files,
 but it's imperfect.
-
 The best way is to create a `CITATION.cff` file.
-The file lists all the authors, their affiliation, and their ORCID, and is loaded by Zenodo.
-The information should already be in the "manifest" found in `nextflow.config`
-Therefore, when reviewing a release pull-request, compare the content of the manifest with CITATION.cff
-and flag any inconsistencies.
 
-### Versioning
+[Citation File Format](https://citation-file-format.github.io/) is a standard for
+recording contributions.
+The file lists all the authors, their affiliation, and their ORCID, and is loaded by Zenodo.
+
+If you're based on the latest nf-core template,
+the information should already be in the "manifest" found in `nextflow.config`.
+We provide a script to automatically write `CITATION.cff` from the manifest.
+Simply run:
+```
+/software/treeoflife/bin/generate_cff_from_manifest.py  # if you're at the root of the repository
+/software/treeoflife/bin/generate_cff_from_manifest.py path/to/repository  # otherwise
+```
+The command will regenerate the `CITATION.cff` file in the repository.
+
+Note that the version number, as defined in `nexflow.config` is copied into `CITATION.cff`.
+If you adhere to the nf-core convention for versioning the `dev` branch, you'll have
+the `dev` suffix in `CITATION.cff` too.
+
+### Update the record after release
+
+Once you've made a release, a record is automatically created on Zenodo.
+Tell [@muffato](https://github.com/muffato) or [@DLBPointon](https://github.com/DLBPointon) who can then do the following:
+
+1. Check the release notes. Markdown tables are not converted by default. You may need to manually copy the rendered table from GitHub into the Zenodo editor.
+2. Change the record type from "Software" to "Workflow".
+3. Check that all authors are properly named (first name and last name identified), have an ORCiD, and have the Sanger affiliation – should be all good if you used a `CITATION.cff`.
+4. Add the pipeline to the [sanger-tol Zenodo community](https://zenodo.org/communities/sanger-tol) – only needed for the first upload.
+5. Check that the licence is correctly set to MIT – should be all good if you used a `CITATION.cff`.
+6. In the "Software" section, link to GitHub URL, enter "Nextflow" as the language, and set the "Development Status" to "Active".
+
+## Versioning
 
 `nf-core pipelines bump-version` can automatically update the version in several locations.
-Notably, it is not aware of `CITATION.cff`, which you have to update manually.
 
 As a reminder, you should be versioning your `dev` branch `${major_number}.${minor_number}dev`.
 This is to ensure that users don't inadvertently take our `dev` branch as release-ready.
-
 That means additional steps to remove the `dev` suffix right before merging into `main` / the release,
 and adding it back after the pull-request.
+
+### Nomenclature
 
 About version numbers and release names:
 
@@ -122,17 +139,14 @@ Alternatively, GitHub can also generate release notes from the list of commits. 
 *Summary of the release*
 ```
 
-## Update the Zenodo record
+## Release steps
 
-Once you've made a release, a record is automatically created on Zenodo.
-Tell [@muffato](https://github.com/muffato) or [@DLBPointon](https://github.com/DLBPointon) who can then do the following:
+Follow the "Before you release" and "Steps to release" from the [nf-core release checklist](https://nf-co.re/docs/contributing/release_checklist) with the following adaptations:
 
-1. Check the release notes. Sometimes the conversion from Markdown doesn't work well, especially the tables. If this happens, copy-paste the rendered Markdwon from GitHub into the Zenodo editor.
-2. Change the record type from "Software" to "Workflow".
-3. Check that all authors are properly named (first name and last name identified), have an ORCiD, and have the recognised Sanger affiliation (it is named "Wellcome Sanger Institute (WTSI)", not "Wellcome Sanger Institute", and has the [ROR](https://ror.org/05cy4wa09) logo).
-4. Add the pipeline to the [sanger-tol Zenodo community](https://zenodo.org/communities/sanger-tol).
-5. Check that the licence is correctly set to MIT.
-6. In the "Software" section, link to GitHub URL, enter "Nextflow" as the language, and set the "Development Status" to "Active".
+1. Replace "nf-core" with "sanger-tol".
+2. Since we develop directly off the sanger-tol repository, the version bump happens there, not "on your fork".
+3. The "core team member" who can activate the integration with Zenodo is [@muffato](https://github.com/muffato).
+4. We don't have Twitter integration.
 
 ## Upload to WorkflowHub
 
