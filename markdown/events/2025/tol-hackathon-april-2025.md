@@ -11,4 +11,3 @@ location_name: G201, Sulston Building, Wellcome Genome Campus.
 
 The focus of this hackathon is to upgrade all pipelines to the latest nf-core template,
 and to review our shared guidelines and documentation.
-

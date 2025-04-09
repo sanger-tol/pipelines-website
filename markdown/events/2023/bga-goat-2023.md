@@ -28,4 +28,3 @@ By the end of this session you will:
 3. Have experience performing simple and complex queries using GoaT Web Interface to retrieve list of taxa and/or assemblies
 4. Have experience viewing sequencing status and target lists for Earth Biogenome Projects
 5. Create and share reports for taxon and assembly metadata
-

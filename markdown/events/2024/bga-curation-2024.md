@@ -25,7 +25,7 @@ More information [on our website](https://thebgacademy.org/).
 By the end of this session you will be able to:
 
 1. Understand the Manual curation pipeline
-2. Understand how Jbrowse can be utilised as a tool both to  aid curation and also for post curation analysis
+2. Understand how Jbrowse can be utilised as a tool both to aid curation and also for post curation analysis
 3. Interpret a HiC Map
 4. Understand how to curate an assembly using PretextView and associated curation scripts
 5. Create an updated/curated assembly fasta
