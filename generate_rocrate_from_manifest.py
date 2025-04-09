@@ -1,6 +1,8 @@
 #!/software/treeoflife/conda/users/envs/tol/nf-core_3.2/bin/python3
 
-"""Code to deal with pipeline RO (Research Object) Crates the sanger-tol way"""
+"""
+Read the pipeline manifest and generate the ro-crate-metadata.json file
+"""
 
 import json
 import logging

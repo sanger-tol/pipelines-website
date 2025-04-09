@@ -1,6 +1,8 @@
 #!/software/treeoflife/conda/users/envs/tol/nf-core_3.2/bin/python3
 
-"""Code to deal with pipeline RO (Research Object) Crates the sanger-tol way"""
+"""
+Read the pipeline manifest and generate the CITATION.cff file
+"""
 
 import datetime
 import json
@@ -125,6 +127,7 @@ def find_release_name(pipeline_dir, version):
 
 # Intro: https://citation-file-format.github.io/
 # Schema: https://github.com/citation-file-format/citation-file-format/blob/main/schema-guide.md
+# Validate with `cffconvert`
 def build_cff(pipeline_obj):
     pipeline_name = pipeline_obj.nf_config["manifest.name"]
     pipeline_version = pipeline_obj.nf_config["manifest.version"]
@@ -160,15 +163,19 @@ def build_cff(pipeline_obj):
         set_if_set(author, "email", contributor.get("email"))
         set_if_set(author, "website", contributor.get("github"))
         if "," in contributor["name"]:
+            # "Family name, Given name"
             (family, given) = contributor["name"].split(",", 1)
         elif " " in contributor["name"]:
+            # "Given Family" (no whitespace allowed in the given name)
             (given, family) = contributor["name"].split(maxsplit=1)
         else:
+            # "Given"
             given = contributor["name"]
             family = None
         set_if_set(author, "given-names", given)
         set_if_set(author, "family-names", family)
         authors.append(author)
+    # Authors ordered by alphabetical order
     authors.sort(key=operator.itemgetter("family-names"))
     content["authors"] = authors
     return content
@@ -184,8 +191,9 @@ def build_cff(pipeline_obj):
 def cff(pipeline_dir):
     pipeline_obj = get_pipeline(pipeline_dir)
     content = build_cff(pipeline_obj)
-    # dump_yaml_with_prettier expects to be run from the repository
+    # dump_yaml_with_prettier expects to be run from the directory of the repository
     os.chdir(pipeline_dir)
+    # Use the function from nf-core to make sure the CFF file is pretty
     dump_yaml_with_prettier("CITATION.cff", content)
 
 if __name__ == "__main__":
