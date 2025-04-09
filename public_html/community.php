@@ -232,9 +232,8 @@ include '../includes/header.php';
 <p>Tree of Life programme at Wellcome Sanger Institute is part of several biodiversity projects. You can see an overview of these below.</p>
 
 <h3 id="dtol_testimonial">
-    <img width="200px" src="/assets/img/contributors-<?php echo $theme == 'dark'
-        ? 'white'
-        : 'colour'; ?>/dtol.png" class="float-end ps-4 darkmode-image" />
+    <img width="170px" src="/assets/img/dtol/png"
+        class="float-end ps-4 darkmode-image" />
     Darwin Tree of Life
     <a href="#dtol_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
 </h3>
@@ -244,7 +243,7 @@ include '../includes/header.php';
     conservation and biotechnology.</p>
 
 <h3 id="vgp_testimonial">
-    <img width="200px" src="/assets/img/VGP_Tag_RGB_newLogo_72dpi_Dots_EDIT.png"
+    <img width="170px" src="/assets/img/VGP_Tag_RGB_newLogo_72dpi_Dots_EDIT.png"
         class="float-end ps-4 darkmode-image" />
     Vertebrate Genomes Project
     <a href="#vgp_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
@@ -255,7 +254,7 @@ include '../includes/header.php';
     </p>
 
 <h3 id="psyche_testimonial">
-    <img width="200px" src="/assets/img/psyche_goddess_logo.png"
+    <img width="170px" src="/assets/img/psyche_goddess_logo.png"
         class="float-end ps-4 darkmode-image" />
     Project Psyche
     <a href="#psyche_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
@@ -266,7 +265,7 @@ Building on the Tree of Life Programme's expertise on similar biodiversity genom
     </p>
 
 <h3 id="erga_testimonial">
-    <img width="200px" src="/assets/img/e31d74_0696de4131f546f3bd52a4bf33a09c8a~mv2.png"
+    <img width="170px" src="/assets/img/e31d74_0696de4131f546f3bd52a4bf33a09c8a~mv2.png"
         class="float-end ps-4 darkmode-image" />
     European Reference Genome Atlas
     <a href="#erga_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
@@ -276,7 +275,7 @@ initiative is a pan-European scientific response to current threats to biodivers
     </p>
 
 <h3 id="asg_testimonial">
-    <img width="200px" src="/assets/img/ASG_logo_nowords_transparent-1-300x300.png"
+    <img width="170px" src="/assets/img/ASG_logo_nowords_transparent-1-300x300.png"
         class="float-end ps-4 darkmode-image" />
     Aquatic Symbiosis Genomics
     <a href="#asg_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
@@ -300,7 +299,7 @@ AEGIS aims to develop the essential science and methodology to use ancient envir
     </p>
 
 <h3 id="bat1k_testimonial">
-    <img width="200px" src="/assets/img/Mina-logo-340-156.png"
+    <img width="170px" src="/assets/img/Mina-logo-340-156.png"
         class="float-end ps-4 darkmode-image" />
     Bat1K
     <a href="#bat1k_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
@@ -310,7 +309,7 @@ is an initiative to sequence the genomes of all living bat species, approximatel
     </p>
 
 <h3 id="bga_testimonial">
-    <img width="200px" src="/assets/img/BGA24_final_2.png"
+    <img width="170px" src="/assets/img/BGA24_final_2.png"
         class="float-end ps-4 darkmode-image" />
     BioDiversity Genomics Academy
     <a href="#bga_testimonial" class="header-link"><span class="fas fa-link" aria-hidden="true"></span></a>
