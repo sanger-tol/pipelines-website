@@ -15,7 +15,7 @@ Given the time constraint, the input data are typically a very small region of a
 sequencing data are limited to 1,000-10,000 reads, etc.
 
 The `test_full` profile is meant to define input data and parameters that represent
-a complete dataset. Such runs will typically take hours to complete on the farm. \\
+a complete dataset. Such runs will typically take hours to complete on the farm. \
 Neither of those profiles is expected to cover 100% of the pipeline features.
 
 [nf-test](https://www.nf-test.com/) is gradually making its way through nf-core.
@@ -41,7 +41,7 @@ The nf-core template includes a Continuous Integration workflow that runs the `t
 GitHub will run the test in pull-requests and will **block** the merge until the test
 passes.
 The `test` profile needs to give you reasonable confidence the changes don't
-break the pipeline. \\
+break the pipeline. \
 Note: you may need to add steps to download and configure input databases that are
 required by the pipeline. The file is `.github/workflows/ci.yml`.
 
