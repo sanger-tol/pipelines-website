@@ -34,7 +34,8 @@ Current members are listed below:
 - [Cibin Sadasivan Baby](#cibin-sadasivan-baby)
 - [Cibele Sotero-Caio](#cibele-sotero-caio)
 - [Paul Davis](#paul-davis)
-- [Beth Yates](#beth-yates)
+- [Tyler Chafin](#tyler-chafin)
+- [Ene Göktan](#ene-goktan)
 
 #### Matthieu Muffato, Team Lead {#matthieu-muffato}
 
@@ -61,13 +62,19 @@ Current members are listed below:
 [<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/davis-paul/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/Paul-Davis) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/paul-davis-uk/) &nbsp; [<img class="emoji" src="/assets/img/twitter.svg" height=25px>](https://twitter.com/SirPaulDavis) &nbsp;
 </br> Paul works on the main ToL Genome Engine. This system was developed by the ToL to manage and track samples from collection, onboarding, processing in the lab, sequencing and finally the publication of the assembly and Genome Note publication. As there are many steps in this process developing methodology to identify issues as early as possible is vital to avoid wasted time and resource. Paul works at all levels of the project fielding questions about data flow, data fixes and helps other ToL staff and project stakeholders with data and information. Paul also interacts with external groups and stakeholders to maintain data integrity in the public domain.
 
-#### Beth Yates, Bioinformatics Engineer {#beth-yates}
+#### Tyler Chafin, Senior Bioinformatician {#tyler-chafin}
 
-[<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/BethYates) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/bethanyates/) &nbsp;
-</br> Beth is a Bioinformatics Engineer working on a building a platform to automate the production of [Genome Note publications](https://wellcomeopenresearch.org/treeoflife). The Universal Genome Note platform consists of a web portal, database and Nextflow pipelines. Beth is contributing to the genomenote pipeline, this pipeline fetches assembly meta data and generates some of the figures and statistics included in each genome note.
+[<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/chafin-tyler/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/tkchafin) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/tyler-chafin-810694197) &nbsp;
+</br> Tyler, a Senior Bioinformatician, develops and maintains reproducible pipelines supporting large-scale genome assembly and analysis objectives of the Tree of Life programme.
+
+#### Ene Göktan, Data Analyst {#ene-goktan}
+
+[<img class="emoji" src="/assets/img/logo/sanger-tol-logo-tree.png" height=25px>](https://www.sanger.ac.uk/person/goktan-ene/) &nbsp; [<img class="emoji" src="/assets/img/github.svg" height=25px>](https://github.com/enegoktan) &nbsp; [<img class="emoji" src="/assets/img/linkedin.png" height=25px>](https://www.linkedin.com/in/ene-goktan) &nbsp;
+</br> Ene, a Data Analyst, is responsible for the reading of the Tree of Life laboratory data. Ene provides support analyses and meaningful representations.
 
 #### Alumni and Friends {#alumni}
 
+- Beth Yates, Bioinformatics Engineer. Beth worked on building a platform to automate the production of [Genome Note publications](https://wellcomeopenresearch.org/treeoflife). Beth contributed to the genomenote pipeline, which fetches assembly meta data and generates some of the figures and statistics included in each genome note.
 - Alexander Ramos-Díaz, Google Summer of Code contributor. Alexander kick-started the development of the [BlobToolKit](/blobtoolkit) pipeline through the [2022 edition of Google Summer of Code](https://summerofcode.withgoogle.com/archive/2022/organizations/wellcome-sanger-institute).
 - Zaynab Butt, Informatics and Digital Associate. Zaynab continued the development of the [BlobToolKit](/blobtoolkit) pipeline, and then developed the web interface of our internal tool for tracking workflow execution.
 - Priyanka Surana, Senior Bioinformatician. Priyanka was a Senior Bioinformatician, overseeing the development of Nextflow pipelines for genome assembly, curation and downstream analyses. She is passionate about building networks that support peer learning and facilitated the workflows community on campus.

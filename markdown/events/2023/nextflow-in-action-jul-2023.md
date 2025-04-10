@@ -1,5 +1,5 @@
 ---
-title: 'Workflows Community Meetup – Use Cases – Part 1'
+title: 'Nextflow in Action - July 2023'
 subtitle: How bioinformatic workflows are being used to deliver strategic goals – Anthony Underwood (Broken Strings Biosciences) and Disha Lodha (Ensembl Metazoa, EMBL-EBI)
 type: talk
 start_date: '2023-07-13'

@@ -1,6 +1,6 @@
 ---
-title: 'Nextflow in Action'
-subtitle: Matthieu Muffato, Luke Paul Buttigieg and Ricardo Ramirez
+title: 'Nextflow in Action - October 2023'
+subtitle: Adopting Nextflow in Sanger Tree of Life – Matthieu Muffato (Sanger Institute) and Porting clinical genome analysis to Nextflow at Genomics England – Luke Paul Buttigieg and Ricardo Ramirez (Genomics England)
 type: talk
 start_date: '2023-10-12'
 start_time: '14:00+01:00'

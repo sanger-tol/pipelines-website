@@ -1,6 +1,6 @@
 ---
-title: 'Nextflow in Action'
-subtitle: Zahra Waheed and Ahmad Zyoud; Jonathan Manning
+title: 'Nextflow in Action - September 2023'
+subtitle: Data Coordination and Archiving – Zahra Waheed and Ahmad Zyoud (EMBL-EBI) and Jonathan Manning (nf-core)
 type: talk
 start_date: '2023-09-05'
 start_time: '15:00+01:00'

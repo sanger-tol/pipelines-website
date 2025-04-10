@@ -30,3 +30,42 @@ contributors:
     url: https://www.ebi.ac.uk/ena/
     affiliation_url: https://www.ebi.ac.uk/
     location: [52.07993, 0.18630]
+  - full_name: Vertebrate Genome Lab
+    short_name: VGL
+    description: >
+      The Vertebrate Genome Lab (VGL) is a genomic-focused lab at the
+      Rockefeller University. The main goal of the VGL is to serve as one the data
+      production and assembly hubs for the  Vertebrate Genomes Project (VGP). We
+      specialize in long-read and long-range sequencing technologies. Our lab hosts
+      several of the latest sequencing technologies as well as computing resources
+      for genome assemblies. Our team is composed of field biologists, molecular
+      biologists, and bioinformaticians encompassing all the required skills and
+      talents for generating high-quality reference genomes.
+    affiliation: The Rockefeller University
+    address: The Rockefeller University, NY 10065, United States of America
+    url: https://www.vertebrategenomelab.org/
+    affiliation_url: https://www.rockefeller.edu/
+    contact: Erich Jarvis
+    contact_email: vgl@rockefeller.edu
+    contact_github: vgl-hub
+    location: [40.7624872, -73.9582511]
+    twitter: genomewarriors
+  - full_name: Earth Biogenome Project
+    short_name: EBP
+    description: >
+      The secretariat team of the Earth Biogenome Project helps onboarding new
+      projects into the global effort for sequencing all life on Earth.
+    affiliation: Global Futures Laboratory
+    address: Arizona State University, 1151 S. Forest Ave., Tempe, AZ 85287, United States of America
+    url: https://www.earthbiogenome.org/
+    affiliation_url: https://globalfutures.asu.edu/
+    contact: Harris Lewin
+    contact_email: ebpsecretariat@asu.edu
+    location: [33.4164955, -111.9367859]
+    twitter: EBPgenome
+  - full_name: nf-core
+    short_name: nf-core
+    description: >
+      A global community effort to collect a curated set of open‑source analysis pipelines built using Nextflow.
+    url: https://nf-co.re/
+    contact_github: nf-core
