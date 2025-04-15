@@ -207,17 +207,23 @@ if (file_exists($gh_pipeline_schema_fn)) {
 
     $schema_content = '<div class="param-docs">';
     $schema_content .= _h1('Parameters');
+    $definitions = 'definitions';
+    $group_id_postion = 14;
+    if (isset($schema['$defs'])) {
+        $definitions = '$defs';
+        $group_id_postion = 8;
+    }
     // Definition groups
     if (isset($schema['allOf']) && count($schema['allOf']) > 0) {
         foreach ($schema['allOf'] as $allof) {
-            if (!isset($allof['$ref']) || !isset($schema['definitions'])) {
+            if (!isset($allof['$ref']) || !isset($schema[$definitions])) {
                 continue;
             }
-            $group_id = substr($allof['$ref'], 14);
-            if (!isset($schema['definitions'][$group_id]) || count($schema['definitions'][$group_id]) == 0) {
+            $group_id = substr($allof['$ref'], $group_id_postion);
+            if (!isset($schema[$definitions][$group_id]) || count($schema[$definitions][$group_id]) == 0) {
                 continue;
             }
-            $group = $schema['definitions'][$group_id];
+            $group = $schema[$definitions][$group_id];
             $schema_content .= print_param(true, $group_id, $group);
             // Group-level params
             foreach ($group['properties'] as $param_id => $param) {
