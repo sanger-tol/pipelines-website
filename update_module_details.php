@@ -201,6 +201,10 @@ echo "\nInformation for modules saved into database.\n\n";
 $gh_pipelines = github_query('https://api.github.com/orgs/sanger-tol/repos?per_page=100');
 $ignored_repos = parse_ini_file('ignored_repos.ini')['repos'];
 
+// Load details of the pipelines
+$pipeline_name_json = json_decode(file_get_contents(dirname(__FILE__) . '/public_html/pipeline_names.json'), true);
+$pipeline_names = $pipeline_name_json['pipeline'];
+
 // Drop existing table if query was successful
 $sql = "CREATE TABLE IF NOT EXISTS nfcore_pipelines (
             id                INT             AUTO_INCREMENT PRIMARY KEY,
@@ -259,8 +263,13 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
 
         if (in_array($pipeline['name'], $ignored_repos)) {
             $pipeline_type = 'core_repos';
+            echo  "Ignore repo " . htmlspecialchars($pipeline['name'], ENT_QUOTES, 'UTF-8') . "\n";
             continue;
-        } else {
+        } else if (! in_array($pipeline['name'], $pipeline_names)) {
+            $pipeline_type = 'pipelines';
+            echo  "Not on pipeline list and ignore repo " . htmlspecialchars($pipeline['name'], ENT_QUOTES, 'UTF-8') . "\n";
+            continue;
+        }else{
             $pipeline_type = 'pipelines';
             echo  "Process pipeline " . htmlspecialchars($pipeline['name'], ENT_QUOTES, 'UTF-8') . "\n";
         }

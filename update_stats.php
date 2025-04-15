@@ -389,10 +389,13 @@ foreach ($gh_repos as $repo) {
         $repo_type = 'core_repos';
         // ignore non-pipeline repos for now
         continue;
+    } else if ( !in_array($repo->name, $pipelines_json_names) ) {
+        // ignore not in piplein list repos for now
+        continue;
     } else {
         $repo_type = 'pipelines';
     }
-    echo " Repo " . htmlspecialchars($repo->name, ENT_QUOTES, 'UTF-8') . "\n";
+    echo " Process stats for repo " . htmlspecialchars($repo->name, ENT_QUOTES, 'UTF-8') . "\n";
     $results[$repo_type][$repo->name]['repo_metrics'][$updated] = [
         'id' => $repo->id,
         'name' => $repo->name,
@@ -425,7 +428,7 @@ echo "Fetch traffic views and clones for each repo, and the contributors\n";
 foreach (['pipelines'] as $repo_type) {
 //foreach (['pipelines', 'core_repos'] as $repo_type) {
     foreach ($results[$repo_type] as $repo_name => $repo_stats) {
-        echo " " . $repo_name . "\n";
+        echo " Process traffic for " . $repo_name . "\n";
         // Views
         $gh_views_url = 'https://api.github.com/repos/sanger-tol/' . $repo_name . '/traffic/views';
         $gh_views = json_decode(file_get_contents($gh_views_url, false, $gh_api_opts));
@@ -528,8 +531,14 @@ echo "Count how many total contributors and contributions we have per week.\n";
 foreach (['pipelines'] as $repo_type) {
 //foreach (['pipelines', 'core_repos'] as $repo_type) {
     foreach ($results[$repo_type] as $repo_name => $repo_stats) {
+        echo " Process contributors for " . $repo_name . "\n";
         foreach ($results[$repo_type][$repo_name]['contributors'] as $idx => $contributor) {
             // Count how many total contributors and contributions we have per week
+            echo "  " . $contributor->author->login . "\n";
+            // Skip if no weeks
+            if (!isset($contributor->weeks) || count($contributor->weeks) == 0) {
+                continue;
+            }
             foreach ($contributor->weeks as $w) {
                 // Skip zeros (anything before 2010)
                 if ($w->w < 1262304000) {
