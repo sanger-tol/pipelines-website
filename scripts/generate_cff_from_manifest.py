@@ -140,7 +140,6 @@ def build_cff(pipeline_obj):
         "url": f"https://pipelines.tol.sanger.ac.uk/{pipeline_name.split('/')[1]}",
         "license": "MIT",
         "title": f"{pipeline_name} v{pipeline_version}{" - " + release_name if release_name else ""}",
-        "commit": pipeline_obj.repo.head.commit.hexsha,
         "version": pipeline_version,
         "date-released": datetime.date.today().isoformat(),
     }
