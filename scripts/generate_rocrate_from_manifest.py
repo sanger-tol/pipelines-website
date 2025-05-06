@@ -10,6 +10,7 @@ import os
 import sys
 from pathlib import Path
 
+import requests
 import rich_click as click
 from rich.progress import BarColumn, Progress
 import rocrate.rocrate
@@ -111,12 +112,39 @@ CustomNextflowCrateBuilder.build = new_build_method
 class SangerToLROCrate(ROCrate):
     """
     Class to generate an RO Crate for a pipeline
-    using author information from the Nextflow manifest
+    Overrides and complements the code written by nf-core
     """
+
+    def make_workflow_rocrate(self) -> None:
+        super().make_workflow_rocrate()
+
+        # Link to the pipelines website instead of the nf-core website
+        self.crate.mainEntity["url"] = [self.crate.mainEntity["url"][0], self.crate.mainEntity["url"][1].replace("https://nf-co.re/sanger-tol", "https://pipelines.tol.sanger.ac.uk/")]
+
+        # Change the Organization object and relink sdPublisher
+        self.crate.delete("https://nf-co.re/")
+        self.crate.add_jsonld(
+            {"@id": "https://pipelines.tol.sanger.ac.uk/", "@type": "Organization", "name": "Sanger Tree of Life programme", "url": "https://pipelines.tol.sanger.ac.uk/"}
+        )
+        self.crate.mainEntity["sdPublisher"] = {"@id": "https://pipelines.tol.sanger.ac.uk/"}
+
+        # Same code as upstream, but fetching keywords from the pipelines website
+        remote_workflows = requests.get("https://pipelines.tol.sanger.ac.uk/pipelines.json").json()["remote_workflows"]
+        # Also put "nextflow" first in the list
+        topics = ["nextflow", "nf-core"]
+        for remote_wf in remote_workflows:
+            assert self.pipeline_obj.pipeline_name is not None  # mypy
+            if remote_wf["name"] == self.pipeline_obj.pipeline_name:
+                topics = topics + remote_wf["topics"]
+                break
+
+        log.debug(f"Adding topics: {topics}")
+        self.crate.mainEntity["keywords"] = topics
+
 
     def add_main_authors(self, wf_file: rocrate.model.entity.Entity) -> None:
         """
-        Add workflow contributors to the crate
+        Add workflow contributors to the crate using author information from the Nextflow manifest
         Overrides the implementation from the parent class
         """
         if "manifest.contributors" not in self.pipeline_obj.nf_config:
