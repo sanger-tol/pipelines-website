@@ -29,7 +29,7 @@ The `test` profile should be usable by anyone anywhere.
 This means that its input data should be on publicly accessible web servers.
 We use Sanger's Ceph S3
 
-1. Deposit your data under `/lustre/scratch123/tol/resources/nextflow/test-data/`.
+1. Deposit your data under `/nfs/treeoflife-01/resources/nextflow/`.
 2. Ask [@gq1](https://github.com/gq1) or [@muffato](https://github.com/muffato) to synchronise the directory.
 3. Access your data throuh `https://tolit.cog.sanger.ac.uk/test-data/` (same sub-path as on disk)
 
