@@ -82,7 +82,7 @@ class RepoHealth {
         'pre-commit',
         'nf-core',
         'Run pipeline with test data (latest-everything | test | docker)',
-        'nf-test',
+        'confirm-pass',
         // NOTE - doesn't seem to be any way to get the "available" contexts through GitHub API
         // If we really want to do this, might have to query the repo contents..??
     ];
