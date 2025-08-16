@@ -34,7 +34,7 @@
         "datatables.net-bs5": "^1.13.5",
         "file-saver": "^2.0.5",
         "hammerjs": "^2.0.8",
-        "jquery": "^3.6.0",
+        "jquery": "^3.7.1",
         "leaflet": "^1.9.4",
         "moment": "^2.29.4",
         "moment-timezone": "^0.5.35",
