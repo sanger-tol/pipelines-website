@@ -19,8 +19,8 @@ Ready? Let's get started! :rocket:
 
 I will take you through:
 
-1. Setting up the environment, like a stage, for Nextflow to perform on :mirror_ball:
-2. Installing Nextflow, our performer :man_dancing:, with dependencies as a set of instrument Nextflow perform with :violin:
+1. Setting up the environment, like a stage, for Nextflow to perform on &#x1FAA9;
+2. Installing Nextflow, our performer &#x1F57A;, with dependencies as a set of instrument Nextflow perform with :violin:
 3. Running Sanger-ToL pipelines, the symphonies our performer play :musical_score:
 
 If that's the concert you came for, you're in the right place. :wink:
@@ -45,7 +45,7 @@ If you’re curious (or just love documentation), check out the [Homebrew websit
 
 Now you’ve got `Homebrew`. Cheers! :beers: Let's move on to the next step.
 
-### Dependencies :toolbox:
+### Dependencies &#x1F9F0;
 
 Nextflow is writen in `Groovy`, which runs on the **Java Virtual Machine (JVM)**. That means you’ll need a Java Development Kit (JDK). The easiest option is to install `OpenJDK`, the open-source JDK that includes everything you need for `Groovy` and Nextflow.
 
@@ -61,9 +61,9 @@ You might also have heard about `Conda` from other docs. `Conda` is both a packa
 brew install --cask miniforge
 ```
 
-This gives you Conda without the bloat. :fairy:
+This gives you Conda without the bloat. &#x1F9DA;
 
-### Containers :passenger_ship:
+### Containers :ship:
 
 One of the best parts of running this pipeline is that you don’t need to install all the individual tools yourself - they’re all neatly wrapped in containers. Think of a container as a 'ready-made costume :dress:' for our performer: it contains all the software the pipeline needs, so your system stays clean and free from version conflicts. And why the 'ship' emoji? Ah, because our performer needs many costumes from all around the world - and We will ship them in! A true luxery :nail_care:.
 
@@ -75,7 +75,7 @@ brew install docker
 
 I personally like `Docker` because its logo is an adorable whale :whale: carrying containers on its back. :smile:
 
-And that’s it! :popcorn: You now have everything prepared for our Nextflow performer to take the stage. :dancer:
+And that’s it! &#x1F37F; You now have everything prepared for our Nextflow performer to take the stage. :dancer:
 
 ## Nextflow :rainbow:
 
