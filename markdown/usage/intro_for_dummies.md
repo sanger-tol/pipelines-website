@@ -117,5 +117,7 @@ If you see version details appear, congratulations! Your Nextflow performer is r
 # Pipeline :musical_note:
 
 Now let's get the pipeline running and make some music with your data!
-The following sections provide the official usage guidelines. Don't worry if some parts seem unclear or if you encounter issues – we're here to help! Feel free to [send me your questions](https://forms.gle/Rn1bWMXamhdoBBeDA) or open an issue on our repository.
 
+Go to the [Pipelines section](/pipelines) to browse our collection of pipelines.
+Don't worry if some parts seem unclear or if you encounter issues – we're here to help &#x1F91D; !
+Feel free to open an issue on our repository, and we'll get to it.
