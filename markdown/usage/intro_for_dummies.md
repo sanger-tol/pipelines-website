@@ -1,4 +1,7 @@
-# sanger-tol/pipelines: Usage
+---
+title: Intro for Dummies
+subtitle: How to get started with running Sanger-ToL pipelines
+---
 
 Welcome! You've found this usage guide for the **Sanger-ToL pipelines**. Well done! :tada:
 
