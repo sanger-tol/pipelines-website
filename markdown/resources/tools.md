@@ -66,6 +66,22 @@ Nucleotide coodinates (other than the start or end of contigs) in AGP files prod
 
 <br/>
 
+## hifi-trimmer
+
+[hifi_trimmer](https://github.com/sanger-tol/hifi-trimmer) is a command-line tool for filtering and trimming extraneous adapter hits from a HiFi read set using a BLAST search against a fasta file of adapter sequences. It is designed to be highly configurable, with per-adapter settings to determine actions if the adapter is found at the ends of a read or in the middle. To improve reproducibility, the primary output of the tool is a BED file that describes the region of each read to be excluded. The tool also includes a command to filter the reads to disk using the produced BED file.
+
+**Pipelines:** [readmapping](/readmapping)
+
+<br/>
+
+## TeloX
+
+[TeloX](https://github.com/sanger-tol/TeloX) (Telomere Motif Extraction Tool) is a high-performance bioinformatics tool for **de novo identification and analysis of telomere motifs** in DNA sequences. It provides comprehensive analysis of strand bias, motif distribution, and telomere identification with optimized performance using parallel processing and efficient algorithms.
+
+**Pipelines:** [treeval](/treeval)
+
+<br/>
+
 ## Arima mapping pipeline
 
 Arima Genomics, who supply the kits we use to produce Hi-C data for genome assembly,
@@ -73,4 +89,4 @@ have released [open source scripts](https://github.com/ArimaGenomics/mapping_pip
 We have modified them to support the CRAM files produced by Sanger's sequencing teams,
 and have made these changes are available in our [fork of the repository on GitHub](https://github.com/sanger-tol/arima_mapping_pipeline).
 
-**Pipelines:** [curationpretext](/curationpretext) | [genomeassembly](/genomeassembly) | [treeval](/treeval)
+**Pipelines:** [curationpretext](/curationpretext) | [genomeassembly](/genomeassembly) | [treeval](/treeval) | [readmapping](/readmapping)
