@@ -55,6 +55,20 @@ jobs:
       matrix: ${{fromJson(needs.get-pipelines.outputs.matrix)}}
       fail-fast: false
     steps:
+      - id: nfcore-checkout-args
+        name: Build nf-core/tools checkout arguments
+        run: |
+          ref="${{ github.event.inputs.nfcore_ref }}"
+          if [ -n "$ref" ]; then
+            printf 'args={"repository":"nf-core/tools","ref":"%s"}\n' "$ref" >> "$GITHUB_OUTPUT"
+          else
+            printf 'args={"repository":"nf-core/tools"}\n' >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        name: Check out nf-core/tools
+        with: ${{ fromJSON(steps.nfcore-checkout-args.outputs.args) }}
+
       - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         name: Check out sanger-tol/${{ matrix.pipeline }}
         with:
