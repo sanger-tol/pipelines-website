@@ -7,7 +7,7 @@ on:
       nfcore_ref:
         description: 'Version of nf-core/tools to use'
         type: string
-        default: '3.2.0'
+        default: ''
       pipeline:
         description: 'Pipeline to sync'
         type: string
@@ -26,6 +26,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+env:
+  NFCORE_REF: ${{ github.event.inputs.nfcore_ref || '' }}
+  PIPELINE: ${{ github.event.inputs.pipeline || 'all' }}
+  DEBUG: ${{ github.event.inputs.debug == 'true' }}
+  MAKE_PR: ${{ github.event.inputs.make_pr != 'false' }}
+
 jobs:
   get-pipelines:
     runs-on: 'ubuntu-latest'
@@ -34,16 +40,14 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          if [ "${{ github.event.inputs.testpipeline }}" == "true" ]; then
-            echo '{"pipeline":["testpipeline"]}' > pipeline_names.json
-          elif [ "${{ github.event.inputs.pipeline }}" != "all" ] && [ "${{ github.event.inputs.pipeline }}" != "" ]; then
+          if [ "$PIPELINE" != "all" ] && [ "$PIPELINE" != "" ]; then
             curl -O https://pipelines.tol.sanger.ac.uk/pipeline_names.json
             # check if the pipeline exists
-            if ! grep -q "\"${{ github.event.inputs.pipeline }}\"" pipeline_names.json; then
-              echo "Pipeline ${{ github.event.inputs.pipeline }} does not exist"
+            if ! grep -q "\"$PIPELINE\"" pipeline_names.json; then
+              echo "Pipeline $PIPELINE does not exist"
               exit 1
             fi
-            echo '{"pipeline":["${{ github.event.inputs.pipeline }}"]}' > pipeline_names.json
+            echo "{\"pipeline\":[\"$PIPELINE\"]}" > pipeline_names.json
           else
             curl -O https://pipelines.tol.sanger.ac.uk/pipeline_names.json
           fi
@@ -57,13 +61,20 @@ jobs:
       matrix: ${{fromJson(needs.get-pipelines.outputs.matrix)}}
       fail-fast: false
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-        name: Check out nf-core/tools
-        with:
-          repository: nf-core/tools
-          ref: ${{ github.event.inputs.nfcore_ref }}
+      - id: nfcore-checkout-args
+        name: Build nf-core/tools checkout arguments
+        run: |
+          if [ -n "$NFCORE_REF" ]; then
+            printf 'args={"repository":"nf-core/tools","ref":"%s"}\n' "$NFCORE_REF" >> "$GITHUB_OUTPUT"
+          else
+            printf 'args={"repository":"nf-core/tools"}\n' >> "$GITHUB_OUTPUT"
+          fi
 
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
+        name: Check out nf-core/tools
+        with: ${{ fromJSON(steps.nfcore-checkout-args.outputs.args) }}
+
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         name: Check out sanger-tol/${{ matrix.pipeline }}
         with:
           repository: sanger-tol/${{ matrix.pipeline }}
@@ -72,22 +83,19 @@ jobs:
           path: sanger-tol/${{ matrix.pipeline }}
           fetch-depth: '0'
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
+      - name: Set up Python 3.14
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6
         with:
-          python-version: '3.12'
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-
-      - name: Install Prettier
-        run: |
-          npm install -g prettier@3.3.3
+          python-version: '3.14'
 
       - name: Install python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install nf-core==${{ github.event.inputs.nfcore_ref }}
+          if [ "$NFCORE_REF" != "" ]; then
+            pip install nf-core==$NFCORE_REF
+          else
+            pip install nf-core
+          fi
 
       - name: Install Nextflow
         uses: nf-core/setup-nextflow@v2
@@ -114,16 +122,16 @@ jobs:
           git config --global user.email "105875386+sanger-tolsoft@users.noreply.github.com"
           git config --global user.name "sanger-tolsoft"
           nf-core --log-file sync_log_${{ matrix.pipeline }}.txt \
-            ${{ github.event.inputs.debug == 'true' && '--verbose' || '' }} \
+            ${{ env.DEBUG == 'true' && '--verbose' || '' }} \
             pipelines sync -d sanger-tol/${{ matrix.pipeline }} \
             --from-branch dev \
-            ${{ github.event.inputs.make_pr == 'true'  && '--pull-request' || '' }} \
+            ${{ env.MAKE_PR == 'true' && '--pull-request' || '' }} \
             --username sanger-tolsoft \
             --github-repository sanger-tol/${{ matrix.pipeline }}
 
       - name: Upload sync log file artifact
         if: ${{ always() }}
-        uses: actions/upload-artifact@b4b15b8c7c6ac21ea08fcf65892d2ee8f75cf882 # v4
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
         with:
           name: sync_log_${{ matrix.pipeline }}
           path: sync_log_${{ matrix.pipeline }}.txt
