@@ -25,9 +25,9 @@ and trigger the following workflow.
    <img src="/assets/img/template-upgrade-run-light.png" width="534" class="hide-dark">
    <img src="/assets/img/template-upgrade-run-dark.png" width="534" class="hide-light">
 
-By default, it runs on all pipelines registered on [this website](/pipelines) ("all")
-but you can specify a pipeline name (without the "sanger-tol" prefix),
-and with the latest nf-core version (empty field) but you can specify a version.
+By default, it uses the latest nf-core version (empty version field) but you can specify a version,
+and it runs on all pipelines registered on [this website](/pipelines) ("all")
+but you can also specify a pipeline name (without the "sanger-tol" prefix).
 
 This will trigger a GitHub action that will run the `nf-core pipelines sync` command
 for each pipeline and:
@@ -52,23 +52,10 @@ you're good to approve the pull-request.
 Sometimes, the conflicts are too large and can't be solved from GitHub.
 You will have to go to your clone, update it, and checkout the `nf-core-template-merge-${VERSION}` branch.
 Run `git merge dev`. This will fail and show the same conflicts as GitHub.
-Solve all the conflicts, `git commit`, `git push`, and there you go.
-
-
-
-You will probably get a tonne of log messages telling you about merge conflicts:
 
 ```console
-$ git pull upstream TEMPLATE
-
-remote: Enumerating objects: 33, done.
-remote: Counting objects: 100% (33/33), done.
-remote: Compressing objects: 100% (18/18), done.
-remote: Total 33 (delta 15), reused 33 (delta 15), pack-reused 0
-Unpacking objects: 100% (33/33), done.
-From github.com:nf-core/rnaseq
- * branch            TEMPLATE   -> FETCH_HEAD
-   55d617e..2d7814a  TEMPLATE   -> upstream/TEMPLATE
+$ git checkout nf-core-template-merge-3.5.1
+$ git merge dev
 Auto-merging nextflow.config
 CONFLICT (content): Merge conflict in nextflow.config
 Auto-merging main.nf
@@ -83,7 +70,7 @@ If you look at the current status, you will see the files that have merge confli
 ```console
 $ git status
 
-On branch merging-template-updates
+On branch nf-core-template-merge-3.5.1
 You have unmerged paths.
   (fix conflicts and run "git commit")
   (use "git merge --abort" to abort the merge)
@@ -127,32 +114,20 @@ You now need to go through each of these files to resolve every merge conflict.
 Most code editors have tools to help with this, for example [VSCode](https://code.visualstudio.com/docs/editor/versioncontrol#_merge-conflicts) have built-in support.
 
 Be careful when resolving conflicts.
-Most of the time you will want to use the version from the `TEMPLATE` branch,
+Most of the time you will want to use the version from the `nf-core-template-merge-${VERSION}` branch,
 but be aware that some of this new template code may need to be customised by your pipeline.
 In other words, you may need to manually combine the two versions in to one new code block.
 
-If you have any doubts, ask for help on the nf-core Slack.
+Check the tool release post on the [nf-core blob](https://nf-co.re/blog).
+It often has instructions and tips to handle the merge conflicts of this particular version.
 
-### Pushing the resolved changes to your fork
+If you have any doubts, ask for help on Slack.
 
 When all merge conflicts have been resolved and all files are staged, you can commit and push these changes as with any other new code:
 
 ```bash
-git commit -m "Merged changes from nf-core template"
-git push --set-upstream origin merging-template-updates
+git commit
+git push
 ```
 
-### Merging to the nf-core repository
-
-Once the changes are on your fork, you can make a pull request to the main nf-core repository for the pipeline.
-This should be reviewed and merged as usual.
-You should see in the commit history on the PR that there is a commit by the @nf-core-bot user, with the same commit hash found in the automated `TEMPLATE` PR.
-
-Once your fork is merged, the automated PR will also show as merged and will close automatically.
-
-
-> Check the tool release post on the [nf-core blob](https://nf-co.re/blog).
-> It often has instructions and tips to handle the merge conflicts of this particular version.
-
-Note: this page contains content copied from the [nf-core website](https://nf-co.re/docs/tutorials/sync/merging_automated_prs).
-
+> This page contains content copied from the [nf-core website](https://nf-co.re/docs/tutorials/sync/merging_automated_prs).
