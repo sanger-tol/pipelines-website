@@ -69,7 +69,6 @@ If you look at the current status, you will see the files that have merge confli
 
 ```console
 $ git status
-
 On branch nf-core-template-merge-3.5.1
 You have unmerged paths.
   (fix conflicts and run "git commit")
@@ -118,7 +117,7 @@ Most of the time you will want to use the version from the `nf-core-template-mer
 but be aware that some of this new template code may need to be customised by your pipeline.
 In other words, you may need to manually combine the two versions in to one new code block.
 
-Check the tool release post on the [nf-core blob](https://nf-co.re/blog).
+Check the tool release post on the [nf-core blog](https://nf-co.re/blog).
 It often has instructions and tips to handle the merge conflicts of this particular version.
 
 If you have any doubts, ask for help on Slack.
