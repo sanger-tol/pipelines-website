@@ -19,11 +19,11 @@ needs to go to [GitHub](https://github.com/sanger-tol/pipelines-website/actions/
 and trigger the following workflow.
 
 1. Click on the "Run workflow" drop-down menu
-   <img src="/public_html/assets/img/logo/template-upgrade-dropdown-light.png#gh-light-mode-only">
-   <img src="/public_html/assets/img/logo/template-upgrade-dropdown-dark.png#gh-dark-mode-only">
+   <img src="/public_html/assets/img/template-upgrade-dropdown-light.png#gh-light-mode-only">
+   <img src="/public_html/assets/img/template-upgrade-dropdown-dark.png#gh-dark-mode-only">
 2. Click on the "Run workflow" button
-   <img src="/public_html/assets/img/logo/template-upgrade-run-light.png#gh-light-mode-only">
-   <img src="/public_html/assets/img/logo/template-upgrade-run-dark.png#gh-dark-mode-only">
+   <img src="/public_html/assets/img/template-upgrade-run-light.png#gh-light-mode-only">
+   <img src="/public_html/assets/img/template-upgrade-run-dark.png#gh-dark-mode-only">
 
 By default, it runs on all pipelines registered on [this website](/pipelines) ("all")
 but you can specify a pipeline name (without the "sanger-tol" prefix),
