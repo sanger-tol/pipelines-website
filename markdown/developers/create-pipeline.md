@@ -115,39 +115,53 @@ Support for `main` is gradually coming in nf-core but we still need to change a 
 
 ### Logo
 
-To add the sanger-tol logo to your pipeline, edit `nextflow.config`
+To add the sanger-tol logo to your pipeline, edit `subworkflows/local/utils_nfcore_${PIPELINE_NAME}_pipeline/main.nf`.
 
-Add this at the end of the `help` dictionary (under `validation`):
+Add these two variables
 
+```diff
+     //
+     // Validate parameters and generate parameter summary to stdout
+     //
++
++    before_text = """
++-\033[2m----------------------------------------------------\033[0m-
++\033[0;34m   _____                               \033[0;32m _______   \033[0;31m _\033[0m
++\033[0;34m  / ____|                              \033[0;32m|__   __|  \033[0;31m| |\033[0m
++\033[0;34m | (___   __ _ _ __   __ _  ___ _ __ \033[0m ___ \033[0;32m| |\033[0;33m ___ \033[0;31m| |\033[0m
++\033[0;34m  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|\033[0m|___|\033[0;32m| |\033[0;33m/ _ \\\033[0;31m| |\033[0m
++\033[0;34m  ____) | (_| | | | | (_| |  __/ |        \033[0;32m| |\033[0;33m (_) \033[0;31m| |____\033[0m
++\033[0;34m |_____/ \\__,_|_| |_|\\__, |\\___|_|        \033[0;32m|_|\033[0;33m\\___/\033[0;31m|______|\033[0m
++\033[0;34m                      __/ |\033[0m
++\033[0;34m                     |___/\033[0m
++\033[0;35m  ${workflow.manifest.name} ${workflow.manifest.version}\033[0m
++-\033[2m----------------------------------------------------\033[0m-
++        """
++    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/', '')}" }.j>
++* The nf-core framework
++    https://doi.org/10.1038/s41587-020-0439-x
++
++* Software dependencies
++    https://github.com/sanger-tol/readmapping/blob/main/CITATIONS.md
++"""
+     command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+     UTILS_NFSCHEMA_PLUGIN (
 ```
-        beforeText = """
--\033[2m----------------------------------------------------\033[0m-
-\033[0;34m   _____                               \033[0;32m _______   \033[0;31m _\033[0m
-\033[0;34m  / ____|                              \033[0;32m|__   __|  \033[0;31m| |\033[0m
-\033[0;34m | (___   __ _ _ __   __ _  ___ _ __ \033[0m ___ \033[0;32m| |\033[0;33m ___ \033[0;31m| |\033[0m
-\033[0;34m  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|\033[0m|___|\033[0;32m| |\033[0;33m/ _ \\\033[0;31m| |\033[0m
-\033[0;34m  ____) | (_| | | | | (_| |  __/ |        \033[0;32m| |\033[0;33m (_) \033[0;31m| |____\033[0m
-\033[0;34m |_____/ \\__,_|_| |_|\\__, |\\___|_|        \033[0;32m|_|\033[0;33m\\___/\033[0;31m|______|\033[0m
-\033[0;34m                      __/ |\033[0m
-\033[0;34m                     |___/\033[0m
-\033[0;35m  ${manifest.name} ${manifest.version}\033[0m
--\033[2m----------------------------------------------------\033[0m-
-"""
-        afterText = """${manifest.doi ? "\n* The pipeline\n" : ""}${manifest.doi.tokenize(",").collect { "    https://doi.org/${it.trim().replace('https://doi.org/','')}"}.join("\n")}${manifest.doi ? "\n" : ""}
-* The nf-core framework
-    https://doi.org/10.1038/s41587-020-0439-x
-* Software dependencies
-    https://github.com/sanger-tol/blobtoolkit/blob/main/CITATIONS.md
-"""
-```
 
-And add another dictionary named `summary` at the end of the `validation` dictionary:
+of course replacing `readmapping` with your actual pipeline name,
+and add this to use them
 
-```
-    summary {
-        beforeText = validation.help.beforeText
-        afterText = validation.help.afterText
-    }
+```diff
+         help,
+         help_full,
+         show_hidden,
+-        "",
+-        "",
++        before_text,
++        after_text,
+         command
+     )
 ```
 
 You should then see this in your terminal when running the pipeline:
