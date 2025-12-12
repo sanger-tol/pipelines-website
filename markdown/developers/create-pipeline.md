@@ -88,7 +88,10 @@ Then, ask [@muffato](https://github.com/muffato) or [@mcshane](https://github.co
 4. Remove your individual access to the repository.
 5. Allow your repository to access all the secrets from <https://github.com/organizations/sanger-tol/settings/secrets/actions>.
 
-Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via <https://pipelines.tol.sanger.ac.uk/pipeline_health>.
+Finally, ask [@gq1](https://github.com/gq1) or [@muffato](https://github.com/muffato) to:
+
+1. Refresh the list of pipelines by clicking the link at the bottom of the [pipelines page](/pipelines).
+2. Set up the repository branch settings via the [pipeline health page](/pipeline_health).
 
 ## Other bits
 
