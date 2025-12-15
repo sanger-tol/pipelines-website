@@ -27,11 +27,14 @@ future version.
 
 The `test` profile should be usable by anyone anywhere.
 This means that its input data should be on publicly accessible web servers.
-We use Sanger's Ceph S3
+We use Sanger's Ceph S3 server.
 
 1. Deposit your data under `/nfs/treeoflife-01/resources/nextflow/`.
 2. Ask [@gq1](https://github.com/gq1) or [@muffato](https://github.com/muffato) to synchronise the directory.
-3. Access your data throuh `https://tolit.cog.sanger.ac.uk/test-data/` (same sub-path as on disk)
+3. Make sure your `nextflow.config` and `tests/nextflow.config` set
+   `pipelines_testdata_base_path` to `https://tolit.cog.sanger.ac.uk/test-data/`
+   (instead of `https://raw.githubusercontent.com/nf-core/test-datasets/`).
+4. Access your data throuh `params.pipelines_testdata_base_path` and the same sub-path as on disk.
 
 We currently do not set such requirements for the inputs of the `test_full` profile.
 

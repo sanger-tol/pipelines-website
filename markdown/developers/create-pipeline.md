@@ -229,6 +229,19 @@ Do the following changes to ensure your pipeline works seamlessly with both.
    +subworkflows/sanger-tol/** linguist-generated
    ```
 
+### Tests
+
+Finally, the nf-core template provides a way of defining the root path of the test data via the `pipelines_testdata_base_path` parameter.
+This defaults to `https://raw.githubusercontent.com/nf-core/test-datasets/` for nf-core pipeline
+but since we have our own [server space for test data](/docs/contributing/testing#test-data),
+we can configure the Sanger base location instead.
+
+Go to `nextflow.config` and `tests/nextflow.config` and change the value of
+`pipelines_testdata_base_path` from
+`https://raw.githubusercontent.com/nf-core/test-datasets/`
+to
+`https://tolit.cog.sanger.ac.uk/test-data/`.
+
 ### Zenodo
 
 The repository needs to be integrated with Zenodo before making the first release.
