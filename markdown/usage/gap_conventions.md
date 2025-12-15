@@ -1,6 +1,6 @@
 ---
-title: Standard output directories of Genome After-Party pipelines
-subtitle: This page describes the conventions we follow to organise the outputs of all Genome After-Party pipelines
+title: Standard Genome After-Party outputs
+subtitle: This page describes the conventions we follow to organise the outputs of the Genome After-Party pipelines
 ---
 
 All Genome After-Party pipelines organise their outputs in a consistent and scalable manner.
@@ -9,8 +9,10 @@ The main principles are that:
 
 - Files are uniquely named across the entire Genome After-Party and could be mixed
   into the same directory without clashing.
-- To facilitate this, filenames include all necessary identifiers such as assembly
-  specimen, sequencing run. These identifiers also go into the directory names.
+- To facilitate this, filenames include all necessary identifiers such as assembly,
+  specimen, or sequencing run.
+- These identifiers, except the assembly name, are also used to name the parent output
+  directories, each identifier naming a different directory level.
 - Analyses that are implemented in multiple pipelines always have the same output
   name and path.
 - File names are as self-explanatory as possible.
@@ -22,18 +24,20 @@ Additionally:
 - All other text files are compressed with `gzip` if they typically exceed 10 MB.
 - Sequence alignments are in CRAM format (version 3.0) with embedded references,
   ensuring the files can be read widely and without having to pass the assembly
-  Fasta file as a parameter.
+  Fasta file as a parameter, and are all indexed with `samtools index` in both `.tbi` and `.csi` formats.
+
+Here is the list of identifiers currently used to named outputs:
+
+| Name       | Description                                                                          |
+| ---------- | ------------------------------------------------------------------------------------ |
+| `assembly` | Accession number of the assembly.                                                    |
+| `type`     | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`.                    |
+| `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. |
+| `specimen` | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         |
+| `lineage`  | Complete name of the Busco lineage, i.e. including the `_odb*` suffix.               |
 
 Below is the canonical structure that all Genome After-Party pipelines abide by.
-Placeholders are indicated with the `${...}` syntax
-
-| Name       | Description                                                                         |
-| ---------- | ----------------------------------------------------------------------------------- |
-| `assembly` | Accession number of the assembly                                                    |
-| `type`     | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`                    |
-| `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC |
-| `specimen` | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/)         |
-| `lineage`  | Complete name of the Busco lineage, i.e. including the `_odb*` suffix               |
+Placeholders for identifiers are indicated with the `${...}` syntax.
 
 ## Read mapping
 
@@ -45,13 +49,13 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
     - `${specimen}`/
       - `${run}`/
         - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
-        - `${type}`.`${specimen}`.`${run}`.filtered*fastqc.(html|zip) \_optional*
+        - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
         - `${type}`.`${specimen}`.`${run}`.multiqc.html
 - read_preprocess/
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${type}`.`${specimen}`.`${run}`.hifi*trimmer.tar.gz \_optional*
+        - `${type}`.`${specimen}`.`${run}`.hifi\_trimmer.tar.gz – _optional_
 - read_mapping/
   - `${type}`/
     - `${specimen}`/
@@ -60,6 +64,7 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
       - `${assembly}`.`${type}`.`${specimen}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
 
 **Q**: include the aligner name ("minimap2", "bwamem2") in the filename ? (i.e. the same way we include "deepvariant" in the variantcalling output files)
+
 **TODO**: change the name of the coverage file to match blobtoolkit
 
 ## Variant calling and analysis
@@ -71,8 +76,8 @@ The following outputs come from the [variant calling](/readmapping) and
   - `${type}`/
     - `${specimen}/`
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(gz|stats.visual*report.html) \_from variantcalling*
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(bcftools*stats.txt.gz|frq|het|indel.hist|plot-vcfstats.(pdf|tar.gz)|roh|sites.pi.gz|snpden) \_from variantcomposition*
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(gz|stats.visual_report.html) – _from variantcalling_
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(stats.bcftools.txt.gz|frq|het|indel.hist|plot-vcfstats.(pdf|tar.gz)|roh|sites.pi.gz|snpden) – _from variantcomposition_
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.himut.vcf.(bgz|bgz.csi|bgz.tbi) _from variantcalling, optional_
 
 **Q**: merge runs by specimen ?
@@ -90,7 +95,7 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
     - `${assembly}`.\*.png
 - busco/
   - `${lineage}`/
-    - `${assembly}`.`${lineage}`.(full_table.tsv.gz|missing_busco_list.tsv.gz|(single_copy|multi_copy|fragmented)\_busco_sequences.tar.gz|short_summary.(json|tsv|txt)|hmmer_output.tar.gz)
+    - `${assembly}`.`${lineage}`.(full\_table.tsv|missing\_busco\_list.tsv|(single\_copy|multi\_copy|fragmented)\_busco_sequences.tar.gz|short\_summary.(json|tsv|txt)|hmmer\_output.tar.gz)
 - read_mapping/
   - `${type}`/
     - `${specimen}`/
@@ -98,7 +103,9 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.coverage.1k.bedGraph.gz
 
 **TODO**: change the `base_content` outputs to match sequencecomposition
+
 **TODO**: drop multiqc output
+
 **TODO**: publish the alignments too, using the same convention as in readmapping
 
 ## Sequence composition
@@ -122,7 +129,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
 - ancestral_plots/
   - `${lineage}`/
     - `${assembly}`.`${lineage}`.buscopainter.(pdf|png)
-- busco/ _as in blobtoolkit_
+- busco/ – _as in blobtoolkit_
 - contact_maps/
   - `${specimen}`/
     - `${assembly}`.hic.`${specimen}`.(cool|mcool|pretext|pretext.png)
@@ -138,6 +145,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
     - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
 
 **TODO**: drop multiqc output
+
 **TODO**: assuming we merge all runs by specimen.
 
 ## Downloads
