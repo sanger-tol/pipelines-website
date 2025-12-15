@@ -95,7 +95,7 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
     - `${assembly}`.\*.png
 - busco/
   - `${lineage}`/
-    - `${assembly}`.`${lineage}`.(full\_table.tsv|missing\_busco\_list.tsv|(single\_copy|multi\_copy|fragmented)\_busco_sequences.tar.gz|short\_summary.(json|tsv|txt)|hmmer\_output.tar.gz)
+    - `${assembly}`.`${lineage}`.(full_table.tsv|missing_busco_list.tsv|(single_copy|multi_copy|fragmented)\_busco_sequences.tar.gz|short_summary.(json|tsv|txt)|hmmer_output.tar.gz)
 - read_mapping/
   - `${type}`/
     - `${specimen}`/
@@ -137,7 +137,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${source}`/
     - `${assembly}`.`${source}`.stats.csv
 - genome_note/
-  - `${assembly}`.(csv|docx|md|xml|genome\_note\_(consistent|inconsistent).csv)
+  - `${assembly}`.(csv|docx|md|xml|genome_note\_(consistent|inconsistent).csv)
 - genomescope/
 - genome_stats/
   - `${assembly}`.gfastats.txt
