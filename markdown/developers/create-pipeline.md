@@ -167,6 +167,68 @@ and add this to use them
 You should then see this in your terminal when running the pipeline:
 ![Sanger-tol logo rendered in a terminal](/assets/img/developer-images/sanger-tol-logo-cli.png)
 
+### Shared module
+
+You will most likely need to include modules or sub-workflows from our
+[shared modules repository](/docs/usage/shared_modules) alongside components
+from nf-core.
+Do the following changes to ensure your pipeline works seamlessly with both.
+
+1. In `.pre-commit-config.yaml`, add extra lines to ignore sanger-tol modules and sub-workflows the same way nf-core ones are ignored:
+
+   ```diff
+   --- a/.pre-commit-config.yaml
+   +++ b/.pre-commit-config.yaml
+   @@ -15,6 +15,8 @@ repos:
+                  .*ro-crate-metadata.json$|
+                  modules/nf-core/.*|
+                  subworkflows/nf-core/.*|
+   +              modules/sanger-tol/.*|
+   +              subworkflows/sanger-tol/.*|
+                  .*\.snap$
+            )$
+         - id: end-of-file-fixer
+   @@ -23,5 +25,7 @@ repos:
+                  .*ro-crate-metadata.json$|
+                  modules/nf-core/.*|
+                  subworkflows/nf-core/.*|
+   +              modules/sanger-tol/.*|
+   +              subworkflows/sanger-tol/.*|
+                  .*\.snap$
+            )$
+   ```
+
+2. `nf-test.config` needs similar rules:
+
+   ```diff
+   --- a/nf-test.config
+   +++ b/nf-test.config
+   @@ -9,7 +9,7 @@ config {
+      configFile "tests/nextflow.config"
+
+      // ignore tests coming from the nf-core/modules repo
+   -    ignore 'modules/nf-core/**/*', 'subworkflows/nf-core/**/*'
+   +    ignore 'modules/nf-core/**/*', 'subworkflows/nf-core/**/*', 'modules/sanger-tol/**/*', 'subworkflows/sanger-tol/**/*'
+
+      // run all test with defined profile(s) from the main nextflow.config
+      profile "test"
+   ```
+
+   It also needs to refers to the version 0.0.7 or later of the `nft-utils` plugin (`load "nft-utils@` line).
+
+3. So does `.gitattributes` (to automatically collapse files changed in the sanger-tol components)
+
+   ```diff
+   --- a/.gitattributes
+   +++ b/.gitattributes
+   @@ -2,3 +2,5 @@
+   *.nf.test linguist-language=nextflow
+   modules/nf-core/** linguist-generated
+   subworkflows/nf-core/** linguist-generated
+   +modules/sanger-tol/** linguist-generated
+   +subworkflows/sanger-tol/** linguist-generated
+   ```
+
 ### Zenodo
 
 The repository needs to be integrated with Zenodo before making the first release.
