@@ -167,7 +167,7 @@ and add this to use them
 You should then see this in your terminal when running the pipeline:
 ![Sanger-tol logo rendered in a terminal](/assets/img/developer-images/sanger-tol-logo-cli.png)
 
-### Shared module
+### Shared modules and sub-workflows
 
 You will most likely need to include modules or sub-workflows from our
 [shared modules repository](/docs/usage/shared_modules) alongside components
