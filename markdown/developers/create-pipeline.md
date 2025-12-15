@@ -165,7 +165,7 @@ and add this to use them
 ```
 
 You should then see this in your terminal when running the pipeline:
-<img src="/assets/img/developer-images/sanger-tol-logo-cli.png" alt="Sanger-tol logo rendered in a terminal">
+![Sanger-tol logo rendered in a terminal](/assets/img/developer-images/sanger-tol-logo-cli.png)
 
 ### Zenodo
 
