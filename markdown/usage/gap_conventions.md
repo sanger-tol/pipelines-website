@@ -49,13 +49,13 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
     - `${specimen}`/
       - `${run}`/
         - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
-        - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
+        - `${type}`.`${specimen}`.`${run}`.filtered_fastqc.(html|zip) – _optional_
         - `${type}`.`${specimen}`.`${run}`.multiqc.html
 - read_preprocess/
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${type}`.`${specimen}`.`${run}`.hifi\_trimmer.tar.gz – _optional_
+        - `${type}`.`${specimen}`.`${run}`.hifi_trimmer.tar.gz – _optional_
 - read_mapping/
   - `${type}`/
     - `${specimen}`/
