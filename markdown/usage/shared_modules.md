@@ -334,4 +334,4 @@ Pipelines need a few modifications to work seamlessly with cross-organisation su
       profile "test"
    ```
 
-   It also meeds to refers to the version 0.0.7 or later of the `nft-utils` plugin (`load "nft-utils@` line).
+   It also needs to refers to the version 0.0.7 or later of the `nft-utils` plugin (`load "nft-utils@` line).
