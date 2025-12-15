@@ -78,7 +78,7 @@ The following outputs come from the [variant calling](/readmapping) and
       - `${run}`/
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(gz|stats.visual_report.html) – _from variantcalling_
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(stats.bcftools.txt.gz|frq|het|indel.hist|plot-vcfstats.(pdf|tar.gz)|roh|sites.pi.gz|snpden) – _from variantcomposition_
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.himut.vcf.(bgz|bgz.csi|bgz.tbi) _from variantcalling, optional_
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.himut.vcf.(bgz|bgz.csi|bgz.tbi) – _from variantcalling, optional_
 
 **Q**: merge runs by specimen ?
 
@@ -137,7 +137,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${source}`/
     - `${assembly}`.`${source}`.stats.csv
 - genome_note/
-  - `${assembly}`.(csv|docx|md|xml|genome*note*(consistent|inconsistent).csv)
+  - `${assembly}`.(csv|docx|md|xml|genome\_note\_(consistent|inconsistent).csv)
 - genomescope/
 - genome_stats/
   - `${assembly}`.gfastats.txt
