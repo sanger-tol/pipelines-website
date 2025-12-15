@@ -137,7 +137,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${source}`/
     - `${assembly}`.`${source}`.stats.csv
 - genome_note/
-  - `${assembly}`.(csv|docx|md|xml|genome_note\_(consistent|inconsistent).csv)
+  - `${assembly}`.(csv|docx|md|xml|genome\_note_(consistent|inconsistent).csv)
 - genomescope/
 - genome_stats/
   - `${assembly}`.gfastats.txt
