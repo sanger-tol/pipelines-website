@@ -88,7 +88,10 @@ Then, ask [@muffato](https://github.com/muffato) or [@mcshane](https://github.co
 4. Remove your individual access to the repository.
 5. Allow your repository to access all the secrets from <https://github.com/organizations/sanger-tol/settings/secrets/actions>.
 
-Finally, ask [@gq1](https://github.com/gq1) to set up the pipeline settings via <https://pipelines.tol.sanger.ac.uk/pipeline_health>.
+Finally, ask [@gq1](https://github.com/gq1) or [@muffato](https://github.com/muffato) to:
+
+1. Refresh the list of pipelines by clicking the link at the bottom of the [pipelines page](/pipelines).
+2. Set up the repository branch settings by selecting the pipeline and clicking "Fix data" on the [pipeline health page](/pipeline_health).
 
 ## Other bits
 
@@ -112,43 +115,132 @@ Support for `main` is gradually coming in nf-core but we still need to change a 
 
 ### Logo
 
-To add the sanger-tol logo to your pipeline, edit `nextflow.config`
+To add the sanger-tol logo to your pipeline, edit `subworkflows/local/utils_nfcore_${PIPELINE_NAME}_pipeline/main.nf`.
 
-Add this at the end of the `help` dictionary (under `validation`):
+Add these two variables
 
+```diff
+     //
+     // Validate parameters and generate parameter summary to stdout
+     //
++
++    before_text = """
++-\033[2m----------------------------------------------------\033[0m-
++\033[0;34m   _____                               \033[0;32m _______   \033[0;31m _\033[0m
++\033[0;34m  / ____|                              \033[0;32m|__   __|  \033[0;31m| |\033[0m
++\033[0;34m | (___   __ _ _ __   __ _  ___ _ __ \033[0m ___ \033[0;32m| |\033[0;33m ___ \033[0;31m| |\033[0m
++\033[0;34m  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|\033[0m|___|\033[0;32m| |\033[0;33m/ _ \\\033[0;31m| |\033[0m
++\033[0;34m  ____) | (_| | | | | (_| |  __/ |        \033[0;32m| |\033[0;33m (_) \033[0;31m| |____\033[0m
++\033[0;34m |_____/ \\__,_|_| |_|\\__, |\\___|_|        \033[0;32m|_|\033[0;33m\\___/\033[0;31m|______|\033[0m
++\033[0;34m                      __/ |\033[0m
++\033[0;34m                     |___/\033[0m
++\033[0;35m  ${workflow.manifest.name} ${workflow.manifest.version}\033[0m
++-\033[2m----------------------------------------------------\033[0m-
++        """
++    after_text = """${workflow.manifest.doi ? "\n* The pipeline\n" : ""}${workflow.manifest.doi.tokenize(",").collect { doi -> "    https://doi.org/${doi.trim().replace('https://doi.org/', '')}" }.j>
++* The nf-core framework
++    https://doi.org/10.1038/s41587-020-0439-x
++
++* Software dependencies
++    https://github.com/sanger-tol/readmapping/blob/main/CITATIONS.md
++"""
+     command = "nextflow run ${workflow.manifest.name} -profile <docker/singularity/.../institute> --input samplesheet.csv --outdir <OUTDIR>"
+
+     UTILS_NFSCHEMA_PLUGIN (
 ```
-        beforeText = """
--\033[2m----------------------------------------------------\033[0m-
-\033[0;34m   _____                               \033[0;32m _______   \033[0;31m _\033[0m
-\033[0;34m  / ____|                              \033[0;32m|__   __|  \033[0;31m| |\033[0m
-\033[0;34m | (___   __ _ _ __   __ _  ___ _ __ \033[0m ___ \033[0;32m| |\033[0;33m ___ \033[0;31m| |\033[0m
-\033[0;34m  \\___ \\ / _` | '_ \\ / _` |/ _ \\ '__|\033[0m|___|\033[0;32m| |\033[0;33m/ _ \\\033[0;31m| |\033[0m
-\033[0;34m  ____) | (_| | | | | (_| |  __/ |        \033[0;32m| |\033[0;33m (_) \033[0;31m| |____\033[0m
-\033[0;34m |_____/ \\__,_|_| |_|\\__, |\\___|_|        \033[0;32m|_|\033[0;33m\\___/\033[0;31m|______|\033[0m
-\033[0;34m                      __/ |\033[0m
-\033[0;34m                     |___/\033[0m
-\033[0;35m  ${manifest.name} ${manifest.version}\033[0m
--\033[2m----------------------------------------------------\033[0m-
-"""
-        afterText = """${manifest.doi ? "\n* The pipeline\n" : ""}${manifest.doi.tokenize(",").collect { "    https://doi.org/${it.trim().replace('https://doi.org/','')}"}.join("\n")}${manifest.doi ? "\n" : ""}
-* The nf-core framework
-    https://doi.org/10.1038/s41587-020-0439-x
-* Software dependencies
-    https://github.com/sanger-tol/blobtoolkit/blob/main/CITATIONS.md
-"""
-```
 
-And add another dictionary named `summary` at the end of the `validation` dictionary:
+of course replacing `readmapping` with your actual pipeline name,
+and add this to use them
 
-```
-    summary {
-        beforeText = validation.help.beforeText
-        afterText = validation.help.afterText
-    }
+```diff
+         help,
+         help_full,
+         show_hidden,
+-        "",
+-        "",
++        before_text,
++        after_text,
+         command
+     )
 ```
 
 You should then see this in your terminal when running the pipeline:
-<img src="/assets/img/developer-images/sanger-tol-logo-cli.png" alt="Sanger-tol logo rendered in a terminal">
+![Sanger-tol logo rendered in a terminal](/assets/img/developer-images/sanger-tol-logo-cli.png)
+
+### Shared modules and sub-workflows
+
+You will most likely need to include modules or sub-workflows from our
+[shared modules repository](/docs/usage/shared_modules) alongside components
+from nf-core.
+Do the following changes to ensure your pipeline works seamlessly with both.
+
+1. In `.pre-commit-config.yaml`, add extra lines to ignore sanger-tol modules and sub-workflows the same way nf-core ones are ignored:
+
+   ```diff
+   --- a/.pre-commit-config.yaml
+   +++ b/.pre-commit-config.yaml
+   @@ -15,6 +15,8 @@ repos:
+                  .*ro-crate-metadata.json$|
+                  modules/nf-core/.*|
+                  subworkflows/nf-core/.*|
+   +              modules/sanger-tol/.*|
+   +              subworkflows/sanger-tol/.*|
+                  .*\.snap$
+            )$
+         - id: end-of-file-fixer
+   @@ -23,5 +25,7 @@ repos:
+                  .*ro-crate-metadata.json$|
+                  modules/nf-core/.*|
+                  subworkflows/nf-core/.*|
+   +              modules/sanger-tol/.*|
+   +              subworkflows/sanger-tol/.*|
+                  .*\.snap$
+            )$
+   ```
+
+2. `nf-test.config` needs similar rules:
+
+   ```diff
+   --- a/nf-test.config
+   +++ b/nf-test.config
+   @@ -9,7 +9,7 @@ config {
+      configFile "tests/nextflow.config"
+
+      // ignore tests coming from the nf-core/modules repo
+   -    ignore 'modules/nf-core/**/*', 'subworkflows/nf-core/**/*'
+   +    ignore 'modules/nf-core/**/*', 'subworkflows/nf-core/**/*', 'modules/sanger-tol/**/*', 'subworkflows/sanger-tol/**/*'
+
+      // run all test with defined profile(s) from the main nextflow.config
+      profile "test"
+   ```
+
+   It also needs to refers to the version 0.0.7 or later of the `nft-utils` plugin (`load "nft-utils@` line).
+
+3. So does `.gitattributes` (to automatically collapse files changed in the sanger-tol components)
+
+   ```diff
+   --- a/.gitattributes
+   +++ b/.gitattributes
+   @@ -2,3 +2,5 @@
+   *.nf.test linguist-language=nextflow
+   modules/nf-core/** linguist-generated
+   subworkflows/nf-core/** linguist-generated
+   +modules/sanger-tol/** linguist-generated
+   +subworkflows/sanger-tol/** linguist-generated
+   ```
+
+### Tests
+
+Finally, the nf-core template provides a way of defining the root path of the test data via the `pipelines_testdata_base_path` parameter.
+This defaults to `https://raw.githubusercontent.com/nf-core/test-datasets/` for nf-core pipeline
+but since we have our own [server space for test data](/docs/contributing/testing#test-data),
+we can configure the Sanger base location instead.
+
+Go to `nextflow.config` and `tests/nextflow.config` and change the value of
+`pipelines_testdata_base_path` from
+`https://raw.githubusercontent.com/nf-core/test-datasets/`
+to
+`https://tolit.cog.sanger.ac.uk/test-data/`.
 
 ### Zenodo
 

@@ -72,10 +72,10 @@ $nf-core-color: $nf-core-color-alt;
 
 // custom dark-mode styling
 .hide-dark {
-  display: none;
+  display: none !important;
 }
 .hide-light {
-  display: inherit;
+  display: inherit !important;
 }
 
 .bg-body {

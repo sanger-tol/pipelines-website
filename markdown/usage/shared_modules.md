@@ -334,4 +334,17 @@ Pipelines need a few modifications to work seamlessly with cross-organisation su
       profile "test"
    ```
 
-   It also meeds to refers to the version 0.0.7 or later of the `nft-utils` plugin (`load "nft-utils@` line).
+   It also needs to refers to the version 0.0.7 or later of the `nft-utils` plugin (`load "nft-utils@` line).
+
+3. So does `.gitattributes` (to automatically collapse files changed in the sanger-tol components)
+
+   ```diff
+   --- a/.gitattributes
+   +++ b/.gitattributes
+   @@ -2,3 +2,5 @@
+   *.nf.test linguist-language=nextflow
+   modules/nf-core/** linguist-generated
+   subworkflows/nf-core/** linguist-generated
+   +modules/sanger-tol/** linguist-generated
+   +subworkflows/sanger-tol/** linguist-generated
+   ```

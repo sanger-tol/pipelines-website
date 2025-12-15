@@ -15,7 +15,7 @@ Given the time constraint, the input data are typically a very small region of a
 sequencing data are limited to 1,000-10,000 reads, etc.
 
 The `test_full` profile is meant to define input data and parameters that represent
-a complete dataset. Such runs will typically take hours to complete on the farm.  
+a complete dataset. Such runs will typically take hours to complete on the farm.
 Neither of those profiles is expected to cover 100% of the pipeline features.
 
 [nf-test](https://www.nf-test.com/) is gradually making its way through nf-core.
@@ -27,11 +27,14 @@ future version.
 
 The `test` profile should be usable by anyone anywhere.
 This means that its input data should be on publicly accessible web servers.
-We use Sanger's Ceph S3
+We use Sanger's Ceph S3 server.
 
 1. Deposit your data under `/nfs/treeoflife-01/resources/nextflow/`.
 2. Ask [@gq1](https://github.com/gq1) or [@muffato](https://github.com/muffato) to synchronise the directory.
-3. Access your data throuh `https://tolit.cog.sanger.ac.uk/test-data/` (same sub-path as on disk)
+3. Make sure your `nextflow.config` and `tests/nextflow.config` set
+   `pipelines_testdata_base_path` to `https://tolit.cog.sanger.ac.uk/test-data/`
+   (instead of `https://raw.githubusercontent.com/nf-core/test-datasets/`).
+4. Access your data throuh `params.pipelines_testdata_base_path` and the same sub-path as on disk.
 
 We currently do not set such requirements for the inputs of the `test_full` profile.
 
@@ -41,7 +44,7 @@ The nf-core template includes a Continuous Integration workflow that runs the `t
 GitHub will run the test in pull-requests and will **block** the merge until the test
 passes.
 The `test` profile needs to give you reasonable confidence the changes don't
-break the pipeline.  
+break the pipeline.
 Note: you may need to add steps to download and configure input databases that are
 required by the pipeline. The file is `.github/workflows/ci.yml`.
 
