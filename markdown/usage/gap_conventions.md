@@ -44,13 +44,6 @@ Placeholders for identifiers are indicated with the `${...}` syntax.
 The following outputs all come from the [read mapping](/readmapping) pipeline.
 Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit) pipeline.
 
-- read_qc/
-  - `${type}`/
-    - `${specimen}`/
-      - `${run}`/
-        - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
-        - `${type}`.`${specimen}`.`${run}`.filtered_fastqc.(html|zip) – _optional_
-        - `${type}`.`${specimen}`.`${run}`.multiqc.html
 - read_preprocess/
   - `${type}`/
     - `${specimen}`/
@@ -61,8 +54,13 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
     - `${specimen}`/
       - `${run}`/
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
+        - qc/
+          - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
+          - `${type}`.`${specimen}`.`${run}`.filtered_fastqc.(html|zip) – _optional_
+          - `${type}`.`${specimen}`.`${run}`.multiqc.html
       - `${assembly}`.`${type}`.`${specimen}`.merged.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
 
+**Q**: move `read_preprocess/` inside like `qc/` ?
 **TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 **TODO**: change the name of the coverage file to match blobtoolkit
 
