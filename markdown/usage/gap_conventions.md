@@ -61,7 +61,9 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
       - `${assembly}`.`${type}`.`${specimen}`.merged.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
 
 **Q**: move `read_preprocess/` inside like `qc/` ?
+
 **TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
+
 **TODO**: change the name of the coverage file to match blobtoolkit
 
 ## Variant calling and analysis
