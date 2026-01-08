@@ -61,7 +61,7 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
     - `${specimen}`/
       - `${run}`/
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
-      - `${assembly}`.`${type}`.`${specimen}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
+      - `${assembly}`.`${type}`.`${specimen}`.merged.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
 
 **Q**: include the aligner name ("minimap2", "bwamem2") in the filename ? (i.e. the same way we include "deepvariant" in the variantcalling output files)
 
