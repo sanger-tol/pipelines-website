@@ -60,11 +60,10 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
-      - `${assembly}`.`${type}`.`${specimen}`.merged.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
+      - `${assembly}`.`${type}`.`${specimen}`.merged.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
 
-**Q**: include the aligner name ("minimap2", "bwamem2") in the filename ? (i.e. the same way we include "deepvariant" in the variantcalling output files)
-
+**TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 **TODO**: change the name of the coverage file to match blobtoolkit
 
 ## Variant calling and analysis
