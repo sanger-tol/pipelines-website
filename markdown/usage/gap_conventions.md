@@ -33,7 +33,7 @@ Here is the list of identifiers currently used to named outputs:
 | Name       | Description                                                                          | Example value     |
 | ---------- | ------------------------------------------------------------------------------------ | ----------------- |
 | `assembly` | Accession number of the assembly.                                                    | `GCA_936432065.2` |
-| `type`     | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`.                    | `hic`             |
+| `type`     | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`             |
 | `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445`      |
 | `specimen` | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`      |
 | `lineage`  | Complete name of the Busco lineage, i.e. including the `_odb*` suffix.               | `insecta_odb12`   |
