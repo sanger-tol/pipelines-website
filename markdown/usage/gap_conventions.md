@@ -65,6 +65,8 @@ read_mapping/hic/icLepMacu1/ERR9248445/qc/GCA_936432065.2.hic.icLepMacu1.ERR9248
 read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap2.cram
 ```
 
+**Q**: move the stats files inside `qc/` ?
+
 **TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 
 **TODO**: change the name of the coverage file to match blobtoolkit (coverage.bedGraph -> coverage.1k.bedGraph)
