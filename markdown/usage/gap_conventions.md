@@ -177,3 +177,5 @@ and [Ensembl repeat download](/ensemblrepeatdownload).
 - gene/
   - `${source}`/
     - `${assembly}`.`${source}`.(gff3.gz|(cdna|cds|pep).fa.gz)
+
+**TODO**: the ensemblgenedownload pipeline should compute the GFF stats, and genomenote can use that
