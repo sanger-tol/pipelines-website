@@ -77,6 +77,7 @@ read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap
 The following outputs come from the [variant calling](/readmapping) and
 [variant composition](/variantcomposition) pipelines.
 
+- read\_mapping/ – _as in readmapping, optional_
 - variant\_analysis/
   - `${type}`/
     - `${specimen}/`
