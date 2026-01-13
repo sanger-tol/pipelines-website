@@ -204,3 +204,11 @@ and [Ensembl repeat download](/ensemblrepeatdownload).
     - `${assembly}`.`${source}`.(gff3.gz|(cdna|cds|pep).fa.gz)
 
 **TODO**: the ensemblgenedownload pipeline should compute the GFF stats and BUSCO scores
+
+## Concluding remarks
+
+- agreed (confirmed again !) that "overwrite" is the default mode. The document above should make it easier to support "topup" at some point, but "topup" is not a scenario we'll be running for the time being.
+- gap_data_finder.py will be doing the symlinking but it should validate the outputs first. Validation will need a config file for each pipeline. The proposal is to have this config file in the pipeline repository
+- because "overwrite" is the default, the symlinking will be at the top-level most of the time. Only in special cases (and "topup" in a future) the symlinking will have to go inside the directory structure.
+- pipelines can keep multiqc, and make it as good as they want
+- additionally, we'll run a multiqc at the end on everything
