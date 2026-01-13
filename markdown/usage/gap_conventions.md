@@ -131,6 +131,14 @@ busco/insecta_odb12/GCA_936432065.2.insecta_odb12.full_table.tsv
 
 **TODO**: publish the alignments too, using the same convention as in readmapping
 
+**TODO**: what does the pipeline do with sequencecomposition ?
+
+**TODO**: create Busco pipeline that runs Busco and the ancestral painter (cf genomenote)
+
+**TODO**: make the pipeline accept existing Busco outputs
+
+**TODO**: at that point, the pipeline will just be aggregating data
+
 ## Sequence composition
 
 The following outputs come from the [sequence composition](/sequencecomposition) pipeline.
@@ -155,7 +163,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
 - busco/ – _as in blobtoolkit_
 - contact\_maps/
   - `${specimen}`/
-    - `${assembly}`.hic.`${specimen}`.(cool|mcool|pretext|pretext.png)
+    - `${assembly}`.hic.`${specimen}`.merged.(cool|mcool|pretext|pretext.png)
 - gene/
   - `${source}`/
     - `${assembly}`.`${source}`.stats.csv
@@ -167,7 +175,15 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${specimen}`/
     - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
 
-**TODO**: assuming we merge all runs by specimen.
+**TODO**: assuming we only run the pipeline on merged read mapping
+
+**TODO**: make the pipeline expect existing BUSCO outputs
+
+**TODO**: move the generation of the contact map to readmapping
+
+**TODO**: move the k-mer and assembly stats to sequencecomposition
+
+**TODO**: at that point, the pipeline will just be aggregating stats
 
 ## Downloads
 
@@ -185,4 +201,4 @@ and [Ensembl repeat download](/ensemblrepeatdownload).
   - `${source}`/
     - `${assembly}`.`${source}`.(gff3.gz|(cdna|cds|pep).fa.gz)
 
-**TODO**: the ensemblgenedownload pipeline should compute the GFF stats, and genomenote can use that
+**TODO**: the ensemblgenedownload pipeline should compute the GFF stats and BUSCO scores
