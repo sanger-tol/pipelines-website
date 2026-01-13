@@ -44,11 +44,6 @@ Placeholders for identifiers are indicated with the `${...}` syntax.
 The following outputs all come from the [read mapping](/readmapping) pipeline.
 Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit) pipeline.
 
-- read\_preprocess/
-  - `${type}`/
-    - `${specimen}`/
-      - `${run}`/
-        - `${type}`.`${specimen}`.`${run}`.hifi\_trimmer.tar.gz – _optional_
 - read\_mapping/
   - `${type}`/
     - `${specimen}`/
@@ -57,11 +52,10 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
         - qc/
           - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
           - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
+          - `${type}`.`${specimen}`.`${run}`.hifi\_trimmer.tar.gz – _optional_
           - `${type}`.`${specimen}`.`${run}`.multiqc.html
       - merged/
         - _all like above but with `merged` instead of `${run}` in the file names_
-
-**Q**: move `read_preprocess/` inside like `qc/` ?
 
 **TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 
