@@ -58,7 +58,8 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
           - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
           - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
           - `${type}`.`${specimen}`.`${run}`.multiqc.html
-      - `${assembly}`.`${type}`.`${specimen}`.merged.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
+      - merged/
+        - _all like above but with `merged` instead of `${run}` in the file names_
 
 **Q**: move `read_preprocess/` inside like `qc/` ?
 
