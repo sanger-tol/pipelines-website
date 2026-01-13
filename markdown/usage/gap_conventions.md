@@ -67,7 +67,7 @@ read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap
 
 **TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 
-**TODO**: change the name of the coverage file to match blobtoolkit
+**TODO**: change the name of the coverage file to match blobtoolkit (coverage.bedGraph -> coverage.1k.bedGraph)
 
 ## Variant calling and analysis
 
