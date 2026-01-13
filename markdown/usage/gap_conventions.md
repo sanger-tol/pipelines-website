@@ -212,3 +212,4 @@ and [Ensembl repeat download](/ensemblrepeatdownload).
 - because "overwrite" is the default, the symlinking will be at the top-level most of the time. Only in special cases (and "topup" in a future) the symlinking will have to go inside the directory structure.
 - pipelines can keep multiqc, and make it as good as they want
 - additionally, we'll run a multiqc at the end on everything
+- something somewhere will have to convert all data tracks to big files to make a trackhub on S3
