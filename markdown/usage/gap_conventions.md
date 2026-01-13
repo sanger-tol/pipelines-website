@@ -44,19 +44,19 @@ Placeholders for identifiers are indicated with the `${...}` syntax.
 The following outputs all come from the [read mapping](/readmapping) pipeline.
 Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit) pipeline.
 
-- read_preprocess/
+- read\_preprocess/
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${type}`.`${specimen}`.`${run}`.hifi_trimmer.tar.gz – _optional_
-- read_mapping/
+        - `${type}`.`${specimen}`.`${run}`.hifi\_trimmer.tar.gz – _optional_
+- read\_mapping/
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
         - qc/
           - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
-          - `${type}`.`${specimen}`.`${run}`.filtered_fastqc.(html|zip) – _optional_
+          - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
           - `${type}`.`${specimen}`.`${run}`.multiqc.html
       - `${assembly}`.`${type}`.`${specimen}`.merged.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
 
@@ -71,11 +71,11 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
 The following outputs come from the [variant calling](/readmapping) and
 [variant composition](/variantcomposition) pipelines.
 
-- variant_calling/
+- variant\_calling/
   - `${type}`/
     - `${specimen}/`
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(gz|stats.visual_report.html) – _from variantcalling_
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(gz|stats.visual\_report.html) – _from variantcalling_
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.deepvariant.(vcf|g.vcf).(stats.bcftools.txt.gz|frq|het|indel.hist|plot-vcfstats.(pdf|tar.gz)|roh|sites.pi.gz|snpden) – _from variantcomposition_
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.himut.vcf.(bgz|bgz.csi|bgz.tbi) – _from variantcalling, optional_
 
@@ -85,7 +85,7 @@ The following outputs come from the [variant calling](/readmapping) and
 
 The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
 
-- base_content/
+- base\_content/
   - `${assembly}`.(mononuc|dinuc|trinuc|tetranuc|freq)\_windows.tsv.gz
 - blobtoolkit/
   - `${assembly}`/
@@ -94,8 +94,8 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
     - `${assembly}`.\*.png
 - busco/
   - `${lineage}`/
-    - `${assembly}`.`${lineage}`.(full_table.tsv|missing_busco_list.tsv|(single_copy|multi_copy|fragmented)\_busco_sequences.tar.gz|short_summary.(json|tsv|txt)|hmmer_output.tar.gz)
-- read_mapping/
+    - `${assembly}`.`${lineage}`.(full\_table.tsv|missing\_busco\_list.tsv|(single\_copy|multi\_copy|fragmented)\_busco\_sequences.tar.gz|short\_summary.(json|tsv|txt)|hmmer\_output.tar.gz)
+- read\_mapping/
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
@@ -111,7 +111,7 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
 
 The following outputs come from the [sequence composition](/sequencecomposition) pipeline.
 
-- base_content/
+- base\_content/
   - k1/
     - `${assembly}`.(mononuc.1k.tsv.gz|(A|C|G|T|N|(AT|GC)\_skew|GC).1k.bedGraph.gz)
   - k2/
@@ -125,20 +125,20 @@ The following outputs come from the [sequence composition](/sequencecomposition)
 
 The following outputs come from the [genome note](/genomenote) pipeline.
 
-- ancestral_plots/
+- ancestral\_plots/
   - `${lineage}`/
     - `${assembly}`.`${lineage}`.buscopainter.(pdf|png)
 - busco/ – _as in blobtoolkit_
-- contact_maps/
+- contact\_maps/
   - `${specimen}`/
     - `${assembly}`.hic.`${specimen}`.(cool|mcool|pretext|pretext.png)
 - gene/
   - `${source}`/
     - `${assembly}`.`${source}`.stats.csv
-- genome_note/
-  - `${assembly}`.(csv|docx|md|xml|genome\_note_(consistent|inconsistent).csv)
+- genome\_note/
+  - `${assembly}`.(csv|docx|md|xml|genome\_note\_(consistent|inconsistent).csv)
 - genomescope/
-- genome_stats/
+- genome\_stats/
   - `${assembly}`.gfastats.txt
   - `${specimen}`/
     - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
