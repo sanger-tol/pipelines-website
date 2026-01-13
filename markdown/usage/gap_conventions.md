@@ -16,6 +16,8 @@ The main principles are that:
 - Analyses that are implemented in multiple pipelines always have the same output
   name and path.
 - File names are as self-explanatory as possible.
+- File and directory naming support topping-up, e.g. adding a new specimen, a new run, etc.
+  The exception is obviously merged files that will have to be overwritten.
 
 Additionally:
 
