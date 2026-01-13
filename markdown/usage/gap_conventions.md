@@ -127,8 +127,6 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
 
 **TODO**: change the `base_content` outputs to match sequencecomposition
 
-**TODO**: drop multiqc output
-
 **TODO**: publish the alignments too, using the same convention as in readmapping
 
 ## Sequence composition
@@ -166,8 +164,6 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${assembly}`.gfastats.txt
   - `${specimen}`/
     - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
-
-**TODO**: drop multiqc output
 
 **TODO**: assuming we merge all runs by specimen.
 
