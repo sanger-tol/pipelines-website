@@ -57,6 +57,14 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
       - merged/
         - _all like above but with `merged` instead of `${run}` in the file names_
 
+*Example*:
+
+```text
+read_mapping/hic/icLepMacu1/ERR9248445/GCA_936432065.2.hic.icLepMacu1.ERR9248445.minimap2.cram
+read_mapping/hic/icLepMacu1/ERR9248445/qc/GCA_936432065.2.hic.icLepMacu1.ERR9248445.fastqc.html
+read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap2.cram
+```
+
 **TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 
 **TODO**: change the name of the coverage file to match blobtoolkit
