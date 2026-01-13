@@ -109,8 +109,7 @@ variant_analysis/pacbio/icLepMacu1/merged/calls/GCA_936432065.2.pacbio.icLepMacu
 
 The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
 
-- base\_content/
-  - `${assembly}`.(mononuc|dinuc|trinuc|tetranuc|freq)\_windows.tsv.gz
+- base\_content/ – _as in sequencecomposition but only the TSV files_
 - blobtoolkit/
   - `${assembly}`/
     - \*.json.gz
@@ -119,11 +118,7 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
 - busco/
   - `${lineage}`/
     - `${assembly}`.`${lineage}`.(full\_table.tsv|missing\_busco\_list.tsv|(single\_copy|multi\_copy|fragmented)\_busco\_sequences.tar.gz|short\_summary.(json|tsv|txt)|hmmer\_output.tar.gz)
-- read\_mapping/
-  - `${type}`/
-    - `${specimen}`/
-      - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.coverage.1k.bedGraph.gz
+- read\_mapping/ – _as in readmapping but no merging expected_
 
 **TODO**: change the `base_content` outputs to match sequencecomposition
 
