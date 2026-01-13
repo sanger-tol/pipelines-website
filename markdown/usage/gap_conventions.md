@@ -11,7 +11,7 @@ The main principles are that:
   into the same directory without clashing.
 - To facilitate this, filenames include all necessary identifiers such as assembly,
   specimen, or sequencing run.
-- These identifiers, except the assembly name, are also used to name the parent output
+- These identifiers, are used to name the output
   directories, each identifier naming a different directory level.
 - Analyses that are implemented in multiple pipelines always have the same output
   name and path.
@@ -35,6 +35,9 @@ Here is the list of identifiers currently used to named outputs:
 | `run`      | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445`      |
 | `specimen` | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`      |
 | `lineage`  | Complete name of the Busco lineage, i.e. including the `_odb*` suffix.               | `insecta_odb10`   |
+
+Additionally, tool and software names may be added to the outputs for clarity,
+especially when different tools could be used, e.g. the aligner or variant-caller.
 
 Below is the canonical structure that all Genome After-Party pipelines abide by.
 Placeholders for identifiers are indicated with the `${...}` syntax.
@@ -66,8 +69,6 @@ read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap
 ```
 
 **Q**: move the stats files inside `qc/` ?
-
-**TODO**: update the overall rules to argue why we're not making a sub-directory for the aligner
 
 **TODO**: change the name of the coverage file to match blobtoolkit (coverage.bedGraph -> coverage.1k.bedGraph)
 
