@@ -53,7 +53,7 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai)
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram)
         - qc/
           - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
           - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
@@ -82,7 +82,7 @@ The following outputs come from the [variant calling](/readmapping) and
   - `${type}`/
     - `${specimen}/`
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(gz|gz.csi|gz.tbi) - _repeated for as many callers as we use_
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).gz - _repeated for as many callers as we use_
         - composition/ – _from variantcomposition_
           - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(frq|het|indel.hist|roh|sites.pi.gz|snpden)
         - qc/ – _from variantcomposition_
