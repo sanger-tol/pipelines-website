@@ -53,12 +53,14 @@ Alignment files and coverage can also be found in the [BlobToolKit](/blobtoolkit
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai|flagstat|idxstats|stats.gz)
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(coverage.bedGraph.gz|cram|cram.crai)
         - qc/
           - `${type}`.`${specimen}`.`${run}`.fastqc.(html|zip)
           - `${type}`.`${specimen}`.`${run}`.filtered\_fastqc.(html|zip) – _optional_
           - `${type}`.`${specimen}`.`${run}`.hifi\_trimmer.tar.gz – _optional_
           - `${type}`.`${specimen}`.`${run}`.multiqc.html
+        - stats/
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.(flagstat|idxstats|stats.gz)
       - merged/
         - _all like above but with `merged` instead of `${run}` in the file names_
 
@@ -69,8 +71,6 @@ read_mapping/hic/icLepMacu1/ERR9248445/GCA_936432065.2.hic.icLepMacu1.ERR9248445
 read_mapping/hic/icLepMacu1/ERR9248445/qc/GCA_936432065.2.hic.icLepMacu1.ERR9248445.fastqc.html
 read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap2.cram
 ```
-
-**Q**: move the stats files inside `qc/` ?
 
 **TODO**: change the name of the coverage file to match blobtoolkit (coverage.bedGraph -> coverage.1k.bedGraph)
 
