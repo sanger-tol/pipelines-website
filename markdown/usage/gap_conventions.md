@@ -72,8 +72,6 @@ read_mapping/hic/icLepMacu1/ERR9248445/qc/GCA_936432065.2.hic.icLepMacu1.ERR9248
 read_mapping/hic/icLepMacu1/merged/GCA_936432065.2.hic.icLepMacu1.merged.minimap2.cram
 ```
 
-**TODO**: change the name of the coverage file to match blobtoolkit (coverage.bedGraph -> coverage.1k.bedGraph)
-
 ## Variant calling and analysis
 
 The following outputs come from the [variant calling](/readmapping) and
@@ -166,8 +164,6 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${assembly}`.gfastats.txt
   - `${specimen}`/
     - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
-
-**TODO**: move the generation of the contact map to readmapping
 
 ## Downloads
 

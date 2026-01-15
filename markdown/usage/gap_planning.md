@@ -53,6 +53,22 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 - gfastats
 - **Many** analyses, incl. repeat analyses, k-mer stats, etc
 
+# Read mapping
+
+## Now
+
+- Release v1.4.0
+  - Fix alignment commands and parameters
+  - HiFi-trimmer
+  - Support for ULI
+- Update memory settings
+  - For v1.4.1
+
+## Later
+
+- Support for RNA-Seq
+- Generate contact maps
+
 # Genomenote
 
 ## Now
