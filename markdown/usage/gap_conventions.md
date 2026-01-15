@@ -213,3 +213,4 @@ and [Ensembl repeat download](/ensemblrepeatdownload).
 - pipelines can keep multiqc, and make it as good as they want
 - additionally, we'll run a multiqc at the end on everything
 - something somewhere will have to convert all data tracks to big files to make a trackhub on S3
+- Keep a text file that describes the output in the pipeline run folder (for instance `assets.yml`), to make it more easier when working in farm env
