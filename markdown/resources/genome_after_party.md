@@ -187,10 +187,4 @@ and move "Create bedGraph for distribution of heterozygous sites across genome" 
 
 # Final words
 
-Additionally, all pipelines are in need of:
-
-- Update the pipeline template.
-- Update the samplesheet validation steps.
-- Implement nf-test.
-
-And we need a strategy for converting all outputs to bigBed/bigWig and building public track-hubs.
+Additionally, we need a strategy for converting all outputs to bigBed/bigWig and building public track-hubs.
