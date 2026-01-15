@@ -86,9 +86,7 @@ Eventually, we'll be running _everything_ but **variantcalling** on _all_ assemb
 
 ### Planned features:
 
-- Use [hifi-trimmer](https://github.com/sanger-tol/hifi-trimmer) to filter PacBio reads.
 - Add calculation for PacBio filtered data percentage.
-- Add support for Pacbio ULI reads.
 - Add support for RNAseq data.
 
 # Genome Note {#genomenote}
@@ -132,7 +130,6 @@ These include (1) assembly information, statistics and chromosome details, (2) P
 
 ### Planned features:
 
-- Runtime improvement for the `blastn` subworkflow.
 - Compute read coverage with k-mer based methods.
 
 # Sequence Composition {#sequencecomposition}
