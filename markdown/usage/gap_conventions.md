@@ -26,7 +26,7 @@ Additionally:
 - All other text files are compressed with `gzip` if they typically exceed 10 MB.
 - Sequence alignments are in CRAM format (version 3.0) with embedded references,
   ensuring the files can be read widely and without having to pass the assembly
-  Fasta file as a parameter, and are all indexed with `samtools index` in both `.tbi` and `.csi` formats.
+  Fasta file as a parameter, and are all indexed with `samtools index` in `.crai` format.
 
 Here is the list of identifiers currently used to named outputs:
 
