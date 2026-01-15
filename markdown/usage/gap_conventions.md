@@ -115,6 +115,8 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
 - blobtoolkit/
   - `${assembly}`/
     - \*.json.gz
+  - multiqc/
+    `${assembly}`.blobtoolkit.multiqc.html
   - plots/
     - `${assembly}`.\*.png
 - busco/
