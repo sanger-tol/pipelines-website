@@ -84,13 +84,11 @@ The following outputs come from the [variant calling](/readmapping) and
   - `${type}`/
     - `${specimen}/`
       - `${run}`/
-        - calls/ – _from variantcalling or elsewhere_
-          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.deepvariant.(vcf|g.vcf).(gz|gz.csi|gz.tbi)
-          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.himut.vcf.(bgz|bgz.csi|bgz.tbi) – _optional_
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(gz|gz.csi|gz.tbi) - _repeated for as many callers as we use_
         - stats/ – _from variantcomposition_
-          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${tool}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.(pdf|tar.gz)|stats.visual\_report.html)
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.(pdf|tar.gz)|stats.visual\_report.html)
         - composition/ – _from variantcomposition_
-          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${tool}`.(vcf|g.vcf).(frq|het|indel.hist|roh|sites.pi.gz|snpden)
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(frq|het|indel.hist|roh|sites.pi.gz|snpden)
       - merged/
         - _like above but with `merged` instead of `${run}` in the file names_
 
