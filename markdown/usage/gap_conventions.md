@@ -85,10 +85,12 @@ The following outputs come from the [variant calling](/readmapping) and
     - `${specimen}/`
       - `${run}`/
         - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(gz|gz.csi|gz.tbi) - _repeated for as many callers as we use_
-        - stats/ – _from variantcomposition_
-          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.(pdf|tar.gz)|stats.visual\_report.html)
         - composition/ – _from variantcomposition_
           - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(frq|het|indel.hist|roh|sites.pi.gz|snpden)
+        - qc/ – _from variantcomposition_
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(plot-vcfstats.pdf|stats.visual\_report.html)
+        - stats/ – _from variantcomposition_
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.tar.gz)
       - merged/
         - _like above but with `merged` instead of `${run}` in the file names_
 
