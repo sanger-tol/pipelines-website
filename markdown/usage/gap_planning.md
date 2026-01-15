@@ -52,3 +52,25 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
   - completeness and QV
 - gfastats
 - **Many** analyses, incl. repeat analyses, k-mer stats, etc
+
+# Genomenote
+
+## Now
+
+- Release v2.2.0
+
+## Later
+
+- Support for combined maps ?
+  - For v2.3.0
+- Smudgeplots ?
+  - For v2.3.0
+- Support for pre-computed analyses ?
+  - Busco
+  - Contact map
+  - BlobToolKit
+
+## Long-term goal
+
+- Retire. The Genome Note Platform will be providing the ability
+  to fill a template in from Genome After-Party data

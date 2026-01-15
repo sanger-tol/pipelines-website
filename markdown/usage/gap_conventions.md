@@ -169,11 +169,7 @@ The following outputs come from the [genome note](/genomenote) pipeline.
 
 **TODO**: assuming we only run the pipeline on merged read mapping
 
-**TODO**: make the pipeline expect existing BUSCO outputs
-
 **TODO**: move the generation of the contact map to readmapping
-
-**TODO**: at that point, the pipeline will just be aggregating stats
 
 ## Downloads
 
