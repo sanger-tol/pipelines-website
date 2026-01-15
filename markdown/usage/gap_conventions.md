@@ -129,17 +129,7 @@ blobtoolkit/plots/GCA_936432065.2.snail.png
 busco/insecta_odb12/GCA_936432065.2.insecta_odb12.full_table.tsv
 ```
 
-**TODO**: change the `base_content` outputs to match sequencecomposition
-
-**TODO**: publish the alignments too, using the same convention as in readmapping
-
-**TODO**: what does the pipeline do with sequencecomposition ?
-
 **TODO**: create Busco pipeline that runs Busco and the ancestral painter (cf genomenote)
-
-**TODO**: make the pipeline accept existing Busco outputs
-
-**TODO**: at that point, the pipeline will just be aggregating data
 
 ## Sequence composition
 
