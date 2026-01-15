@@ -35,7 +35,6 @@ Eventually, we'll be running _everything_ but **variantcalling** on _all_ assemb
 ### Planned features:
 
 - Download RefSeq annotations.
-- Review the usage of ENA vs NCBI, and the naming of the pipeline.
 
 # Ensembl Repeat Download {#ensemblrepeatdownload}
 
