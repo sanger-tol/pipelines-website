@@ -41,3 +41,9 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 ## Long-term goal
 
 - Reinstate the Nextflow port of Busco
+
+# Sequence composition
+
+## Later
+
+- **Many** analyses, incl. repeat analyses, k-mer stats, etc
