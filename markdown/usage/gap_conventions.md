@@ -131,8 +131,6 @@ blobtoolkit/plots/GCA_936432065.2.snail.png
 busco/insecta_odb12/GCA_936432065.2.insecta_odb12.full_table.tsv
 ```
 
-**TODO**: create Busco pipeline that runs Busco and the ancestral painter (cf genomenote)
-
 ## Sequence composition
 
 The following outputs come from the [sequence composition](/sequencecomposition) pipeline.

@@ -25,3 +25,19 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
   - Busco
   - fasta_windows
   - Read coverage
+
+# Busco
+
+## Later
+
+- Complete and release the pipeline v1.0.0
+  - Regular Busco commands
+  - Supports odb10 and odb12
+  - Can find lineage automatically using the taxonomy
+  - Make keeping the individual Fasta files an option
+- Ancestral painting
+  - For v1.1.0
+
+## Long-term goal
+
+- Reinstate the Nextflow port of Busco
