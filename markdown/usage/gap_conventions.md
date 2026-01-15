@@ -167,8 +167,6 @@ The following outputs come from the [genome note](/genomenote) pipeline.
   - `${specimen}`/
     - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
 
-**TODO**: assuming we only run the pipeline on merged read mapping
-
 **TODO**: move the generation of the contact map to readmapping
 
 ## Downloads
