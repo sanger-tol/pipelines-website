@@ -173,8 +173,6 @@ The following outputs come from the [genome note](/genomenote) pipeline.
 
 **TODO**: move the generation of the contact map to readmapping
 
-**TODO**: move the k-mer and assembly stats to sequencecomposition
-
 **TODO**: at that point, the pipeline will just be aggregating stats
 
 ## Downloads

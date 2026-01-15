@@ -46,4 +46,9 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Later
 
+- k-mer stats used in genome-note
+  - genomescope
+  - smudgeplot
+  - completeness and QV
+- gfastats
 - **Many** analyses, incl. repeat analyses, k-mer stats, etc
