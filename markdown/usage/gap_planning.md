@@ -7,17 +7,20 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Now
 
+- Release features already implemented on the development branch
+  - v0.10.0 or v1.0.0
 - (bug) Busco output tar files don't contain the sequences
-  - Will be released as v0.9.1 or v1.0.0
   - Means all Buscos done with BlobToolKit >= v0.7.0, <= v0.9.0 will have to be rerun
     - All BlobToolKit runs with version < v0.7.0 have to be rerun anyway to enable the chromosome grids
+  - Need to be included in the next production release, by v1.0.0
 - (feature) parameter validation for Blastn and Busco
-  - For v1.0.0
+  - Requested by many external users of the pipeline
+  - Only thing needed to call it v1.0.0
 
 ## Later
 
 - (bug) Fix accepting existing Buscos as input (useful for large genomes when we run Busco outside of the pipeline)
-  - For v1.0.1
+  - Ideally v1.0.0 but could be deferred to v1.0.1
 
 ## Long-term goal
 
@@ -59,11 +62,12 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Now
 
-- Release v1.4.0
+- (feature) Release v1.4.0
   - Fix alignment commands and parameters. Use the same code as TreeVal &amp; co
-  - HiFi-trimmer
+  - Switch to HiFi-trimmer and provide the ability to _not_ filter (that's what I actually want in production)
   - Support for ULI
-- Update memory settings
+- (bug) Update CPU/memory settings
+  - v1.4.0 is such a big change it's unlikely to be requesting the right resources at the first attempt
   - For v1.4.1
 
 ## Later
@@ -75,18 +79,18 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Now
 
-- Release v2.2.0 with all the changes already implemented for Sanger genome notes
+- Release features already implemented on the development branch
+  - As v2.2.0
 
 ## Later
 
 - Support for combined maps ?
+  - Need to check if we can use the curationpretext pipeline instead
   - For v2.3.0
 - Smudgeplots ?
   - For v2.3.0
-- Support for pre-computed analyses ?
-  - Busco
-  - Contact map
-  - BlobToolKit
+- Support for pre-computed analyses ? (Busco, contact maps, BlobToolKit)
+  - For even later. TBD
 
 ## Long-term goal
 
@@ -99,9 +103,9 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Now
 
-- Generate a mapping file between accession numbers, chromosome numbers, and sequence names
+- (feature) Generate a mapping file between accession numbers, chromosome numbers, and sequence names
   - insdcdownload v2.1.0
-- Generate a SAM header we can add to all read alignments
+- (bug) Generate a correct SAM header for the CRAM files
   - insdcdownload v2.1.0
 
 ## Later
@@ -119,7 +123,7 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 ## Long-term goal
 
 - Rethink the naming / split of the pipelines, e.g.:
-  - combine the two Ensembl pipelines into 1
+  - combine the two Ensembl pipelines into one
   - do the RefSeq downloads in a ncbidownload pipeline
   - implement ENA support in insdcdownload or rename it ncbidownload
   - add GCA assembly support in nf-core/fetchngs
