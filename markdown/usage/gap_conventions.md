@@ -181,8 +181,6 @@ and [Ensembl repeat download](/ensemblrepeatdownload).
   - `${source}`/
     - `${assembly}`.`${source}`.(gff3.gz|(cdna|cds|pep).fa.gz)
 
-**TODO**: the ensemblgenedownload pipeline should compute the GFF stats and BUSCO scores
-
 ## Concluding remarks
 
 - agreed (confirmed again !) that "overwrite" is the default mode. The document above should make it easier to support "topup" at some point, but "topup" is not a scenario we'll be running for the time being.

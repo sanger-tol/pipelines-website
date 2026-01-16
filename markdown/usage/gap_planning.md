@@ -89,3 +89,32 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 - Retire. The Genome Note Platform will be providing the ability
   to fill a template in from Genome After-Party data
+
+# Download pipelines
+
+## Now
+
+- Generate a mapping file between accession numbers, chromosome numbers, and sequence names
+  - insdcdownload v2.1.0
+- Generate a SAM header we can add to all read alignments
+  - insdcdownload v2.1.0
+
+## Later
+
+- The insdcdownload pipeline should:
+  - download RefSeq annotation ?
+- The ensemblgenedownload pipeline should
+  - change the sequence names in the GFF file to match the accession numbers
+  - compute the GFF stats and its BUSCO scores
+  - compute gene density tracks
+- The ensemblrepeatdownload pipeline should
+  - compute repeat density tracks
+  - download RepeatModeler models
+
+## Long-term goal
+
+- Rethink the naming / split of the pipelines, e.g.:
+  - combine the two Ensembl pipelines into 1
+  - do the RefSeq downloads in a ncbidownload pipeline
+  - implement ENA support in insdcdownload or rename it ncbidownload
+  - add GCA assembly support in nf-core/fetchngs
