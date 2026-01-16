@@ -16,13 +16,12 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Later
 
-- (bug) Fix accepting existing Buscos as input
+- (bug) Fix accepting existing Buscos as input (useful for large genomes when we run Busco outside of the pipeline)
   - For v1.0.1
 
 ## Long-term goal
 
 - Accept pre-computed analyses and make all the embedded analyses optional
-  - Busco
   - fasta_windows
   - Read coverage
 
