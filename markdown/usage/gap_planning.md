@@ -39,7 +39,7 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Long-term goal
 
-- Reinstate the Nextflow port of Busco
+- Reinstate the Nextflow port of Busco (to run Busco on large genomes)
 
 # Sequence composition
 
@@ -57,7 +57,7 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 ## Now
 
 - Release v1.4.0
-  - Fix alignment commands and parameters
+  - Fix alignment commands and parameters. Use the same code as TreeVal &amp; co
   - HiFi-trimmer
   - Support for ULI
 - Update memory settings
@@ -72,7 +72,7 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Now
 
-- Release v2.2.0
+- Release v2.2.0 with all the changes already implemented for Sanger genome notes
 
 ## Later
 
