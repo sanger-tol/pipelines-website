@@ -17,7 +17,7 @@ The main principles are that:
   name and path.
 - File names are as self-explanatory as possible.
 - File and directory naming support topping-up, e.g. adding a new specimen, a new run, etc.
-  The exception is obviously merged files that will have to be overwritten.
+  - The exception is obviously analyses across runs, specimens, etc, which may have to be overwritten.
 
 Additionally:
 
@@ -114,7 +114,7 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) pipeline.
   - `${assembly}`/
     - \*.json.gz
   - multiqc/
-    `${assembly}`.blobtoolkit.multiqc.html
+    - `${assembly}`.blobtoolkit.multiqc.html
   - plots/
     - `${assembly}`.\*.png
 - busco/
