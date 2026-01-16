@@ -87,8 +87,10 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Long-term goal
 
-- Retire. The Genome Note Platform will be providing the ability
-  to fill a template in from Genome After-Party data
+- Retire.
+  - Move all the analyses to other pipelines
+  - The Genome Note Platform will be providing the ability
+    to fill a template in from Genome After-Party data
 
 # Download pipelines
 
