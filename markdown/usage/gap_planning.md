@@ -45,12 +45,15 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Later
 
-- k-mer stats used in genome-note
+- _Many_ analyses, incl. repeat analyses, k-mer stats, etc
+
+## Long-term goal
+
+- Take these from genomenote
   - genomescope
   - smudgeplot
   - completeness and QV
-- gfastats
-- **Many** analyses, incl. repeat analyses, k-mer stats, etc
+  - gfastats
 
 # Read mapping
 
