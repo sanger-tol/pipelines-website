@@ -29,15 +29,15 @@ Additionally:
 
 Here is the list of identifiers currently used to named outputs:
 
-| Name            | Description                                                                          | Example value     |
-| --------------- | ------------------------------------------------------------------------------------ | ----------------- |
-| `assembly`      | Accession number of the assembly.                                                    | `GCA_936432065.2` |
-| `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`             |
-| `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445`      |
-| `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`      |
-| `lineage`       | Name of the Busco lineage, including the `_odb*` suffix.                             | `insecta_odb12`   |
-| `ancestral_set` | Name of the set of ancestral linkage groups                                          | `Merian`          |
-| `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`               |
+| Name            | Description                                                                          | Example value                                |
+| --------------- | ------------------------------------------------------------------------------------ | -------------------------------------------- |
+| `assembly`      | Accession number of the assembly.                                                    | `GCA_936432065.2`                            |
+| `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`                                        |
+| `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445` (hic)<br/>`ERR9284044` (pacbio) |
+| `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`                                 |
+| `lineage`       | Name of the Busco lineage, including the `_odb*` suffix.                             | `insecta_odb12`                              |
+| `ancestral_set` | Name of the set of ancestral linkage groups                                          | `Merian`                                     |
+| `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`                                          |
 
 Additionally, tool and software names may be added to the outputs for clarity,
 especially when different tools could be used, e.g. the aligner or variant-caller.
