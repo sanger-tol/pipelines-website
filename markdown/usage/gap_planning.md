@@ -99,17 +99,25 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
   - The Genome Note Platform will be providing the ability
     to fill a template in from Genome After-Party data
 
-# Download pipelines
+# Assembly download pipeline
 
 ## Now
 
 - (feature) Generate a mapping file between accession numbers, chromosome numbers, and sequence names
-  - insdcdownload v2.1.0
+  - v2.1.0
 - (bug) Generate a correct SAM header for the CRAM files
-  - insdcdownload v2.1.0
+  - v2.1.0
 
 ## Later
 
+- Take over running gfastats from the genome-note pipeline
+  - v2.2.0
+
+# Ensembl download pipelines
+
+## Later
+
+- Support the new FTP / data release model of Ensembl
 - The insdcdownload pipeline should:
   - download RefSeq annotation ?
 - The ensemblgenedownload pipeline should
@@ -122,8 +130,9 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Long-term goal
 
-- Rethink the naming / split of the pipelines, e.g.:
-  - combine the two Ensembl pipelines into one
-  - do the RefSeq downloads in a ncbidownload pipeline
-  - implement ENA support in insdcdownload or rename it ncbidownload
-  - add GCA assembly support in nf-core/fetchngs
+- Rethink the naming / split of all download pipelines, e.g.:
+  - combine the two Ensembl pipelines into one ?
+  - pipeline to download from RefSeq (refseqdownload ?)
+  - implement ENA support in insdcdownload ?
+  - rename insdcdownlod it ncbidownload
+  - add GCA assembly support in nf-core/fetchngs ?
