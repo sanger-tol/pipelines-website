@@ -77,6 +77,19 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 - Support for RNA-Seq
 - Generate contact maps
 
+# Variant calling and composition
+
+## Now
+
+- (feature) add filtering options
+  - For variantcomposition v0.2.0
+- (feature) rearrange the outputs to be more practical
+  - For variantcomposition v0.2.0
+- (feature) remove features (except the stats) now in variantcomposition
+  - For variantcalling v1.2.0
+- (feature) make the merging of the input read alignment optional
+  - For variantcalling v1.2.0
+
 # Genomenote
 
 ## Now
