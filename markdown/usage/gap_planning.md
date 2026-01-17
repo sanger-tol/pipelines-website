@@ -94,6 +94,11 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 - (feature) make the merging of the input read alignment optional
   - For variantcalling v1.2.0
 
+## Later
+
+- (feature) Add structural variation detection
+  - For variantcalling v1.3.0
+
 # Genomenote
 
 ## Now
