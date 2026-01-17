@@ -88,7 +88,6 @@ and **variantcalling**/**variantcomposition** only on primary haplotypes.
 
 ### Planned features:
 
-- Add calculation for PacBio filtered data percentage.
 - Add support for RNAseq data.
 
 # Genome Note {#genomenote}
