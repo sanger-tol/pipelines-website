@@ -8,7 +8,7 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 ## Now
 
 - Release features already implemented on the development branch
-  - v0.10.0 or v1.0.0
+  - v0.10.0 or v1.0.0 if changes below are included
 - (bug) Busco output tar files don't contain the sequences
   - Means all Buscos done with BlobToolKit >= v0.7.0, <= v0.9.0 will have to be rerun
     - All BlobToolKit runs with version < v0.7.0 have to be rerun anyway to enable the chromosome grids
