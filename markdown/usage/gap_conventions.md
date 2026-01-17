@@ -86,7 +86,7 @@ merged.`${#}` is used as a pseudo run identifier,
 where `${#}` is automatically incremented from 1.
 The SOURCE file then lists the runs that were included in the merged analysis.
 
-*Example*:
+_Example_:
 
 ```text
 read_mapping/hic/icLepMacu1/ERR9248445/GCA_936432065.2.hic.icLepMacu1.ERR9248445.minimap2.cram
@@ -114,7 +114,7 @@ The following outputs come from the [variant calling](/variantcalling) and
 The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder.
 `${run}` may even be one of the merged.`${#}` form.
 
-*Example*:
+_Example_:
 
 ```text
 variant_analysis/pacbio/icLepMacu1/ERR9284044/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.minimap2.deepvariant.vcf.gz
@@ -139,7 +139,7 @@ The following outputs come from the [BlobToolKit](/blobtoolkit) and [genome note
     - `${ancestral_set}`/
       - `${assembly}`.`${lineage}`.`${ancestral_set}`.buscopainter.(pdf|png)
 
-*Example*:
+_Example_:
 
 ```text
 busco/insecta_odb12/GCA_936432065.2.insecta_odb12.full_table.tsv
@@ -156,7 +156,7 @@ The following outputs specifically come from the [BlobToolKit](/blobtoolkit) pip
   - plots/
     - `${assembly}`.\*.png
 
-*Example*:
+_Example_:
 
 ```text
 blobtoolkit/GCA_936432065.2/
@@ -188,7 +188,7 @@ or downloaded by the [Ensembl gene download](/ensemblgenedownloadd) and [Ensembl
   - `${source}`/
     - `${assembly}`.`${source}`.(bed.gz|masked.fa.gz)
 
-*Note*: the list will significantly increase when full development of the [sequence composition](/sequencecomposition) pipeline starts.
+_Note_: the list will significantly increase when full development of the [sequence composition](/sequencecomposition) pipeline starts.
 
 ## Genome note
 
