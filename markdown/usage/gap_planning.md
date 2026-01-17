@@ -62,12 +62,14 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Now
 
-- (feature) Release v1.4.0
+- Release features already implemented on the development branch
+  - As v1.4.0
   - Fix alignment commands and parameters. Use the same code as TreeVal &amp; co
   - Switch to HiFi-trimmer and provide the ability to _not_ filter (that's what I actually want in production)
   - Support for ULI
 - (bug) Update CPU/memory settings
   - v1.4.0 is such a big change it's unlikely to be requesting the right resources at the first attempt
+  - Necessary for production but lengthy to do, so not fitting v1.4.0
   - For v1.4.1
 
 ## Later
