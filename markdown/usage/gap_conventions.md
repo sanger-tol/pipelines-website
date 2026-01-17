@@ -112,8 +112,9 @@ The following outputs come from the [variant calling](/variantcalling) and
           - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.tar.gz)
 
 The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder,
-though in practice we only envisage to use PacBio data.
-`${run}` may be of the `merged.${#}` form.
+including `merged.${#}` forms of `${run}`.
+
+_Note_: In practice we only envisage to use PacBio data.
 
 _Example_:
 
@@ -191,8 +192,9 @@ or downloaded by the [Ensembl gene download](/ensemblgenedownloadd) and [Ensembl
     - `${assembly}`.`${source}`.(bed.gz|masked.fa.gz)
 
 The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder,
-though in practice we only envisage to use PacBio data.
-`${run}` may be of the `merged.${#}` form.
+including `merged.${#}` forms of `${run}`.
+
+_Note_: In practice we only envisage to use PacBio data.
 
 _Note_: the list will significantly increase when full development of the [sequence composition](/sequencecomposition) pipeline starts.
 
