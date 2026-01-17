@@ -29,15 +29,15 @@ Additionally:
 
 Here is the list of identifiers currently used to named outputs:
 
-| Name            | Description                                                                          | Example value                                |
-| --------------- | ------------------------------------------------------------------------------------ | -------------------------------------------- |
-| `assembly`      | Accession number of the assembly.                                                    | `GCA_936432065.2`                            |
-| `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`                                        |
-| `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445` (hic)<br/>`ERR9284044` (pacbio) |
-| `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`                                 |
-| `lineage`       | Name of the Busco lineage, including the `_odb*` suffix.                             | `insecta_odb12`                              |
-| `ancestral_set` | Name of the set of ancestral linkage groups                                          | `Merian`                                     |
-| `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`                                          |
+| Name            | Description                                                                          | Example value                                                   |
+| --------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| `assembly`      | Accession number of the assembly. Linked haploid assemblies may be referred to.      | `GCA_936432065.2` (principal)<br/>`GCA_936443135.2` (alternate) |
+| `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`                                                           |
+| `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445` (hic)<br/>`ERR9284044` (pacbio)                    |
+| `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`                                                    |
+| `lineage`       | Name of the Busco lineage, including the `_odb*` suffix.                             | `insecta_odb12`                                                 |
+| `ancestral_set` | Name of the set of ancestral linkage groups                                          | `Merian`                                                        |
+| `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`                                                             |
 
 Additionally, tool and software names may be added to the outputs for clarity,
 especially when different tools could be used, e.g. the aligner or variant-caller.
@@ -185,8 +185,11 @@ or downloaded by the [Ensembl gene download](/ensemblgenedownloadd) and [Ensembl
   - `${type}`/
     - `${specimen}`/
       - `${run}`/
-        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
-  - genomescope/
+        - merqury/
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.(completeness.stats|qv|spectra-asm.\*.png)
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${target_assembly}`.(only.bed.gz|qv|spectra-cn.\*.png)
+        - genomescope/
+          - `${assembly}`.`${type}`.`${specimen}`.`${run}`.genomescope\_((transformed\_)?(linear|log)\_plot.png|(model|summary).txt)
 - repeats/
   - `${source}`/
     - `${assembly}`.`${source}`.(bed.gz|masked.fa.gz)
@@ -196,6 +199,17 @@ though in practice we only envisage to use PacBio data.
 `${run}` may be of the `merged.${#}` form.
 
 _Note_: the list will significantly increase when full development of the [sequence composition](/sequencecomposition) pipeline starts.
+
+_Example_:
+
+```text
+base_content/k1/GCA_936432065.2.GC.1k.bedGraph.gz
+genes/ensembl.2023_05/GCA_936432065.2.ensembl.2023-05.gff3.gz
+genome_stats/pacbio/icLepMacu1/ERR9284044/merqury/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.qv
+genome_stats/pacbio/icLepMacu1/merged.1/merqury/GCA_936432065.2.pacbio.icLepMacu1.merged.1.GCA_936443135.2.qv
+genome_stats/pacbio/icLepMacu1/merged.1/genomescope/GCA_936432065.2.pacbio.icLepMacu1.merged.1.genomescope_log_plot.png
+repeats/ensembl/GCA_936432065.2.ensembl.bed.gz
+```
 
 ## Genome note
 
