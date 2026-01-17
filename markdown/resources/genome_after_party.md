@@ -181,7 +181,3 @@ We're considering implementing the following as a _separate_ pipeline called **[
 - Calculate InDel size distribution.
 
 and move "Create bedGraph for distribution of heterozygous sites across genome" over here.
-
-# Final words
-
-Additionally, we need a strategy for converting all outputs to bigBed/bigWig and building public track-hubs.
