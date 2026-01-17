@@ -31,7 +31,7 @@ Here is the list of identifiers currently used to named outputs:
 
 | Name            | Description                                                                          | Example value                                                   |
 | --------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
-| `assembly`      | Accession number of the assembly. Linked haploid assemblies may be referred to.      | `GCA_936432065.2` (principal)<br/>`GCA_936443135.2` (alternate) |
+| `assembly`      | Accession number of the assembly. Linked haploid assemblies may be referred to too.  | `GCA_936432065.2` (principal)<br/>`GCA_936443135.2` (alternate) |
 | `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`                                                           |
 | `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445` (hic)<br/>`ERR9284044` (pacbio)                    |
 | `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`                                                    |
