@@ -112,7 +112,7 @@ The following outputs come from the [variant calling](/variantcalling) and
           - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.tar.gz)
 
 The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder.
-`${run}` may even be one of the `merged.${#}` form.
+`${run}` may even be of the `merged.${#}` form.
 
 _Example_:
 
