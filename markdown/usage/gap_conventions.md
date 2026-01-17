@@ -3,6 +3,8 @@ title: Standard Genome After-Party outputs
 subtitle: This page describes the conventions we follow to organise the outputs of the Genome After-Party pipelines
 ---
 
+## Principles
+
 All Genome After-Party pipelines organise their outputs in a consistent and scalable manner.
 
 The main principles are that:
