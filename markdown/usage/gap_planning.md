@@ -56,7 +56,6 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
   - genomescope
   - smudgeplot
   - completeness and QV
-  - gfastats
 
 # Read mapping
 
