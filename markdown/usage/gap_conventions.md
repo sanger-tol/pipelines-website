@@ -203,7 +203,7 @@ _Example_:
 ```text
 base_content/k1/GCA_936432065.2.GC.1k.bedGraph.gz
 genes/ensembl.2023_05/GCA_936432065.2.ensembl.2023-05.gff3.gz
-genome_stats/pacbio/icLepMacu1/ERR9284044/merqury/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.qv
+genome_stats/pacbio/icLepMacu1/ERR9284044/merqury/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.completeness.stats
 genome_stats/pacbio/icLepMacu1/merged.1/merqury/GCA_936432065.2.pacbio.icLepMacu1.merged.1.GCA_936443135.2.qv
 genome_stats/pacbio/icLepMacu1/merged.1/genomescope/GCA_936432065.2.pacbio.icLepMacu1.merged.1.genomescope_log_plot.png
 repeats/ensembl/GCA_936432065.2.ensembl.bed.gz
