@@ -74,8 +74,12 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Later
 
+- Support for PiMMS ?
+  - For v1.5.0
 - Support for RNA-Seq
+  - For v1.6.0
 - Generate contact maps
+  - For v1.7.0
 
 # Variant calling and composition
 
