@@ -102,7 +102,7 @@ These include (1) assembly information, statistics and chromosome details, (2) P
 - Create HiC contact map and chromosomal grid using `Cooler`.
 - Retrieve assembly information, statistics and chromosome details from NCBI `datasets`.
 - Compute genome completeness with `BUSCO`.
-- Compute sequence quality and k-mer completeness with the `FastK`/`MerquryFK` suite of tools.
+- Compute sequence quality and k-mer completeness with the `FastK`/`MerquryFK` suite of tools, using the alternative haplotype.
 - Compute the percentage of HiC primary mappings with `samtools flagstat`.
 - Run GFA stats.
 - Broad fetching of genome metadata from numerous sources.
@@ -111,8 +111,9 @@ These include (1) assembly information, statistics and chromosome details, (2) P
 
 ### Planned features:
 
-- Process principal and alternate haplotypes together.
 - Add optional read mapping subworkflow.
+- Generate combined HiC contact maps
+- Generate smudgeplots
 
 # BlobToolKit {#blobtoolkit}
 
