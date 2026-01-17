@@ -182,12 +182,18 @@ or downloaded by the [Ensembl gene download](/ensemblgenedownloadd) and [Ensembl
   - `${source}`/
     - `${assembly}`.`${source}`.(gff3.gz|(cdna|cds|pep).fa.gz)
 - genome\_stats/
-  - `${specimen}`/
-    - `${assembly}`.`${specimen}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
+  - `${type}`/
+    - `${specimen}`/
+      - `${run}`/
+        - `${assembly}`.`${type}`.`${specimen}`.`${run}`.(completeness.stats|only.bed.gz|(asm|seq).qv|spectra-(asm|cn).\*.png|
   - genomescope/
 - repeats/
   - `${source}`/
     - `${assembly}`.`${source}`.(bed.gz|masked.fa.gz)
+
+The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder,
+though in practice we only envisage to use PacBio data.
+`${run}` may be of the `merged.${#}` form.
 
 _Note_: the list will significantly increase when full development of the [sequence composition](/sequencecomposition) pipeline starts.
 
