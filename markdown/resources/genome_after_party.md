@@ -200,4 +200,6 @@ It will be considered ready to general use in v0.2.0.
 
 # Future pipelines {#futurepipelines}
 
+- Pipeline to run Busco (outputs can then be used by blobtoolkit and genomenote).
+  A preliminary version is implemented in **[sanger-tol/busco](/busco)**
 - Pipeline to download RefSeq annotations.
