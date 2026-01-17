@@ -87,8 +87,11 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
   - For v1.5.0
 - Support for RNA-Seq
   - For v1.6.0
-- Generate contact maps
-  - For v1.7.0
+
+## Long-term goal
+
+- Take the generation of contact maps from genomenote
+  - Check if we could rather just run curationpretext
 
 # Variant calling and composition
 
