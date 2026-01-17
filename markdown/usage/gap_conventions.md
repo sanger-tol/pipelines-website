@@ -111,8 +111,9 @@ The following outputs come from the [variant calling](/variantcalling) and
         - stats/
           - `${assembly}`.`${type}`.`${specimen}`.`${run}`.`${aligner}`.`${caller}`.(vcf|g.vcf).(stats.bcftools.txt.gz|plot-vcfstats.tar.gz)
 
-The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder.
-`${run}` may even be of the `merged.${#}` form.
+The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder,
+though in practice we only envisage to use PacBio data.
+`${run}` may be of the `merged.${#}` form.
 
 _Example_:
 
