@@ -17,7 +17,7 @@ The main principles are that:
   name and path.
 - File names are as self-explanatory as possible.
 - File and directory naming support topping-up, e.g. adding a new specimen, a new run, etc.
-  - The exception is obviously analyses across runs, specimens, etc, which may have to be overwritten.
+  - The exception is obviously analyses across multiple runs, specimens, etc, which may have to be overwritten.
 
 Additionally:
 
