@@ -21,6 +21,8 @@ and **variantcalling**/**variantcomposition** only on primary haplotypes.
 > You can see all planned features and requests on the [project board](https://github.com/orgs/sanger-tol/projects/3).
 > If you have an idea for a new feature – [send us your request](https://github.com/sanger-tol/pipelines-website/issues/new?assignees=muffato&labels=user%20request&projects=&template=genome_after_party_feature_request.yaml&title=%5BFeature%5D%3A+).
 
+Finally, we have ideas for [future pipelines](#futurepipelines).
+
 # INSDC Download {#insdcdownload}
 
 **[sanger-tol/insdcdownload](/insdcdownload)** downloads assemblies from the NCBI.
@@ -36,7 +38,7 @@ and **variantcalling**/**variantcomposition** only on primary haplotypes.
 
 ### Planned features:
 
-- Download RefSeq annotations.
+- Run gfastats.
 
 # Ensembl Repeat Download {#ensemblrepeatdownload}
 
@@ -194,3 +196,7 @@ It will be considered ready to general use in v0.2.0.
 ### Planned features:
 
 - VCF filtering options.
+
+# Future pipelines {#futurepipelines}
+
+- Pipeline to download RefSeq annotations.
