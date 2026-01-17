@@ -48,7 +48,17 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 
 ## Later
 
-- _Many_ analyses, incl. repeat analyses, k-mer stats, etc
+- (feature) Add simple repeat finders:
+  - Low complexity repeats from `Dustmasker`.
+  - Inverted repeats from `einverted`.
+  - LTR retrotransposons from `LTRharvest` and `LTRdigest`.
+  - Tandem repeats from `trf`.
+  - Telomeric repeat annotation (tool to be confirmed).
+  - Centromeric repeat annotation (tool to be confirmed).
+- (feature) Add comprehensive repeat finders such as EarlGreyTE or EDTA2.
+- (feature) Add TRASH and Pantera.
+- (feature) Add stainedglass and/or ModDotPlot for self-alignment.
+- (feature) Mappability tracks.
 
 ## Long-term goal
 
