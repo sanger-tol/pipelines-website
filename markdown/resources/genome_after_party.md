@@ -133,6 +133,7 @@ These include (1) assembly information, statistics and chromosome details, (2) P
 ### Planned features:
 
 - Compute read coverage with k-mer based methods.
+- Accept pre-computed read-coverage and fasta_windows analyses.
 
 # Sequence Composition {#sequencecomposition}
 
