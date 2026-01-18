@@ -144,11 +144,6 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 - (bug) Generate a correct SAM header for the CRAM files
   - v2.1.0
 
-## Later
-
-- Take over running gfastats from the genome-note pipeline
-  - v2.2.0
-
 # Ensembl download pipelines
 
 ## Later

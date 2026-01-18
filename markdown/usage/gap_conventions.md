@@ -47,15 +47,12 @@ especially when different tools could be used, e.g. the aligner or variant-calle
 Below is the canonical structure that all Genome After-Party pipelines abide by.
 Placeholders for identifiers are indicated with the `${...}` syntax.
 
-## Assembly and statistics
+## Assembly
 
-Assemblies are made available in standard directories too.
-Currently this is the output of the [INSDC download](/insdcdownload) and [genome note](/genomenote) pipelines.
+Assemblies are made available in standard directories too by the [INSDC download](/insdcdownload) pipeline.
 
 - assembly/
   - `${assembly}`.(fa.gz|sizes|assembly\_(report|stats).txt|header.sam|SOURCE)
-- genome\_stats/
-  - `${assembly}`.gfastats.txt
 
 ## Read mapping
 
@@ -181,6 +178,7 @@ or downloaded by the [Ensembl gene download](/ensemblgenedownloadd) and [Ensembl
   - `${source}`/
     - `${assembly}`.`${source}`.(gff3.gz|(cdna|cds|pep).fa.gz)
 - genome\_stats/
+  - `${assembly}`.gfastats.txt
   - `${type}`/
     - `${specimen}`/
       - `${run}`/

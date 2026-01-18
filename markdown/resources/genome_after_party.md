@@ -38,7 +38,7 @@ Finally, we have ideas for [future pipelines](#futurepipelines).
 
 ### Planned features:
 
-- Run gfastats.
+- Generate a mapping file between accession numbers, chromosome numbers, and sequence names.
 
 # Ensembl Repeat Download {#ensemblrepeatdownload}
 
@@ -108,6 +108,7 @@ These include (1) assembly information, statistics and chromosome details, (2) P
 - Broad fetching of genome metadata from numerous sources.
 - Create summary table with the information above.
 - Combine results and metadata with template Word document.
+- Run gfastats.
 
 ### Planned features:
 
