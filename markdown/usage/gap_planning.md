@@ -3,69 +3,14 @@ title: Genome After-Party planing
 subtitle: This page gives an overview of the changes we're planning for the Genome After-Party pipelines
 ---
 
-# BlobToolKit
+# Assembly download pipeline
 
 ## Now
 
-- Release features already implemented on the development branch
-  - v0.10.0 or v1.0.0 if changes below are included
-- (bug) Busco output tar files don't contain the sequences
-  - Means all Buscos done with BlobToolKit >= v0.7.0, <= v0.9.0 will have to be rerun
-    - All BlobToolKit runs with version < v0.7.0 have to be rerun anyway to enable the chromosome grids
-  - Need to be included in the next production release, by v1.0.0
-- (feature) parameter validation for Blastn and Busco
-  - Requested by many external users of the pipeline
-  - Only thing needed to call it v1.0.0
-
-## Later
-
-- (bug) Fix accepting existing Buscos as input (useful for large genomes when we run Busco outside of the pipeline)
-  - Ideally v1.0.0 but could be deferred to v1.0.1
-
-## Long-term goal
-
-- Accept pre-computed analyses and make all the embedded analyses optional
-  - fasta_windows
-  - Read coverage
-
-# Busco
-
-## Later
-
-- Complete and release the pipeline v1.0.0
-  - Regular Busco commands
-  - Supports odb10 and odb12
-  - Can find lineage automatically using the taxonomy
-  - Make keeping the individual Fasta files an option
-- Ancestral painting
-  - For v1.1.0
-
-## Long-term goal
-
-- Reinstate the Nextflow port of Busco (to run Busco on large genomes)
-
-# Sequence composition
-
-## Later
-
-- (feature) Add simple repeat finders:
-  - Low complexity repeats from `Dustmasker`.
-  - Inverted repeats from `einverted`.
-  - LTR retrotransposons from `LTRharvest` and `LTRdigest`.
-  - Tandem repeats from `trf`.
-  - Telomeric repeat annotation (tool to be confirmed).
-  - Centromeric repeat annotation (tool to be confirmed).
-- (feature) Add comprehensive repeat finders such as EarlGreyTE or EDTA2.
-- (feature) Add TRASH and Pantera.
-- (feature) Add stainedglass and/or ModDotPlot for self-alignment.
-- (feature) Mappability tracks.
-
-## Long-term goal
-
-- Take these from genomenote
-  - genomescope
-  - smudgeplot
-  - completeness and QV
+- (feature) Generate a mapping file between accession numbers, chromosome numbers, and sequence names
+  - v2.1.0
+- (bug) Generate a correct SAM header for the CRAM files
+  - v2.1.0
 
 # Read mapping
 
@@ -111,6 +56,31 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
 - (feature) Add structural variation detection
   - For variantcalling v1.3.0
 
+# BlobToolKit
+
+## Now
+
+- Release features already implemented on the development branch
+  - v0.10.0 or v1.0.0 if changes below are included
+- (bug) Busco output tar files don't contain the sequences
+  - Means all Buscos done with BlobToolKit >= v0.7.0, <= v0.9.0 will have to be rerun
+    - All BlobToolKit runs with version < v0.7.0 have to be rerun anyway to enable the chromosome grids
+  - Need to be included in the next production release, by v1.0.0
+- (feature) parameter validation for Blastn and Busco
+  - Requested by many external users of the pipeline
+  - Only thing needed to call it v1.0.0
+
+## Later
+
+- (bug) Fix accepting existing Buscos as input (useful for large genomes when we run Busco outside of the pipeline)
+  - Ideally v1.0.0 but could be deferred to v1.0.1
+
+## Long-term goal
+
+- Accept pre-computed analyses and make all the embedded analyses optional
+  - fasta_windows
+  - Read coverage
+
 # Genomenote
 
 ## Now
@@ -135,14 +105,44 @@ subtitle: This page gives an overview of the changes we're planning for the Geno
   - The Genome Note Platform will be providing the ability
     to fill a template in from Genome After-Party data
 
-# Assembly download pipeline
+# Busco
 
-## Now
+## Later
 
-- (feature) Generate a mapping file between accession numbers, chromosome numbers, and sequence names
-  - v2.1.0
-- (bug) Generate a correct SAM header for the CRAM files
-  - v2.1.0
+- Complete and release the pipeline v1.0.0
+  - Regular Busco commands
+  - Supports odb10 and odb12
+  - Can find lineage automatically using the taxonomy
+  - Make keeping the individual Fasta files an option
+- Ancestral painting
+  - For v1.1.0
+
+## Long-term goal
+
+- Reinstate the Nextflow port of Busco (to run Busco on large genomes)
+
+# Sequence composition
+
+## Later
+
+- (feature) Add simple repeat finders:
+  - Low complexity repeats from `Dustmasker`.
+  - Inverted repeats from `einverted`.
+  - LTR retrotransposons from `LTRharvest` and `LTRdigest`.
+  - Tandem repeats from `trf`.
+  - Telomeric repeat annotation (tool to be confirmed).
+  - Centromeric repeat annotation (tool to be confirmed).
+- (feature) Add comprehensive repeat finders such as EarlGreyTE or EDTA2.
+- (feature) Add TRASH and Pantera.
+- (feature) Add stainedglass and/or ModDotPlot for self-alignment.
+- (feature) Mappability tracks.
+
+## Long-term goal
+
+- Take these from genomenote
+  - genomescope
+  - smudgeplot
+  - completeness and QV
 
 # Ensembl download pipelines
 
