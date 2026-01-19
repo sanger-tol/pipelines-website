@@ -92,6 +92,7 @@ Finally, we have ideas for [future pipelines](#futurepipelines).
 ### Planned features:
 
 - Add support for RNAseq data.
+- Replace the "sample" samplesheet parameter with one for the specimen and one for the sequencing run.
 
 # Genome Note {#genomenote}
 
