@@ -46,6 +46,7 @@ especially when different tools could be used, e.g. the aligner or variant-calle
 
 Below is the canonical structure that all Genome After-Party pipelines abide by.
 Placeholders for identifiers are indicated with the `${...}` syntax.
+To keep the document lean, indices such as `.tbi`, `.crai`, etc, are omitted from the listings below.
 
 ## Assembly
 
