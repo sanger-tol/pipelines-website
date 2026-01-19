@@ -77,10 +77,10 @@ Finally, we have ideas for [future pipelines](#futurepipelines).
 
 ### Current features:
 
-- Align short read data (HiC and Illumina) against the genome with `bwamem2 mem`.
+- Align short read data (HiC and Illumina) against the genome with `bwamem2`.
 - Mark duplicates for short read alignment with `samtools`.
 - Filter PacBio raw read data using vector database.
-- Align long read data (ONT, PacBio CCS and PacBio CLR) against the genome with `minimap align`.
+- Align long read data (ONT, PacBio CCS and PacBio CLR) against the genome with `minimap2`.
 - Merge all alignment files at the individual level and convert to CRAM format.
 - Calculate statistics for all alignment files using `samtools` `stats`, `flagstat`, and `idxstats`.
 - Read chunking to speed up alignment for all technologies.
