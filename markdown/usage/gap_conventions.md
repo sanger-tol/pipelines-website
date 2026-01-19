@@ -37,7 +37,7 @@ Here is the list of identifiers currently used to named outputs:
 | `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`                                                           |
 | `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445` (hic)<br/>`ERR9284044` (pacbio)                    |
 | `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`                                                    |
-| `lineage`       | Name of the Busco lineage, including the `_odb*` suffix.                             | `insecta_odb12`                                                 |
+| `lineage`       | Name of the BUSCO lineage, including the `_odb*` suffix.                             | `insecta_odb12`                                                 |
 | `ancestral_set` | Name of the set of ancestral linkage groups                                          | `Merian`                                                        |
 | `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`                                                             |
 
@@ -124,7 +124,7 @@ variant_analysis/pacbio/icLepMacu1/ERR9284044/composition/GCA_936432065.2.pacbio
 variant_analysis/pacbio/icLepMacu1/merged.1/GCA_936432065.2.pacbio.icLepMacu1.merged.1.minimap2.deepvariant.vcf.gz
 ```
 
-## Busco analysis
+## BUSCO analysis
 
 The following outputs come from the [BlobToolKit](/blobtoolkit) and [genome note](/genomenote) pipelines.
 
