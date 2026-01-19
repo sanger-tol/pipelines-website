@@ -39,6 +39,7 @@ Finally, we have ideas for [future pipelines](#futurepipelines).
 ### Planned features:
 
 - Generate a mapping file between accession numbers, chromosome numbers, and sequence names.
+- Generate a SAM header with sequence aliases and other metadata such as species or sample name.
 
 # Ensembl Repeat Download {#ensemblrepeatdownload}
 
