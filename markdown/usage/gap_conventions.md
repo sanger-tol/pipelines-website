@@ -89,7 +89,7 @@ _Example_:
 
 ```text
 read_mapping/hic/icLepMacu1/ERR9248445/GCA_936432065.2.hic.icLepMacu1.ERR9248445.minimap2.cram
-read_mapping/hic/icLepMacu1/ERR9248445/qc/GCA_936432065.2.hic.icLepMacu1.ERR9248445.fastqc.html
+read_mapping/hic/icLepMacu1/ERR9248445/qc/hic.icLepMacu1.ERR9248445.fastqc.html
 read_mapping/hic/icLepMacu1/merged.1/GCA_936432065.2.hic.icLepMacu1.merged.1.minimap2.cram
 ```
 
