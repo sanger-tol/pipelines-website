@@ -137,8 +137,9 @@ echo $msg;
 
 <p class="mt-5 small text-muted">
   Page last synced with GitHub <?php echo time_ago($pipelines_json->updated); ?>.
-  <a href="/pipelines?update">Click here</a> to trigger an update</a>.
-  See also <a href="/pipeline_health">pipeline repository health</a>.
+  <a href="/pipelines?update">Click here</a> to trigger an update.
+  See also <a href="/pipeline_health">pipeline repository health</a> and
+  <a href="https://github.com/sanger-tol/nextflow-strict-syntax-health" target="_blank">strict syntax health</a>.
 </p>
 
 <?php include '../includes/footer.php'; ?>
