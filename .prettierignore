@@ -9,6 +9,8 @@ public_html/assets/css/nf-core-dark.css.map
 public_html/assets/css/nf-core-light.css
 public_html/assets/css/nf-core-light.css.map
 
+markdown/usage/gap_conventions.md
+
 .DS_Store
 
 config.ini
