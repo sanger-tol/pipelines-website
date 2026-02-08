@@ -36,7 +36,7 @@ Here is the list of identifiers currently used to named outputs:
 | `assembly`      | Accession number of the assembly. Linked haploid assemblies may be referred to too.  | `GCA_936432065.2` (principal)<br/>`GCA_936443135.2` (alternate) |
 | `type`          | Sequencing technology. One of `pacbio`, `hic`, `illumina`, `ont`, `rna`.             | `hic`                                                           |
 | `run`           | Identifier of the sequencing run. Usually the accession number of the data in INSDC. | `ERR9248445` (hic)<br/>`ERR9284044` (pacbio)                    |
-| `specimen`      | Identifier of the specimen. Usually a [ToLID](https://id.tol.sanger.ac.uk/).         | `icLepMacu1`                                                    |
+| `specimen`      | Identifier of the specimen. Usually a BioSpecimen accession.                         | `SAMEA7521529`                                                  |
 | `lineage`       | Name of the BUSCO lineage, including the `_odb*` suffix.                             | `insecta_odb12`                                                 |
 | `ancestral_set` | Name of the set of ancestral linkage groups                                          | `Merian`                                                        |
 | `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`                                                             |
@@ -89,9 +89,9 @@ The SOURCE file then lists the runs that were included in the merged analysis.
 _Example_:
 
 ```text
-read_mapping/hic/icLepMacu1/ERR9248445/GCA_936432065.2.hic.icLepMacu1.ERR9248445.minimap2.cram
-read_mapping/hic/icLepMacu1/ERR9248445/qc/hic.icLepMacu1.ERR9248445.fastqc.html
-read_mapping/hic/icLepMacu1/merged.1/GCA_936432065.2.hic.icLepMacu1.merged.1.minimap2.cram
+read_mapping/hic/SAMEA7521529/ERR9248445/GCA_936432065.2.hic.SAMEA7521529.ERR9248445.minimap2.cram
+read_mapping/hic/SAMEA7521529/ERR9248445/qc/hic.SAMEA7521529.ERR9248445.fastqc.html
+read_mapping/hic/SAMEA7521529/merged.1/GCA_936432065.2.hic.SAMEA7521529.merged.1.minimap2.cram
 ```
 
 ## Variant calling and analysis
@@ -119,10 +119,10 @@ _Note_: In practice we only envisage to use PacBio data.
 _Example_:
 
 ```text
-variant_analysis/pacbio/icLepMacu1/ERR9284044/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.minimap2.deepvariant.vcf.gz
-variant_analysis/pacbio/icLepMacu1/ERR9284044/stats/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.minimap2.deepvariant.vcf.stats.bcftools.txt.gz
-variant_analysis/pacbio/icLepMacu1/ERR9284044/composition/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.minimap2.deepvariant.vcf.sites.pi.gz
-variant_analysis/pacbio/icLepMacu1/merged.1/GCA_936432065.2.pacbio.icLepMacu1.merged.1.minimap2.deepvariant.vcf.gz
+variant_analysis/pacbio/SAMEA7521529/ERR9284044/GCA_936432065.2.pacbio.SAMEA7521529.ERR9284044.minimap2.deepvariant.vcf.gz
+variant_analysis/pacbio/SAMEA7521529/ERR9284044/stats/GCA_936432065.2.pacbio.SAMEA7521529.ERR9284044.minimap2.deepvariant.vcf.stats.bcftools.txt.gz
+variant_analysis/pacbio/SAMEA7521529/ERR9284044/composition/GCA_936432065.2.pacbio.SAMEA7521529.ERR9284044.minimap2.deepvariant.vcf.sites.pi.gz
+variant_analysis/pacbio/SAMEA7521529/merged.1/GCA_936432065.2.pacbio.SAMEA7521529.merged.1.minimap2.deepvariant.vcf.gz
 ```
 
 ## BUSCO analysis
@@ -204,9 +204,9 @@ _Example_:
 ```text
 base_content/k1/GCA_936432065.2.GC.1k.bedGraph.gz
 genes/ensembl.2023_05/GCA_936432065.2.ensembl.2023-05.gff3.gz
-genome_stats/pacbio/icLepMacu1/ERR9284044/merqury/GCA_936432065.2.pacbio.icLepMacu1.ERR9284044.completeness.stats
-genome_stats/pacbio/icLepMacu1/merged.1/merqury/GCA_936432065.2.pacbio.icLepMacu1.merged.1.GCA_936443135.2.qv
-genome_stats/pacbio/icLepMacu1/merged.1/genomescope/GCA_936432065.2.pacbio.icLepMacu1.merged.1.genomescope_log_plot.png
+genome_stats/pacbio/SAMEA7521529/ERR9284044/merqury/GCA_936432065.2.pacbio.SAMEA7521529.ERR9284044.completeness.stats
+genome_stats/pacbio/SAMEA7521529/merged.1/merqury/GCA_936432065.2.pacbio.SAMEA7521529.merged.1.GCA_936443135.2.qv
+genome_stats/pacbio/SAMEA7521529/merged.1/genomescope/GCA_936432065.2.pacbio.SAMEA7521529.merged.1.genomescope_log_plot.png
 repeats/ensembl/GCA_936432065.2.ensembl.bed.gz
 ```
 
