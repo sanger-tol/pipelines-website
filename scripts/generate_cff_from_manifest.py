@@ -110,7 +110,7 @@ def find_release_name(pipeline_dir, version):
     changelog = pipeline_dir / "CHANGELOG.md"
     with changelog.open() as f:
         for l in f:
-            if l.startswith("#") and version in l and ("2024" in l or "2025" in l):
+            if l.startswith("#") and version in l and ("2024" in l or "2025" in l or "2026" in l):
                 # We have a variety of line structures (and hyphen styles !)
 ## [[0.7.1](https://github.com/sanger-tol/blobtoolkit/releases/tag/0.7.1)] – Psyduck (patch 1) – [2025-03-29]
 ## [[0.7.0](https://github.com/sanger-tol/blobtoolkit/releases/tag/0.7.0)] – Psyduck – [2025-03-19]
