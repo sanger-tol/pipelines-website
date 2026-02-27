@@ -190,7 +190,7 @@ or downloaded by the [Ensembl gene download](/ensemblgenedownloadd) and [Ensembl
           - `${assembly}`.`${type}`.`${specimen}`.`${run}`.genomescope\_((transformed\_)?(linear|log)\_plot.png|(model|summary).txt)
 - repeats/
   - `${source}`/
-    - `${assembly}`.`${source}`.(bed.gz|masked.fa.gz)
+    - `${assembly}`.repeats.`${source}`.(bed.gz|masked.fa.gz)
 
 The triplet (`${type}`, `${specimen}`, `${run}`) is expected to match files from the read\_mapping/ folder,
 including `merged.${#}` forms of `${run}`.
@@ -207,7 +207,7 @@ genes/ensembl.2023_05/GCA_936432065.2.ensembl.2023-05.gff3.gz
 genome_stats/pacbio/SAMEA7521529/ERR9284044/merqury/GCA_936432065.2.pacbio.SAMEA7521529.ERR9284044.completeness.stats
 genome_stats/pacbio/SAMEA7521529/merged.1/merqury/GCA_936432065.2.pacbio.SAMEA7521529.merged.1.GCA_936443135.2.qv
 genome_stats/pacbio/SAMEA7521529/merged.1/genomescope/GCA_936432065.2.pacbio.SAMEA7521529.merged.1.genomescope_log_plot.png
-repeats/ensembl/GCA_936432065.2.ensembl.bed.gz
+repeats/ensembl/GCA_936432065.2.repeats.ensembl.bed.gz
 ```
 
 ## Genome note
