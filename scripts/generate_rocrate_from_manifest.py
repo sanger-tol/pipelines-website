@@ -119,7 +119,7 @@ class SangerToLROCrate(ROCrate):
         super().make_workflow_rocrate()
 
         # Link to the pipelines website instead of the nf-core website
-        self.crate.mainEntity["url"] = [self.crate.mainEntity["url"][0], self.crate.mainEntity["url"][1].replace("https://nf-co.re/sanger-tol", "https://pipelines.tol.sanger.ac.uk/")]
+        self.crate.mainEntity["url"] = [self.crate.mainEntity["url"][0], self.crate.mainEntity["url"][1].replace("https://nf-co.re/sanger-tol", "https://pipelines.tol.sanger.ac.uk")]
 
         # Change the Organization object and relink sdPublisher
         self.crate.delete("https://nf-co.re/")
