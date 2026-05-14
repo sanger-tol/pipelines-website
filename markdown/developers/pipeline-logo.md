@@ -38,6 +38,8 @@ If you are already in the pipeline directory, this is equivalent:
 
 ```bash
 /software/treeoflife/bin/render_logo.py --pipeline-dir .
+# or
+/software/treeoflife/bin/render_logo.py
 ```
 
 If `.nf-core.yml` is missing or you want to override its values, supply the name
