@@ -90,6 +90,16 @@ Write output somewhere other than `docs/images` within the pipeline directory:
   --output-dir assets/logo
 ```
 
+Run on your laptop with your own Inkscape installation
+(assumes you are in an environment with all dependencies installed,
+cf requirements.txt)
+
+```bash
+python3 /path/to/sanger-tol/nf-core-modules/scripts/logo/render_logo.py \
+  --pipeline-dir /path/to/pipeline \
+  --inkscape /path/to/Applications/Inkscape.app/Contents/MacOS/inkscape
+```
+
 Use a different metadata file under the same pipeline directory:
 
 ```bash
