@@ -92,7 +92,7 @@ Write output somewhere other than `docs/images` within the pipeline directory:
 
 Run on your laptop with your own Inkscape installation
 (assumes you are in an environment with all dependencies installed,
-cf requirements.txt)
+cf [requirements.txt](https://github.com/sanger-tol/nf-core-modules/blob/main/scripts/logo/requirements.txt)).
 
 ```bash
 python3 /path/to/sanger-tol/nf-core-modules/scripts/logo/render_logo.py \
