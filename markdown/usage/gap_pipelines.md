@@ -66,7 +66,20 @@ the nf-core template.
 Most of the conventions are already defined in the [output convention](gap_conventions)
 as they form a contract with downstream consumers.
 
-Additionally, when a pipeline merges data files, it shall name the
+However, pipelines don't have to explicitly request all possible identifiers
+(`${assembly}`, `${run}`, etc) just for the sake of naming the outputs
+correctly. Pipelines should use the "baseName" of the input files
+whenever possible and assume that Genome After-Party production
+_inputs_ will be named in such a way that the naming convention
+is fulfilled all the way through.
+
+For instance, the [variantcalling pipeline](/variantcalling/usage)
+takes aligned reads in BAM/CRAM and simply changes the extension to
+`.deepvariant.vcf.gz`.
+The naming convention applies because in production, it is run on
+[readmapping](/readmapping/output) outputs that themselves comply.
+
+Lastly, when a pipeline merges data files, it shall name the
 merged dataset `merged_${#}` and list the identifiers of the merged
 data files in a file named `SOURCE.txt`.
 
