@@ -1,5 +1,5 @@
 ---
-title: Standard Genome After-Party outputs
+title: Genome After-Party output standards
 subtitle: This page describes the conventions we follow to organise the outputs of the Genome After-Party pipelines
 ---
 
