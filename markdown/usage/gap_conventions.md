@@ -11,14 +11,13 @@ The main principles are that:
 
 - Files are uniquely named across the entire Genome After-Party and could be mixed
   into the same directory without clashing.
+- File and directory naming support topping-up, e.g. adding a new specimen, a new run, etc.
 - To facilitate this, filenames include all necessary identifiers such as assembly,
   specimen, or sequencing run.
-- These identifiers, are used to name the output
-  directories, each identifier naming a different directory level.
+- These identifiers are used to name the output directories, each identifier naming a different directory level.
 - Analyses that are implemented in multiple pipelines always have the same output
   name and path.
 - File names are as self-explanatory as possible.
-- File and directory naming support topping-up, e.g. adding a new specimen, a new run, etc.
 
 Additionally:
 
