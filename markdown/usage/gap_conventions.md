@@ -41,7 +41,7 @@ Here is the list of identifiers currently used to named outputs:
 | `#`             | Auto-incremented integer, starting from 1. Typically used to version merged datasets | `1`                                                             |
 
 Additionally, tool and software names may be added to the outputs for clarity,
-especially when different tools could be used, e.g. the aligner or variant-caller.
+especially when different tools could be used, e.g. the aligner or variant caller.
 
 Below is the canonical structure that all Genome After-Party pipelines abide by.
 Placeholders for identifiers are indicated with the `${...}` syntax.
