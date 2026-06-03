@@ -86,7 +86,7 @@ data files in a file named `SOURCE.txt`.
 ## Testing
 
 All pipelines must define both a `test` and `test_full` profile as per
-the [testing conventions](docs/contributing/testing).
+the [testing conventions](../contributing/testing).
 The `test` profile must work as is, without any additional parameters
 or prior environment setup, e.g.
 
