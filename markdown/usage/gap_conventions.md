@@ -23,7 +23,7 @@ Additionally:
 
 - All text files that can be queried by coordinates (e.g. Fasta, BED, bedGraph, VCF, some TSV)
   are compressed with `bgzip` and indexed with `tabix` in both `.tbi` and `.csi` formats.
-- All other text files are compressed with `gzip` if they typically exceed 10 MB.
+- All other text files are compressed with `gzip` if they typically exceed 1 MB.
 - Sequence alignments are in CRAM format (version 3.0) with embedded references,
   ensuring the files can be read widely and without having to pass the assembly
   Fasta file as a parameter, and are all indexed with `samtools index` in `.crai` format.
