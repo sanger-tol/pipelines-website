@@ -50,7 +50,7 @@ required by the pipeline. The file is `.github/workflows/ci.yml`.
 
 Our policy is to also run the `test_full` profile but only after the pull-requests are
 merged due to the compute costs.
-For that purpose, we provide a CI workflow [`sanger_test_full.yml`](https://github.com/sanger-tol/pipelines-website/blob/main/sanger_test_full.yml)
+For that purpose, we provide a CI workflow [`sanger_test_full.yml`](https://github.com/sanger-tol/nf-core-modules/blob/main/scripts/ci/sanger_test_full.yml)
 that you can add to your `.github/workflows/` directory.
 This workflow will trigger a run of the `test_full` profile on the farm, via
 Nextflow Tower (Seqera Platform).
@@ -58,5 +58,5 @@ The outputs of the `test_full` profile on the `main` branch are also
 used to populate the "Results" tab of your pipeline on this website.
 
 Finally, we also provide the equivalent CI workflow for the `test` profile:
-[`sanger_test.yml`](https://github.com/sanger-tol/pipelines-website/blob/main/sanger_test.yml).
+[`sanger_test.yml`](https://github.com/sanger-tol/nf-core-modules/blob/main/scripts/ci/sanger_test.yml).
 This is mostly used for debugging `test` profile failures.
