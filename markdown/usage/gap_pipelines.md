@@ -11,10 +11,7 @@ The main principles are that:
 - We follow the nf-core standards, of course :wink:
 - Pipelines must not rely on Sanger infrastructure or environment to
   run. Pipelines must only use provided data files and metadata values,
-  and query public APIs.
-- No _custom_ YAML or JSON file. All parameters can be passed directly
-  on the command-line. Parameters may be passed in YAML/JSON via
-  Nextflow's native `-params-file` option.
+  or query public APIs.
 - Pipelines should accept a "samplesheet" as the `--input` parameter.
   Samplesheets are used to enumerate input files, input parameters,
   output directories.
@@ -27,6 +24,10 @@ The main principles are that:
   `--fasta` parameter. Pipelines may propose a bulk-processing mode
   by allowing multiple input assemblies and output directories to be
   passed through the samplesheet.
+- All other command-line parameters must be values (strings, integers,
+  etc), or data files. No input parameter shall have its own YAML or
+  JSON format. Parameters may be only passed in YAML/JSON via Nextflow's
+  native `-params-file` option.
 - Parameter names should be consistent across pipelines.
 
 ## Input definition
