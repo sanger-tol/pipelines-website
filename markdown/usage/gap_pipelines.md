@@ -104,6 +104,10 @@ takes aligned reads in BAM/CRAM and simply changes the extension to
 The naming convention applies because in production, it is run on
 [readmapping](/readmapping/output) outputs that themselves comply.
 
+Pipelines should have a MultiQC report for the whole run.
+Only the HTML file needs to be published, directly in the results
+directory, and it should be named `multiqc_report.html`.
+
 Lastly, when a pipeline merges data files, it shall name the
 merged dataset `merged_${#}` and list the identifiers of the merged
 data files in a file named `SOURCE.txt`.
