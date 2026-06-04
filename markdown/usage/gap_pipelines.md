@@ -28,7 +28,10 @@ The main principles are that:
   etc), or data files. No input parameter shall have its own YAML or
   JSON format. Parameters may be only passed in YAML/JSON via Nextflow's
   native `-params-file` option.
-- Parameter names should be consistent across pipelines.
+- Parameter names should be consistent across pipelines. There is a list
+  below of with the most common parameters. Before introducing a new
+  parameter, search the existing pipelines for parameters that are close
+  in meaning or purpose.
 
 ## Input definition
 
@@ -47,6 +50,24 @@ When such identifiers are optional, or to avoid introducing a breaking
 change in a pipeline, the string before the `/` may be used as the
 specimen identifier, cf the [variantcalling](/variantcalling/usage)
 pipeline.
+
+## Parameter names
+
+Here are the most common parameters shared across pipelines.
+
+- `--input`: samplesheet in CSV format
+- `--fasta`: genome assembly in FASTA format, possibly compressed
+- `--outdir`: output directory, created by Nextflow if missing
+- `--align_reads`: (boolean) tell the pipeline to align the reads
+- `--assembly_accession`: accession number of the assembly (GCA\_\*)
+- `--*_db`: path to a local database directory or file, e.g.
+  `--busco_db`, `--blastn_db`.
+- `--use_work_dir_as_temp`: selection of the temporary directory, see
+  below.
+- `--merge_output`: a non-empty string tells the pipeline to merge
+  the input files per specimen, and use that string as the name.
+
+Note: we are still updating the pipelines to be fully consistent.
 
 ## Execution control
 
