@@ -87,8 +87,9 @@ data files in a file named `SOURCE.txt`.
 
 All pipelines must define both a `test` and `test_full` profile as per
 the [testing conventions](../contributing/testing).
-The `test` profile must work as is, without any additional parameters
-or prior environment setup, e.g.
+The `test` profile shall be used in the `default.nf.test` test.
+It must also work as is, without any additional parameters
+or prior environment setup from anywhere, e.g.
 
 ```
 nextflow run . -profile singularity,test --outdir results
@@ -101,5 +102,3 @@ input paths:
 ```
 nextflow run . -profile singularity,test_full --outdir results_full
 ```
-
-The `test` profile shall be used in the `default.nf.test` test.
