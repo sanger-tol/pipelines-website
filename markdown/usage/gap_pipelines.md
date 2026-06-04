@@ -121,6 +121,9 @@ or prior environment setup from anywhere, e.g.
 nextflow run . -profile singularity,test --outdir results
 ```
 
+The `test` profile should run under 15 minutes, ideally less than
+5 minutes.
+
 The `test_full` must also work as is, without any additional parameters,
 but may require the Sanger farm environment, e.g. for database or
 input paths:
@@ -128,3 +131,15 @@ input paths:
 ```
 nextflow run . -profile singularity,test_full --outdir results_full
 ```
+
+The `test_full` pipeline may take up to a day to complete. It is
+meant to represent a real, small, species.
+`test_full` is automatically run on `dev`.
+
+Finally, all pipelines should have a Release Sentinel dataset defined
+– more information on [Confluence](https://ssg-confluence.internal.sanger.ac.uk/spaces/TOL/pages/336036572/Release+Sentinel+datasets).
+Release Sentinel datasets are much more expensive than `test_full`.
+With often a dozen species defined, including some large ones, a
+Release Sentinel dataset may take up to a week to complete.
+It is therefore run less frequently, usually only before releases
+when there is a certain risk of performance or quality regression.
