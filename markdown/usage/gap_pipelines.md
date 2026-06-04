@@ -15,11 +15,14 @@ The main principles are that:
 - No _custom_ YAML or JSON file. All parameters can be passed directly
   on the command-line. Parameters may be passed in YAML/JSON via
   Nextflow's native `-params-file` option.
-- Pipelines may accept a "samplesheet" as the `--input` parameter.
+- Pipelines should accept a "samplesheet" as the `--input` parameter.
   Samplesheets are used to enumerate input files, input parameters,
   output directories.
 - The output directory is controlled via the `--outdir` parameter
   and all outputs conform to the [output convention](gap_conventions).
+  This can be achieved by defining publishDir directives in
+  `conf/modules.config` in the pipeline, tuning `meta.id`,
+  `task.ext.prefix`, etc.
 - One pipeline run should process a single assembly, passed as the
   `--fasta` parameter. Pipelines may propose a bulk-processing mode
   by allowing multiple input assemblies and output directories to be
@@ -36,9 +39,9 @@ sub-directories. This is typically used to follow the `${specimen}/${run}`
 output directory convention.
 
 When the specimen or run identifiers are explicitly needed, they
-should be requested as such in the samplesheet, rather than being inferred
-from the `sample` value, cf the [readmapping](/readmapping/usage)
-pipeline.
+they should be requested as explicitly named columns (e.g. `specimen`,
+`run`) in the samplesheet, rather than being inferred from the `sample`
+value, cf the [readmapping](/readmapping/usage) pipeline.  
 When such identifiers are optional, or to avoid introducing a breaking
 change in a pipeline, the string before the `/` may be used as the
 specimen identifier, cf the [variantcalling](/variantcalling/usage)
@@ -82,6 +85,7 @@ The naming convention applies because in production, it is run on
 Lastly, when a pipeline merges data files, it shall name the
 merged dataset `merged_${#}` and list the identifiers of the merged
 data files in a file named `SOURCE.txt`.
+This file lists the source runs (`${accession}`), one per line.
 
 ## Testing
 
