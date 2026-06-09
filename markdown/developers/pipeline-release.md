@@ -57,11 +57,11 @@ The file lists all the authors, their affiliation, and their ORCID, and is loade
 If you're based on the latest nf-core template,
 the information should already be in the "manifest" found in `nextflow.config`.
 We provide a script to automatically write `CITATION.cff` from the manifest.
-Simply run:
+Simply run the following command in an active nf-core environment:
 
 ```
-/software/treeoflife/bin/generate_cff_from_manifest.py  # if you're at the root of the repository
-/software/treeoflife/bin/generate_cff_from_manifest.py path/to/repository  # otherwise
+generate_cff_from_manifest.py                     # if you're at the root of the repository
+generate_cff_from_manifest.py path/to/repository  # otherwise
 ```
 
 The command will regenerate the `CITATION.cff` file in the repository.
@@ -152,11 +152,12 @@ and nf-core can create/update the `ro-crate-metadata.json` file automatically.
 However, it gets the list of authors **only** from the git history of `main.nf`.
 
 Just like for `CITATION.cff`, we have a script to automatically regenerate
-`ro-crate-metadata.json` from the pipeline manifest. Run:
+`ro-crate-metadata.json` from the pipeline manifest. Run the following
+command in an active nf-core environment:
 
 ```
-/software/treeoflife/bin/generate_rocrate_from_manifest.py  # if you're at the root of the repository
-/software/treeoflife/bin/generate_rocrate_from_manifest.py path/to/repository  # otherwise
+generate_rocrate_from_manifest.py                     # if you're at the root of the repository
+generate_rocrate_from_manifest.py path/to/repository  # otherwise
 ```
 
 Unfortunately, `nf-core pipelines bump-version` regenerates the file every time it is called.
