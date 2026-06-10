@@ -145,17 +145,12 @@ def build_report():
 
         if created_at and created_at >= WINDOW_START:
             opened += 1
-
+            repo_activity[repo] += 1
             if author:
                 creator_counts[author] += 1
 
         if closed_at and closed_at >= WINDOW_START:
             closed += 1
-
-        if created_at >= WINDOW_START:
-            repo_activity[repo] += 1
-
-        if closed_at and closed_at >= WINDOW_START:
             repo_activity[repo] += 1
 
         reviewers_for_pr = set()
