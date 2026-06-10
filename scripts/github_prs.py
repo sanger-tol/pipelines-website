@@ -141,13 +141,13 @@ def build_report():
         created_at = parse_ts(pr["createdAt"])
         closed_at = parse_ts(pr["closedAt"])
         repo = pr["repository"]["name"]
+        author = pr["author"].get("name")
 
         if created_at and created_at >= WINDOW_START:
             opened += 1
 
-            author = pr.get("author")
-            if author and author.get("name"):
-                creator_counts[author["name"]] += 1
+            if author:
+                creator_counts[author] += 1
 
         if closed_at and closed_at >= WINDOW_START:
             closed += 1
@@ -161,15 +161,9 @@ def build_report():
         reviewers_for_pr = set()
 
         for review in pr["reviews"]["nodes"]:
-            author = review.get("author")
-
-            if not author:
-                continue
-
-            login = author.get("name")
-
-            if login:
-                reviewers_for_pr.add(login)
+            reviewer = review["author"].get("name")
+            if reviewer and reviewer != author:
+                reviewers_for_pr.add(reviewer)
 
         for login in reviewers_for_pr:
             reviewer_counts[login] += 1
