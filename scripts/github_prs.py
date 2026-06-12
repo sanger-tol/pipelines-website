@@ -76,7 +76,7 @@ def graphql_search(cursor=None):
     )
 
     cmd = [
-        "gh",
+        "/software/team328/users/mm49/homebrew/bin/gh",
         "api",
         "graphql",
         "-f",
