@@ -167,7 +167,8 @@ def build_report():
         for login in reviewers_for_pr:
             reviewer_counts[login] += 1
 
-        repo_activity[repo] += len(reviewers_for_pr)
+        if reviewers_for_pr:
+            repo_activity[repo] += len(reviewers_for_pr)
 
     lines = [
         f":olympics: *GitHub PR Report (last {WEEKS} week{'' if WEEKS == 1 else 's'})*",
