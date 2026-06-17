@@ -47,6 +47,7 @@ query($searchQuery: String!, $cursor: String) {
         reviews(first: 100) {
           nodes {
             state
+            submittedAt
             author {
               ... on User {
                 name
@@ -156,6 +157,9 @@ def build_report():
         reviewers_for_pr = set()
 
         for review in pr["reviews"]["nodes"]:
+            submitted_at = parse_ts(review["submittedAt"])
+            if submitted_at < WINDOW_START:
+                continue
             reviewer = review["author"].get("name")
             if reviewer and reviewer != author:
                 reviewers_for_pr.add(reviewer)
