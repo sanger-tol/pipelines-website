@@ -144,10 +144,12 @@ def build_report():
         repo = pr["repository"]["name"]
         author = pr["author"].get("name")
 
+        old_pr = True
         if created_at and created_at >= WINDOW_START:
             opened += 1
             repo_activity[repo] += 1
             if author:
+                old_pr = False
                 creator_counts[author] += 1
 
         if closed_at and closed_at >= WINDOW_START:
@@ -156,13 +158,17 @@ def build_report():
 
         reviewers_for_pr = set()
 
+        active_author = False
         for review in pr["reviews"]["nodes"]:
             submitted_at = parse_ts(review["submittedAt"])
             if submitted_at < WINDOW_START:
                 continue
             reviewer = review["author"].get("name")
-            if reviewer and reviewer != author:
-                reviewers_for_pr.add(reviewer)
+            if reviewer:
+                if reviewer == author:
+                    active_author = True
+                else:
+                    reviewers_for_pr.add(reviewer)
 
         for login in reviewers_for_pr:
             reviewer_counts[login] += 1
@@ -170,13 +176,16 @@ def build_report():
         if reviewers_for_pr:
             repo_activity[repo] += len(reviewers_for_pr)
 
+        if old_pr and active_author:
+            creator_counts[author] += 1
+
     lines = [
         f":olympics: *GitHub PR Report (last {WEEKS} week{'' if WEEKS == 1 else 's'})*",
         "",
         f"Opened: {opened}",
         f"Closed: {closed}",
         "",
-        ":artist: *Top PR Creators*",
+        ":artist: *Top PR Authors*",
     ]
 
     for rank, (user, count) in enumerate(
