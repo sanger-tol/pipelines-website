@@ -8,7 +8,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 
 ORG = os.environ.get("GITHUB_ORG", "sanger-tol")
-SLACK_WEBHOOK_URL = os.environ["SLACK_WEBHOOK_URL"]
+SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
 WEEKS = int(os.environ.get("WEEKS", "4"))
 
 WINDOW_START = datetime.now(timezone.utc) - timedelta(weeks=WEEKS)
@@ -251,7 +251,8 @@ def main():
     report = build_report()
 
     print(report)
-    post_to_slack(report)
+    if SLACK_WEBHOOK_URL:
+        post_to_slack(report)
 
 
 if __name__ == "__main__":
