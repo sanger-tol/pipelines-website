@@ -77,7 +77,7 @@ def graphql_search(cursor=None):
     )
 
     cmd = [
-        "/software/team328/users/mm49/homebrew/bin/gh",
+        "/software/treeoflife/conda/users/envs/toladmin/tolsoft/github_backups/bin/gh",
         "api",
         "graphql",
         "-f",
