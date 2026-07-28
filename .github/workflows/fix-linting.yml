@@ -9,10 +9,11 @@ jobs:
     if: >
       contains(github.event.comment.html_url, '/pull/') &&
       contains(github.event.comment.body, '@sanger-tolsoft fix linting') &&
-      github.repository == 'sanger-tol/pipelines-website'
+      github.repository == 'sanger-tol/pipelines-website' &&
+      github.event.comment.user.login == 'sanger-tolsoft'
     permissions:
       contents: write
-      pull-requests: write
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
       # Use the default GitHub token so we can push formatting fixes
