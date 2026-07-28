@@ -34,6 +34,10 @@ env:
 
 jobs:
   get-pipelines:
+    # Only run syncs from the main and dev branches.
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/dev'
     runs-on: 'ubuntu-latest'
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
