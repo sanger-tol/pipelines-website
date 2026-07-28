@@ -10,19 +10,18 @@ jobs:
       contains(github.event.comment.html_url, '/pull/') &&
       contains(github.event.comment.body, '@sanger-tolsoft fix linting') &&
       github.repository == 'sanger-tol/pipelines-website'
+    permissions:
+      contents: write
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
-      # Use the @sanger-tolsoft token to check out so we can push later
+      # Use the default GitHub token so we can push formatting fixes
       - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.sangertolsoft_access_token }}
 
       # Action runs on the issue comment, so we don't get the PR by default
       # Use the gh cli to check out the PR
       - name: Checkout Pull Request
         run: gh pr checkout ${{ github.event.issue.number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.sangertolsoft_access_token }}
 
       - uses: actions/setup-node@v2
 
