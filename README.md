@@ -171,4 +171,4 @@ Phil Ewels ([@ewels](http://github.com/ewels/)) built the original nf-core websi
 More recently, [@mashehu](https://github.com/mashehu) has done a great deal of work with the code.
 See the [repo contributors](https://github.com/nf-core/nf-co.re/graphs/contributors) for more.
 
-Kudos to the excellent [npm website](https://www.npmjs.com), which provided inspiration for the design of the pipeline pages.  
+Kudos to the excellent [npm website](https://www.npmjs.com), which provided inspiration for the design of the pipeline pages.
