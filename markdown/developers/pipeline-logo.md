@@ -7,9 +7,9 @@ subtitle: Instructions for creating the image logos for a pipeline
 Logos use the same layout as the nf-core logos, but customised to
 follow Sanger branding guidelines (Roboto font, specific shades of blue).
 
-In Tree of Life, the script is already installed at
-`/software/treeoflife/bin/render_logo.py`, and its runtime dependencies are
-already available. There is nothing to install.
+The script can be found in the [nf-core-modules repository](https://github.com/sanger-tol/nf-core-modules/tree/main/scripts/logo).
+All its runtime dependencies are already installed in the central nf-core Conda environments.
+There is nothing to install.
 
 ## Quick start
 
@@ -17,7 +17,7 @@ In most cases you only need to point the script at the pipeline directory that
 contains `.nf-core.yml`:
 
 ```bash
-/software/treeoflife/bin/render_logo.py --pipeline-dir /path/to/pipeline
+render_logo.py --pipeline-dir /path/to/pipeline
 ```
 
 This command:
@@ -37,16 +37,16 @@ By default the output filenames are:
 If you are already in the pipeline directory, this is equivalent:
 
 ```bash
-/software/treeoflife/bin/render_logo.py --pipeline-dir .
+render_logo.py --pipeline-dir .
 # or
-/software/treeoflife/bin/render_logo.py
+render_logo.py
 ```
 
 If `.nf-core.yml` is missing or you want to override its values, supply the name
 as the positional argument, e.g. `--org`:
 
 ```bash
-/software/treeoflife/bin/render_logo.py my-pipeline \
+render_logo.py my-pipeline \
   --org sanger-tol \
   --pipeline-dir /path/to/pipeline
 ```
@@ -79,13 +79,13 @@ Two path rules are worth knowing:
 Generate only the light logo:
 
 ```bash
-/software/treeoflife/bin/render_logo.py --pipeline-dir /path/to/pipeline --mode light
+render_logo.py --pipeline-dir /path/to/pipeline --mode light
 ```
 
 Write output somewhere other than `docs/images` within the pipeline directory:
 
 ```bash
-/software/treeoflife/bin/render_logo.py \
+render_logo.py \
   --pipeline-dir /path/to/pipeline \
   --output-dir assets/logo
 ```
@@ -103,7 +103,7 @@ python3 /path/to/sanger-tol/nf-core-modules/scripts/logo/render_logo.py \
 Use a different metadata file under the same pipeline directory:
 
 ```bash
-/software/treeoflife/bin/render_logo.py \
+render_logo.py \
   --pipeline-dir /path/to/pipeline \
   --config config/custom.nf-core.yml
 ```
@@ -111,7 +111,7 @@ Use a different metadata file under the same pipeline directory:
 Use an explicit template file:
 
 ```bash
-/software/treeoflife/bin/render_logo.py \
+render_logo.py \
   --pipeline-dir /path/to/pipeline \
   --template /path/to/custom-template.svg
 ```
