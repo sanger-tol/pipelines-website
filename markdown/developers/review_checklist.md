@@ -260,7 +260,7 @@ Where previous work from other pipelines / projects is used within a pipeline, t
 If in doubt about what to do, ask on Slack or discuss at the fortnightly pipeline meetings.
 
 To accurately record all contributions, Nextflow now supports a `contributors` array in the [`manifest` section of `nextflow.config`](https://www.nextflow.io/docs/latest/reference/config.html#manifest).
-Fill it in, and use the two scripts `/software/treeoflife/bin/generate_cff_from_manifest.py` and `/software/treeoflife/bin/generate_rocrate_from_manifest.py`
+Fill it in, and use the two scripts `generate_cff_from_manifest.py` and `generate_rocrate_from_manifest.py` from our [nf-core-modules repo](https://github.com/sanger-tol/nf-core-modules/tree/main/scripts)
 to update `CITATION.cff` and `ro-crate-metadata.json` accordingly.
 
 When reviewing a release pull-request, check that all files are synchronised.
