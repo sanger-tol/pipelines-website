@@ -817,7 +817,6 @@ class PipelineHealth extends RepoHealth {
     public function fix_tests() {
         parent::fix_tests();
         if (is_fix_repo($this->name) && $this->rulesets_ready) {
-            $this->fix_branch_protection();
             // Done! Refresh the test statuses
             $this->run_tests();
         }
