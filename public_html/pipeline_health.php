@@ -190,7 +190,8 @@ class RepoHealth {
                 $this->gh_rulesets = json_decode(file_get_contents($this->gh_rulesets_cache));
             } else {
                 $gh_rulesets_url =
-                    'https://api.github.com/repos/sanger-tol/' . basename($this->name) . '/rulesets?includes_parents=true';
+                    'https://api.github.com/repos/sanger-tol/' . basename($this->name) . '/rulesets';
+                $this->gh_rulesets = json_decode(file_get_contents($gh_rulesets_url, false, GH_API_OPTS));
                 $this->_save_cache_data($this->gh_rulesets_cache, $this->gh_rulesets);
             }
         }
