@@ -1007,25 +1007,26 @@ $base_test_urls = [
     'branch_dev_enforce_admins' => 'https://github.com/sanger-tol/{repo}/settings/branches',
     // 'branch_template_restrict_push' => 'https://github.com/sanger-tol/{repo}/settings/branches',
 ];
+$branch_protection_display_tests = [
+    'branch_main_strict_updates',
+    'branch_main_required_ci',
+    'branch_main_stale_reviews',
+    'branch_main_code_owner_reviews',
+    'branch_main_required_num_reviews',
+    'branch_main_enforce_admins',
+    'branch_dev_strict_updates',
+    'branch_dev_required_ci',
+    'branch_dev_stale_reviews',
+    'branch_dev_code_owner_reviews',
+    'branch_dev_required_num_reviews',
+    'branch_dev_enforce_admins',
+];
+foreach ($branch_protection_display_tests as $key) {
+    unset($base_test_names[$key], $base_test_descriptions[$key], $base_test_urls[$key]);
+}
 $base_merge_table_col_headings = [
     'Team access' => ['team_nextflow_all', 'team_nextflow_admin'],
     'Branches exist' => ['branch_main_exists', 'branch_dev_exists', 'branch_template_exists'],
-    'Branch protection: main' => [
-        'branch_main_strict_updates',
-        'branch_main_required_ci',
-        'branch_main_stale_reviews',
-        'branch_main_code_owner_reviews',
-        'branch_main_required_num_reviews',
-        'branch_main_enforce_admins',
-    ],
-    'Branch protection: dev' => [
-        'branch_dev_strict_updates',
-        'branch_dev_required_ci',
-        'branch_dev_stale_reviews',
-        'branch_dev_code_owner_reviews',
-        'branch_dev_required_num_reviews',
-        'branch_dev_enforce_admins',
-    ],
 ];
 
 $pipeline_base_test_names = $base_test_names;
