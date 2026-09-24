@@ -42,6 +42,7 @@ $pipelines_json = json_decode(file_get_contents('pipelines.json'))->remote_workf
 // Placeholders
 $pipelines = [];
 $core_repos = [];
+$ruleset_warnings = [];
 
 // HTTP header to use on GitHub API GET requests
 define(
@@ -132,6 +133,7 @@ class RepoHealth {
     public $repo_description;
     public $repo_url;
     public $repo_ruleset_branch_protection;
+    public $rulesets_ready = false;
     public $team_nextflow_all;
     public $team_nextflow_admin;
 
@@ -163,7 +165,7 @@ class RepoHealth {
         $this->test_branch_exists();
     }
     public function fix_tests() {
-        if (is_fix_repo($this->name)) {
+        if (is_fix_repo($this->name) && $this->rulesets_ready) {
             $this->fix_repo();
             $this->fix_topics();
             $this->fix_teams();
@@ -293,11 +295,33 @@ class RepoHealth {
         if (is_array($this->gh_rulesets)) {
             $this->repo_ruleset_branch_protection = false;
             foreach ($this->gh_rulesets as $ruleset) {
-                if ($ruleset->name == 'main+dev branch protection' && $ruleset->enforcement == 'active') {
+                if (($ruleset->name ?? '') == 'main+dev branch protection' && ($ruleset->enforcement ?? '') == 'active') {
                     $this->repo_ruleset_branch_protection = true;
                 }
             }
+            $this->rulesets_ready = $this->repo_ruleset_branch_protection;
         }
+        if (!$this->rulesets_ready) {
+            $this->add_ruleset_warning(['main+dev branch protection']);
+        }
+    }
+
+    protected function add_ruleset_warning($required_rulesets) {
+        global $ruleset_warnings;
+        $missing_rulesets = [];
+        foreach ($required_rulesets as $required_ruleset) {
+            $found = false;
+            foreach ((array) $this->gh_rulesets as $ruleset) {
+                if (($ruleset->name ?? '') == $required_ruleset && ($ruleset->enforcement ?? '') == 'active') {
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $missing_rulesets[] = $required_ruleset;
+            }
+        }
+        $ruleset_warnings[$this->name] = $missing_rulesets;
     }
     public function test_teams() {
         $this->team_nextflow_all = isset($this->gh_teams['nextflow_all']) ? $this->gh_teams['nextflow_all']->push : false;
@@ -701,10 +725,15 @@ class PipelineHealth extends RepoHealth {
         if (is_array($this->gh_rulesets)) {
             $this->repo_ruleset_nf_core_ci_protection = false;
             foreach ($this->gh_rulesets as $ruleset) {
-                if ($ruleset->name == 'nf-core CI protection' && $ruleset->enforcement == 'active') {
+                if (($ruleset->name ?? '') == 'nf-core CI protection' && ($ruleset->enforcement ?? '') == 'active') {
                     $this->repo_ruleset_nf_core_ci_protection = true;
                 }
             }
+            $this->rulesets_ready =
+                $this->repo_ruleset_branch_protection && $this->repo_ruleset_nf_core_ci_protection;
+        }
+        if (!$this->rulesets_ready) {
+            $this->add_ruleset_warning(['main+dev branch protection', 'nf-core CI protection']);
         }
     }
 
@@ -787,7 +816,7 @@ class PipelineHealth extends RepoHealth {
     // Extra pipeline-specific fixes
     public function fix_tests() {
         parent::fix_tests();
-        if (is_fix_repo($this->name)) {
+        if (is_fix_repo($this->name) && $this->rulesets_ready) {
             $this->fix_branch_protection();
             // Done! Refresh the test statuses
             $this->run_tests();
@@ -1144,6 +1173,18 @@ foreach ($updated_teams as $team => $updated) {
 ksort($pipelines);
 ksort($core_repos);
 ?>
+
+<?php if (isset($_GET['action']) && $_GET['action'] == 'fix') {
+    foreach ($ruleset_warnings as $repo => $missing_rulesets) {
+        if (count($missing_rulesets) > 0) {
+            echo '<div class="alert alert-warning m-3"><strong>Action required for ' .
+                htmlspecialchars($repo, ENT_QUOTES, 'UTF-8') .
+                ':</strong> add or activate the following ruleset(s): <code>' .
+                htmlspecialchars(implode(', ', $missing_rulesets), ENT_QUOTES, 'UTF-8') .
+                '</code>. No automatic fixes were applied.</div>';
+        }
+    }
+} ?>
 
 <div class="container-fluid main-content">
   <h2>Pipelines</h2>
