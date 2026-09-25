@@ -42,6 +42,7 @@ $pipelines_json = json_decode(file_get_contents('pipelines.json'))->remote_workf
 // Placeholders
 $pipelines = [];
 $core_repos = [];
+$ruleset_warnings = [];
 
 // HTTP header to use on GitHub API GET requests
 define(
@@ -73,6 +74,7 @@ class RepoHealth {
         $this->cache_base = dirname(dirname(__FILE__)) . '/api_cache/pipeline_health';
         $checked_name = basename($this->name);
         $this->gh_repo_cache = $this->cache_base . '/repo_' . $checked_name  . '.json';
+        $this->gh_rulesets_cache = $this->cache_base . '/rulesets_' . $checked_name  . '.json';
         $this->gh_release_cache = $this->cache_base . '/release_' . $checked_name  . '.json';
         $this->gh_all_branches_cache = $this->cache_base . '/branches_' . $checked_name  . '.json';
     }
@@ -112,6 +114,7 @@ class RepoHealth {
 
     // Data vars
     public $gh_repo;
+    public $gh_rulesets;
     public $gh_release;
     public $gh_teams = [];
     public $gh_branches;
@@ -129,6 +132,8 @@ class RepoHealth {
     public $repo_keywords;
     public $repo_description;
     public $repo_url;
+    public $repo_ruleset_branch_protection;
+    public $rulesets_ready = false;
     public $team_nextflow_all;
     public $team_nextflow_admin;
 
@@ -160,7 +165,7 @@ class RepoHealth {
         $this->test_branch_exists();
     }
     public function fix_tests() {
-        if (is_fix_repo($this->name)) {
+        if (is_fix_repo($this->name) && $this->rulesets_ready) {
             $this->fix_repo();
             $this->fix_topics();
             $this->fix_teams();
@@ -178,6 +183,16 @@ class RepoHealth {
                 $gh_repo_url = 'https://api.github.com/repos/sanger-tol/' . basename($this->name);
                 $this->gh_repo = json_decode(file_get_contents($gh_repo_url, false, GH_API_OPTS));
                 $this->_save_cache_data($this->gh_repo_cache, $this->gh_repo);
+            }
+        }
+        if (is_null($this->gh_rulesets)) {
+            if (file_exists($this->gh_rulesets_cache) && !$this->refresh) {
+                $this->gh_rulesets = json_decode(file_get_contents($this->gh_rulesets_cache));
+            } else {
+                $gh_rulesets_url =
+                    'https://api.github.com/repos/sanger-tol/' . basename($this->name) . '/rulesets';
+                $this->gh_rulesets = json_decode(file_get_contents($gh_rulesets_url, false, GH_API_OPTS));
+                $this->_save_cache_data($this->gh_rulesets_cache, $this->gh_rulesets);
             }
         }
     }
@@ -278,6 +293,36 @@ class RepoHealth {
         if (isset($this->gh_repo->homepage)) {
             $this->repo_url = $this->gh_repo->homepage == $this->web_url;
         }
+        if (is_array($this->gh_rulesets)) {
+            $this->repo_ruleset_branch_protection = false;
+            foreach ($this->gh_rulesets as $ruleset) {
+                if (($ruleset->name ?? '') == 'main+dev branch protection' && ($ruleset->enforcement ?? '') == 'active') {
+                    $this->repo_ruleset_branch_protection = true;
+                }
+            }
+            $this->rulesets_ready = $this->repo_ruleset_branch_protection;
+        }
+        if (!$this->rulesets_ready) {
+            $this->add_ruleset_warning(['main+dev branch protection']);
+        }
+    }
+
+    protected function add_ruleset_warning($required_rulesets) {
+        global $ruleset_warnings;
+        $missing_rulesets = [];
+        foreach ($required_rulesets as $required_ruleset) {
+            $found = false;
+            foreach ((array) $this->gh_rulesets as $ruleset) {
+                if (($ruleset->name ?? '') == $required_ruleset && ($ruleset->enforcement ?? '') == 'active') {
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $missing_rulesets[] = $required_ruleset;
+            }
+        }
+        $ruleset_warnings[$this->name] = $missing_rulesets;
     }
     public function test_teams() {
         $this->team_nextflow_all = isset($this->gh_teams['nextflow_all']) ? $this->gh_teams['nextflow_all']->push : false;
@@ -666,6 +711,7 @@ class PipelineHealth extends RepoHealth {
     public $last_release;
     public $release_after_tools;
     public $main_is_release;
+    public $repo_ruleset_nf_core_ci_protection;
 
     // Extra pipeline-specific tests
     public function run_tests() {
@@ -673,6 +719,23 @@ class PipelineHealth extends RepoHealth {
         $this->test_branch_protection();
         $this->test_files_exist();
         $this->test_releases();
+    }
+
+    public function test_repo() {
+        parent::test_repo();
+        if (is_array($this->gh_rulesets)) {
+            $this->repo_ruleset_nf_core_ci_protection = false;
+            foreach ($this->gh_rulesets as $ruleset) {
+                if (($ruleset->name ?? '') == 'nf-core CI protection' && ($ruleset->enforcement ?? '') == 'active') {
+                    $this->repo_ruleset_nf_core_ci_protection = true;
+                }
+            }
+            $this->rulesets_ready =
+                $this->repo_ruleset_branch_protection && $this->repo_ruleset_nf_core_ci_protection;
+        }
+        if (!$this->rulesets_ready) {
+            $this->add_ruleset_warning(['main+dev branch protection', 'nf-core CI protection']);
+        }
     }
 
     public function check_url($url) {
@@ -754,8 +817,7 @@ class PipelineHealth extends RepoHealth {
     // Extra pipeline-specific fixes
     public function fix_tests() {
         parent::fix_tests();
-        if (is_fix_repo($this->name)) {
-            $this->fix_branch_protection();
+        if (is_fix_repo($this->name) && $this->rulesets_ready) {
             // Done! Refresh the test statuses
             $this->run_tests();
         }
@@ -894,6 +956,7 @@ $base_test_names = [
     'repo_keywords' => 'Keywords',
     'repo_description' => 'Description',
     'repo_url' => 'Repo URL',
+    'repo_ruleset_branch_protection' => 'Branch protection ruleset',
     'team_nextflow_all' => 'Team all',
     'team_nextflow_admin' => 'Team admin',
     'branch_main_exists' => 'main: exists',
@@ -923,6 +986,7 @@ $base_test_descriptions = [
     'repo_keywords' => 'Minimum keywords set',
     'repo_description' => 'Description must be set',
     'repo_url' => 'URL should be set to https://pipelines.tol.sanger.ac.uk',
+    'repo_ruleset_branch_protection' => 'main+dev branch protection ruleset must be active',
     'team_nextflow_all' => 'Write access for sanger-tol/nextflow-all',
     'team_nextflow_admin' => 'Admin access for sanger-tol/nextflow-admin',
     'branch_main_exists' => 'main branch: branch must exist',
@@ -952,6 +1016,7 @@ $base_test_urls = [
     'repo_keywords' => 'https://github.com/sanger-tol/{repo}',
     'repo_description' => 'https://github.com/sanger-tol/{repo}',
     'repo_url' => 'https://github.com/sanger-tol/{repo}',
+    'repo_ruleset_branch_protection' => 'https://github.com/sanger-tol/{repo}/settings/rules',
     'team_nextflow_all' => 'https://github.com/sanger-tol/{repo}/settings/collaboration',
     'team_nextflow_admin' => 'https://github.com/sanger-tol/{repo}/settings/collaboration',
     'branch_main_exists' => 'https://github.com/sanger-tol/{repo}/branches',
@@ -971,27 +1036,30 @@ $base_test_urls = [
     'branch_dev_enforce_admins' => 'https://github.com/sanger-tol/{repo}/settings/branches',
     // 'branch_template_restrict_push' => 'https://github.com/sanger-tol/{repo}/settings/branches',
 ];
+$branch_protection_display_tests = [
+    'branch_main_strict_updates',
+    'branch_main_required_ci',
+    'branch_main_stale_reviews',
+    'branch_main_code_owner_reviews',
+    'branch_main_required_num_reviews',
+    'branch_main_enforce_admins',
+    'branch_dev_strict_updates',
+    'branch_dev_required_ci',
+    'branch_dev_stale_reviews',
+    'branch_dev_code_owner_reviews',
+    'branch_dev_required_num_reviews',
+    'branch_dev_enforce_admins',
+];
+foreach ($branch_protection_display_tests as $key) {
+    unset($base_test_names[$key], $base_test_descriptions[$key], $base_test_urls[$key]);
+}
 $base_merge_table_col_headings = [
     'Team access' => ['team_nextflow_all', 'team_nextflow_admin'],
     'Branches exist' => ['branch_main_exists', 'branch_dev_exists', 'branch_template_exists'],
-    'Branch protection: main' => [
-        'branch_main_strict_updates',
-        'branch_main_required_ci',
-        'branch_main_stale_reviews',
-        'branch_main_code_owner_reviews',
-        'branch_main_required_num_reviews',
-        'branch_main_enforce_admins',
-    ],
-    'Branch protection: dev' => [
-        'branch_dev_strict_updates',
-        'branch_dev_required_ci',
-        'branch_dev_stale_reviews',
-        'branch_dev_code_owner_reviews',
-        'branch_dev_required_num_reviews',
-        'branch_dev_enforce_admins',
-    ],
 ];
 
+$pipeline_base_test_names = $base_test_names;
+unset($pipeline_base_test_names['repo_ruleset_branch_protection']);
 $pipeline_test_names =
     [
         'has_release' => 'Released',
@@ -999,7 +1067,12 @@ $pipeline_test_names =
         'main_is_release' => 'Main = release',
         'has_json_schema' => 'JSON Schema',
         'has_dsl2_modules_dir' => 'DSL2',
-    ] + $base_test_names;
+    ] +
+    $pipeline_base_test_names +
+    [
+        'repo_ruleset_branch_protection' => 'Branch protection ruleset',
+        'repo_ruleset_nf_core_ci_protection' => 'nf-core CI protection',
+    ];
 $pipeline_test_descriptions =
     [
         'has_release' => 'Has at least one release',
@@ -1008,6 +1081,7 @@ $pipeline_test_descriptions =
         'has_json_schema' => 'Has a nextflow_schema.json file (in last release, dev if no release)',
         'has_dsl2_modules_dir' =>
             'Has a modules directory, suggesting that it\'s a DSL2 pipeline (in last release, dev if no release)',
+        'repo_ruleset_nf_core_ci_protection' => 'nf-core CI protection ruleset must be active',
     ] + $base_test_descriptions;
 $pipeline_test_descriptions['repo_url'] = 'URL should be set to https://pipelines.tol.sanger.ac.uk/[PIPELINE-NAME]';
 $pipeline_test_urls =
@@ -1017,6 +1091,7 @@ $pipeline_test_urls =
         'main_is_release' => 'https://github.com/sanger-tol/{repo}/compare/{latest-tag}...main',
         'has_json_schema' => 'https://github.com/sanger-tol/{repo}',
         'has_dsl2_modules_dir' => 'https://github.com/sanger-tol/{repo}',
+        'repo_ruleset_nf_core_ci_protection' => 'https://github.com/sanger-tol/{repo}/settings/rules',
     ] + $base_test_urls;
 $pipeline_merge_table_col_headings = $base_merge_table_col_headings;
 
@@ -1099,6 +1174,18 @@ ksort($pipelines);
 ksort($core_repos);
 ?>
 
+<?php if (isset($_GET['action']) && $_GET['action'] == 'fix') {
+    foreach ($ruleset_warnings as $repo => $missing_rulesets) {
+        if (count($missing_rulesets) > 0) {
+            echo '<div class="alert alert-warning m-3"><strong>Action required for ' .
+                htmlspecialchars($repo, ENT_QUOTES, 'UTF-8') .
+                ':</strong> add or activate the following ruleset(s): <code>' .
+                htmlspecialchars(implode(', ', $missing_rulesets), ENT_QUOTES, 'UTF-8') .
+                '</code>. No automatic fixes were applied.</div>';
+        }
+    }
+} ?>
+
 <div class="container-fluid main-content">
   <h2>Pipelines</h2>
   <div class="table-responsive">
@@ -1110,6 +1197,7 @@ ksort($core_repos);
           $m_names_printed = [];
           $colspan = '';
           foreach ($pipeline_test_names as $key => $name) {
+              $colspan = '';
               $description = $pipeline_test_descriptions[$key];
               $print = true;
               foreach ($pipeline_merge_table_col_headings as $m_name => $m_keys) {
