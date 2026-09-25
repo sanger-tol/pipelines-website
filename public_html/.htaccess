@@ -2,6 +2,8 @@
     RewriteEngine On
     RewriteBase /
 
+    RewriteRule ^modules(?:\.php)?(?:/.*)?$ - [R=503,L,NC]
+
     # Specific convenience URLs
     RewriteRule ^/?bilibili/?$ https://space.bilibili.com/1280248035?spm_id_from=333.788.b_765f7570696e666f.1 [R=301,L]
 
