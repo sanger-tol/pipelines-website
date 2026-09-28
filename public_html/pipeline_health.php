@@ -1289,6 +1289,7 @@ ksort($core_repos);
     <button type="submit" name="action" value="fix" class="btn btn-info col-2 my-1 ms-2 fix-btn">Fix data</button>
   </form>
   <p><em class="small text-muted">Warning: page will take a minute or two to load. Even when refreshing one repo, some tests will be refreshed for all repos.</em></p>
+    <p><em class="small text-muted">Warning: some core repositories, such as <code>nf-core-modules</code>, may use different branch-protection rulesets from pipelines. Check the repository's intended ruleset before making changes based on these checks.</em></p>
 
 </div>
 
