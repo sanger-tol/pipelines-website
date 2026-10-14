@@ -71,7 +71,7 @@ $content = '';
 $schema_content = '';
 $import_chartjs = true;
 $no_auto_toc = true;
-$gh_url = 'https://github.com/nf-core/modules/tree/master/' . str_replace('/meta.yml', '', $module['github_path']);
+$gh_url = 'https://github.com/sanger-tol/nf-core-modules/tree/main/' . str_replace('/meta.yml', '', $module['github_path']);
 
 # Header - keywords
 $header_html = '<p class="mb-0">';
@@ -296,7 +296,7 @@ include '../includes/header.php';
             <div>
                 <h6>get in touch</h6>
                 <p><a class="btn btn-sm btn-outline-info" href="https://nfcore.slack.com/channels/modules"><i class="fab fa-slack me-1"></i> Ask a question on Slack</a></p>
-                <p><a class="btn btn-sm btn-outline-secondary" href="https://github.com/nf-core/modules/issues"><i class="fab fa-github me-1"></i> Open an issue on GitHub</a></p>
+                <p><a class="btn btn-sm btn-outline-secondary" href="https://github.com/sanger-tol/nf-core-modules/issues"><i class="fab fa-github me-1"></i> Open an issue on GitHub</a></p>
             </div>
         </div>
     <?php }
