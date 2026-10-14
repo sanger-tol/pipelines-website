@@ -78,27 +78,43 @@ function github_query($gh_query_url) {
 //  nf-core modules table
 //
 
-$gh_modules = github_query('https://api.github.com/repos/nf-core/modules/git/trees/master?recursive=1');
+$gh_modules = github_query('https://api.github.com/repos/sanger-tol/nf-core-modules/git/trees/main?recursive=1');
+if (!isset($gh_modules['tree']) || !is_array($gh_modules['tree']) || !empty($gh_modules['truncated'])) {
+    throw new RuntimeException('GitHub returned an incomplete repository tree');
+}
 $modules = [];
 foreach ($gh_modules['tree'] as $f) {
     if (substr($f['path'], -8) == 'meta.yml' && substr($f['path'], 0, 8) == 'modules/') {
         $meta = github_query($f['url']);
-        $meta_content = base64_decode($meta['content']);
+        if (($meta['encoding'] ?? '') !== 'base64' || !isset($meta['content'], $meta['sha'])) {
+            throw new RuntimeException('Missing module metadata in ' . $f['path']);
+        }
+        $meta_content = base64_decode($meta['content'], true);
+        if ($meta_content === false) {
+            throw new RuntimeException('Invalid base64 content in ' . $f['path']);
+        }
         $meta_content = Yaml::parse($meta_content);
-        $meta_content['keywords'] = is_array($meta_content['keywords'])
-            ? implode(';', $meta_content['keywords'])
-            : $meta_content['keywords'];
-        $meta_content['authors'] = is_array($meta_content['authors'])
-            ? implode(';', $meta_content['authors'])
-            : $meta_content['authors'];
+        if (!is_array($meta_content) || empty($meta_content['name']) || !is_string($meta_content['name'])) {
+            throw new RuntimeException('Missing module name in ' . $f['path']);
+        }
+        foreach (['tools', 'input', 'output'] as $field) {
+            if (isset($meta_content[$field]) && !is_array($meta_content[$field])) {
+                throw new RuntimeException('Invalid ' . $field . ' in ' . $f['path']);
+            }
+            $meta_content[$field] = $meta_content[$field] ?? [];
+        }
+        foreach (['keywords', 'authors'] as $field) {
+            $value = $meta_content[$field] ?? [];
+            $meta_content[$field] = is_array($value) ? implode(';', $value) : $value;
+        }
         $meta_content['sha'] = $meta['sha'];
-        $meta_content['api_url'] = $meta['url'];
+        $meta_content['api_url'] = $f['url'];
         $meta_content['github_path'] = $f['path'];
         $modules[] = $meta_content;
     }
 }
 
-echo "\nModules in nf-core in total: " . count($modules) . "\n\n";
+echo "\nModules in sanger-tol/nf-core-modules in total: " . count($modules) . "\n\n";
 
 $sql = "CREATE TABLE IF NOT EXISTS  nfcore_modules (
             id           INT             AUTO_INCREMENT PRIMARY KEY,
@@ -114,82 +130,82 @@ $sql = "CREATE TABLE IF NOT EXISTS  nfcore_modules (
             authors	     VARCHAR (2000)  NOT NULL,
             date_added   TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
             date_updated TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-            )";
+            ) ENGINE=InnoDB";
 if (mysqli_query($conn, $sql)) {
     echo "`nfcore_modules` table created successfully.\n";
 } else {
     echo "ERROR: Could not execute $sql. " . mysqli_error($conn);
 }
-// Prepare an insert statement
-$sql =
-    'INSERT INTO nfcore_modules (github_sha,github_path,api_url,name,description,keywords,tools,input,output,authors) VALUES (?,?,?,?,?,?,?,?,?,?)';
-
-if ($stmt = mysqli_prepare($conn, $sql)) {
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param(
-        $stmt,
-        'ssssssssss',
-        $github_sha,
-        $github_path,
-        $api_url,
-        $name,
-        $description,
-        $keywords,
-        $tools,
-        $input,
-        $output,
-        $authors,
-    );
-
-    foreach ($modules as $idx => $module) {
-        // check if module already exists
-        $check = "SELECT * FROM nfcore_modules WHERE name = '$module[name]'";
-        $res = mysqli_query($conn, $check);
-        $github_sha = $module['sha'];
-        $github_path = $module['github_path'];
-        $api_url = $module['api_url'];
-        $name = htmlspecialchars($module['name'], ENT_QUOTES, 'UTF-8');;
-        $description = $module['description'];
-        $keywords = $module['keywords'];
-        $tools = json_encode($module['tools']);
-        $input = json_encode($module['input']);
-        $output = json_encode($module['output']);
-        $authors = $module['authors'];
-        if ($res->num_rows) {
-            // check if entry is different
-            $row = $res->fetch_assoc();
-
-            // update existing module
-            $update = "UPDATE nfcore_modules SET github_sha = ?, github_path = ?, api_url = ?, description = ?, keywords = ?, tools = ?, input = ?, output = ?, authors = ? WHERE name = '$name'";
-            if ($update_stmt = mysqli_prepare($conn, $update)) {
-                // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param(
-                    $update_stmt,
-                    'sssssssss',
-                    $github_sha,
-                    $github_path,
-                    $api_url,
-                    $description,
-                    $keywords,
-                    $tools,
-                    $input,
-                    $output,
-                    $authors,
-                );
-            } else {
-                echo "ERROR: Could not prepare query: $update. " . mysqli_error($conn);
-            }
-            if (!mysqli_stmt_execute($update_stmt)) {
-                echo "ERROR: Could not execute $update. " . mysqli_error($conn);
-            }
+$driver = new mysqli_driver();
+$report_mode = $driver->report_mode;
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+$conn->begin_transaction();
+try {
+    $insert_statement = $conn->prepare('INSERT INTO nfcore_modules
+        (github_sha, github_path, api_url, name, description, keywords, tools, input, output, authors)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $update_statement = $conn->prepare('UPDATE nfcore_modules SET github_sha = ?, github_path = ?,
+        api_url = ?, name = ?, description = ?, keywords = ?, tools = ?, input = ?, output = ?, authors = ?
+        WHERE github_path = ?');
+    $check_statement = $conn->prepare('SELECT id FROM nfcore_modules WHERE github_path = ?');
+    foreach ($modules as $module) {
+        $parameters = [
+            $module['sha'],
+            $module['github_path'],
+            $module['api_url'],
+            htmlspecialchars($module['name'], ENT_QUOTES, 'UTF-8'),
+            $module['description'] ?? null,
+            $module['keywords'],
+            json_encode($module['tools'], JSON_THROW_ON_ERROR),
+            json_encode($module['input'], JSON_THROW_ON_ERROR),
+            json_encode($module['output'], JSON_THROW_ON_ERROR),
+            $module['authors'],
+        ];
+        $check_statement->bind_param('s', $module['github_path']);
+        $check_statement->execute();
+        $result = $check_statement->get_result();
+        if ($result->num_rows > 0) {
+            $write_statement = $update_statement;
+            $parameters[] = $module['github_path'];
         } else {
-            if (!mysqli_stmt_execute($stmt)) {
-                echo "ERROR: Could not execute $sql. " . mysqli_error($conn);
-            }
+            $write_statement = $insert_statement;
         }
+        $result->free();
+        $write_statement->bind_param(str_repeat('s', count($parameters)), ...$parameters);
+        $write_statement->execute();
     }
-} else {
-    echo "ERROR: Could not prepare query: $sql. " . mysqli_error($conn);
+    $check_statement->close();
+    $insert_statement->close();
+    $update_statement->close();
+
+    $paths = array_column($modules, 'github_path');
+    $stale_condition = $paths
+        ? 'github_path NOT IN (' . implode(', ', array_fill(0, count($paths), '?')) . ')'
+        : '1 = 1';
+    $delete_queries = [];
+    $result = $conn->query("SELECT 1 FROM information_schema.tables
+        WHERE table_schema = DATABASE() AND table_name = 'pipelines_modules'");
+    if ($result->num_rows > 0) {
+        $delete_queries[] = 'DELETE pipelines_modules FROM pipelines_modules
+            INNER JOIN nfcore_modules ON pipelines_modules.module_id = nfcore_modules.id
+            WHERE ' . $stale_condition;
+    }
+    $result->free();
+    $delete_queries[] = 'DELETE FROM nfcore_modules WHERE ' . $stale_condition;
+    foreach ($delete_queries as $delete_sql) {
+        $delete_statement = $conn->prepare($delete_sql);
+        if ($paths) {
+            $delete_statement->bind_param(str_repeat('s', count($paths)), ...$paths);
+        }
+        $delete_statement->execute();
+        $delete_statement->close();
+    }
+    $conn->commit();
+} catch (Throwable $error) {
+    $conn->rollback();
+    throw $error;
+} finally {
+    mysqli_report($report_mode);
 }
 
 echo "\nInformation for modules saved into database.\n\n";
@@ -429,7 +445,7 @@ foreach ($pipelines as $pipeline) {
     );
     $modules_json = json_decode(base64_decode($modules_json['content']), true);
 
-    $modules = $modules_json['repos']['https://github.com/nf-core/modules.git']['modules']['nf-core'];
+    $modules = $modules_json['repos']['https://github.com/sanger-tol/nf-core-modules.git']['modules']['sanger-tol'];
  
 
     // catch repos with no modules.json

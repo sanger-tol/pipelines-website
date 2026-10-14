@@ -2,8 +2,6 @@
     RewriteEngine On
     RewriteBase /
 
-    RewriteRule ^modules(?:\.php)?(?:/.*)?$ - [R=503,L,NC]
-
     # Specific convenience URLs
     RewriteRule ^/?bilibili/?$ https://space.bilibili.com/1280248035?spm_id_from=333.788.b_765f7570696e666f.1 [R=301,L]
 
@@ -26,6 +24,8 @@
     # Remove double-slashes
     RewriteCond %{REQUEST_URI} ^(.*)/{2,}(.*)$
     RewriteRule (.*) %1/%2 [R=301,L]
+
+    RewriteRule ^subworkflows/([^/]+)$ /_routes.php?path=subworkflows/$1 [L,QSA]
 
     # Run PHP without filename extension
     RewriteCond %{REQUEST_FILENAME} !-d

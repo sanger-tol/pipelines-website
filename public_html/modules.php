@@ -5,7 +5,14 @@ $config = parse_ini_file('../config.ini');
 $conn = mysqli_connect($config['host'], $config['username'], $config['password'], $config['dbname'], $config['port']);
 
 // get all modules
-$sql = 'SELECT * FROM nfcore_modules ORDER BY LOWER(name)';
+$sql = 'SELECT nfcore_modules.*, COALESCE(pipeline_counts.pipeline_count, 0) AS pipeline_count
+    FROM nfcore_modules
+    LEFT JOIN (
+        SELECT module_id, COUNT(DISTINCT pipeline_id) AS pipeline_count
+        FROM pipelines_modules
+        GROUP BY module_id
+    ) AS pipeline_counts ON pipeline_counts.module_id = nfcore_modules.id
+    ORDER BY LOWER(nfcore_modules.name)';
 $modules = [];
 if ($result = mysqli_query($conn, $sql)) {
     if (mysqli_num_rows($result) > 0) {
@@ -64,21 +71,18 @@ function add_update_url_param($param_key, $param_value) {
     return http_build_query($params);
 }
 
-$msg = '';
-if (isset($_GET['update'])) {
-    $output = shell_exec('php ../update_module_details.php 2>&1 | tee -a /home/nfcore/update.log');
-    $msg = '<div class="alert alert-success">Manual modules update sync triggered: <pre>' . $output . '</pre></div>';
-}
-
 $title = 'Modules';
 $subtitle =
-    'Browse the <strong>' . count($modules) . '</strong> modules that are currently available as part of nf-core.';
+    'Browse the <strong>' . count($modules) . '</strong> modules from the sanger-tol/nf-core-modules repository.';
 include '../includes/header.php';
-echo $msg;
 ?>
 
+<style>
+    .module .module-params { min-width: 0; overflow-wrap: anywhere; }
+</style>
+
 <h1>Available Modules</h1>
-<p class="mb-3">Modules are the building stones of all DSL2 nf-core blocks. You can find more info from nf-core website, if you would like to write your own module.
+<p class="mb-3">Modules are reusable process definitions for Nextflow DSL2 pipelines. These modules are maintained in the <a href="https://github.com/sanger-tol/nf-core-modules">sanger-tol/nf-core-modules</a> repository. For guidance on writing modules, see the <a href="https://nf-co.re/docs">nf-core documentation</a>.
 </p>
 <div class=" btn-toolbar mb-4 modules-toolbar" role="toolbar">
     <div class="module-filters input-group input-group-sm w-25">
@@ -121,7 +125,7 @@ echo $msg;
         -->
     </div>
     <div class="col-12 col-lg-9">
-        <p class="no-modules text-muted mt-5" style="display: none;">No modules found..</p>
+        <p class="no-modules text-muted mt-5" style="display: none;">No modules found.</p>
         <div class="modules-container modules-container-list">
             <?php foreach ($current_modules as $idx => $module): ?>
                 <div class="card pipeline module mb-2">
@@ -145,52 +149,7 @@ echo $msg;
                         <p class="card-text mb-0 mt-2 description <?php echo $module['name']; ?>-description">
                             <?php echo parse_md($module['description'])['content']; ?>
                         </p>
-                        <div class="module-params d-flex">
-                            <div class="module-input flex-fill">
-                                <label class="text-success">Input</label>
-
-                                <?php
-                                $input_text = '<p class="d-flex flex-wrap">';
-                                if(is_array($module['input'])){
-                                    foreach ($module['input'] as $input) {
-                                        foreach ($input as $name => $input_value) {
-                                            $description = $input_value['description'];
-                                            $description = str_replace('[', '<code class="px-0">[', $description);
-                                            $description = str_replace(']', ']</code>', $description);
-                                            $input_text .=
-                                                '<code class="me-1 mt-1 py-0" data-bs-toggle="tooltip" title="' .
-                                                $input_value['description'] .
-                                                '">' .
-                                                $name .
-                                                '</code>';
-                                        }
-                                    }
-                                }else{
-                                    $input_text .= "NO input";
-                                }
-                                $input_text .= '</p>';
-                                echo $input_text;
-                                ?>
-                            </div>
-                            <div class="module-output flex-fill">
-                                <label class="text-success">Output</label>
-                                <?php
-                                $output_text = '<p class="d-flex flex-wrap">';
-                                foreach ($module['output'] as $output) {
-                                    foreach ($output as $name => $output_value) {
-                                        $description = $output_value['description'];
-                                        $output_text .=
-                                            '<code class="me-1 mt-1 py-0" data-bs-toggle="tooltip" title="' .
-                                            $output_value['description'] .
-                                            '">' .
-                                            $name .
-                                            ' </code>';
-                                    }
-                                }
-                                $output_text .= '</p>';
-                                echo $output_text;
-                                ?>
-                            </div>
+                        <div class="module-params">
                             <div class="module-tools  flex-fill">
                                 <?php
                                 $tool_text = '<div class="d-flex flex-wrap">';
@@ -216,9 +175,9 @@ echo $msg;
                                                 '</span>';
                                             $tool_text .= '</div>';
                                         }
-                                        $tool_text .= '</ul>';
                                     }
                                 }
+                                $tool_text .= '</div>';
                                 if (substr_count($tool_text, '<div>') > 0) {
                                     $tool_text = '<label class="text-success">Tools</label>' . $tool_text;
                                 }
@@ -226,10 +185,11 @@ echo $msg;
                                 ?>
                             </div>
                         </div>
+                        <p class="small text-muted mb-0 module-pipeline-count"><?php echo (int) $module['pipeline_count']; ?> pipelines</p>
                     </div>
                 </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
     </div>
     <nav aria-label="Module page navigation ">
         <ul class="pagination">
@@ -263,7 +223,4 @@ echo $msg;
         </ul>
     </nav>
 </div>
-<p class="mt-5 small text-muted">
-    <a href="/modules?update">Click here</a> to trigger an update.
-</p>
 <?php include '../includes/footer.php';
