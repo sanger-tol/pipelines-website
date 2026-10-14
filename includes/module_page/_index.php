@@ -151,11 +151,13 @@ include '../includes/header.php';
                 <?php
                 $input_text = '<div class="">';
                 $input_text .= $header;
-                foreach ($module['input'] as $input) {
-                    foreach ($input as $name => $input_value) {
-                        $description = $input_value['description'];
-                        $input_text .= create_row($name, $input_value['type'], $description, $input_value['pattern']);
+                $input_channel = '';
+                foreach (module_parameter_fields($module['input']) as $input) {
+                    if ($input['channel'] !== '' && $input['channel'] !== $input_channel) {
+                        $input_text .= '<h3 class="h5 mt-3">' . htmlspecialchars($input['channel'], ENT_QUOTES, 'UTF-8') . '</h3>';
                     }
+                    $input_channel = $input['channel'];
+                    $input_text .= create_row($input['name'], $input['type'], $input['description'], $input['pattern']);
                 }
                 $input_text .= '</div>';
                 echo $input_text;
@@ -169,16 +171,18 @@ include '../includes/header.php';
                 <?php
                 $output_text = '<div class="">';
                 $output_text .= $header;
-                foreach ($module['output'] as $output) {
-                    foreach ($output as $name => $output_value) {
-                        $description = $output_value['description'];
-                        $output_text .= create_row(
-                            $name,
-                            $output_value['type'],
-                            $description,
-                            $output_value['pattern'],
-                        );
+                $output_channel = '';
+                foreach (module_parameter_fields($module['output']) as $output) {
+                    if ($output['channel'] !== '' && $output['channel'] !== $output_channel) {
+                        $output_text .= '<h3 class="h5 mt-3">' . htmlspecialchars($output['channel'], ENT_QUOTES, 'UTF-8') . '</h3>';
                     }
+                    $output_channel = $output['channel'];
+                    $output_text .= create_row(
+                        $output['name'],
+                        $output['type'],
+                        $output['description'],
+                        $output['pattern'],
+                    );
                 }
                 $output_text .= '</div>';
                 echo $output_text;

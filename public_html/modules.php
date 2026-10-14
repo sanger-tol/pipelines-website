@@ -72,13 +72,17 @@ if (isset($_GET['update'])) {
 
 $title = 'Modules';
 $subtitle =
-    'Browse the <strong>' . count($modules) . '</strong> modules that are currently available as part of nf-core.';
+    'Browse the <strong>' . count($modules) . '</strong> modules from the sanger-tol/nf-core-modules repository.';
 include '../includes/header.php';
 echo $msg;
 ?>
 
+<style>
+    .module .module-params { min-width: 0; overflow-wrap: anywhere; }
+</style>
+
 <h1>Available Modules</h1>
-<p class="mb-3">Modules are the building stones of all DSL2 nf-core blocks. You can find more info from nf-core website, if you would like to write your own module.
+<p class="mb-3">Modules are reusable process definitions for Nextflow DSL2 pipelines. These modules are maintained in the <a href="https://github.com/sanger-tol/nf-core-modules">sanger-tol/nf-core-modules</a> repository. For guidance on writing modules, see the <a href="https://nf-co.re/docs">nf-core documentation</a>.
 </p>
 <div class=" btn-toolbar mb-4 modules-toolbar" role="toolbar">
     <div class="module-filters input-group input-group-sm w-25">
@@ -145,52 +149,7 @@ echo $msg;
                         <p class="card-text mb-0 mt-2 description <?php echo $module['name']; ?>-description">
                             <?php echo parse_md($module['description'])['content']; ?>
                         </p>
-                        <div class="module-params d-flex">
-                            <div class="module-input flex-fill">
-                                <label class="text-success">Input</label>
-
-                                <?php
-                                $input_text = '<p class="d-flex flex-wrap">';
-                                if(is_array($module['input'])){
-                                    foreach ($module['input'] as $input) {
-                                        foreach ($input as $name => $input_value) {
-                                            $description = $input_value['description'];
-                                            $description = str_replace('[', '<code class="px-0">[', $description);
-                                            $description = str_replace(']', ']</code>', $description);
-                                            $input_text .=
-                                                '<code class="me-1 mt-1 py-0" data-bs-toggle="tooltip" title="' .
-                                                $input_value['description'] .
-                                                '">' .
-                                                $name .
-                                                '</code>';
-                                        }
-                                    }
-                                }else{
-                                    $input_text .= "NO input";
-                                }
-                                $input_text .= '</p>';
-                                echo $input_text;
-                                ?>
-                            </div>
-                            <div class="module-output flex-fill">
-                                <label class="text-success">Output</label>
-                                <?php
-                                $output_text = '<p class="d-flex flex-wrap">';
-                                foreach ($module['output'] as $output) {
-                                    foreach ($output as $name => $output_value) {
-                                        $description = $output_value['description'];
-                                        $output_text .=
-                                            '<code class="me-1 mt-1 py-0" data-bs-toggle="tooltip" title="' .
-                                            $output_value['description'] .
-                                            '">' .
-                                            $name .
-                                            ' </code>';
-                                    }
-                                }
-                                $output_text .= '</p>';
-                                echo $output_text;
-                                ?>
-                            </div>
+                        <div class="module-params">
                             <div class="module-tools  flex-fill">
                                 <?php
                                 $tool_text = '<div class="d-flex flex-wrap">';
@@ -216,9 +175,9 @@ echo $msg;
                                                 '</span>';
                                             $tool_text .= '</div>';
                                         }
-                                        $tool_text .= '</ul>';
                                     }
                                 }
+                                $tool_text .= '</div>';
                                 if (substr_count($tool_text, '<div>') > 0) {
                                     $tool_text = '<label class="text-success">Tools</label>' . $tool_text;
                                 }
@@ -228,8 +187,8 @@ echo $msg;
                         </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
     </div>
     <nav aria-label="Module page navigation ">
         <ul class="pagination">

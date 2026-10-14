@@ -4,6 +4,30 @@
 // Include the PHP Composer autoloader for required libraries
 require dirname(__FILE__) . '/../vendor/autoload.php';
 
+function module_parameter_fields($parameters, $channel = '') {
+    $fields = [];
+    if (!is_array($parameters)) {
+        return $fields;
+    }
+    foreach ($parameters as $name => $value) {
+        if (!is_array($value)) {
+            continue;
+        }
+        if (isset($value['type']) || isset($value['description'])) {
+            $fields[] = [
+                'name' => $name,
+                'channel' => $channel,
+                'type' => $value['type'] ?? '',
+                'description' => $value['description'] ?? '',
+                'pattern' => $value['pattern'] ?? '',
+            ];
+        } else {
+            $fields = array_merge($fields, module_parameter_fields($value, is_string($name) ? $name : $channel));
+        }
+    }
+    return $fields;
+}
+
 // Pull out YAML front-matter from a markdown file
 function parse_md_front_matter($md_full) {
     if (substr($md_full, 0, 3) == '---') {
