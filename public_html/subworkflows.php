@@ -144,6 +144,7 @@ include __DIR__ . '/../includes/header.php';
         </div>
     <?php endif; ?>
     <h1>Available Subworkflows</h1>
+    <p class="mb-3">Subworkflows combine modules into reusable groups of processes for Nextflow DSL2 pipelines. These subworkflows are maintained in the <a href="https://github.com/sanger-tol/nf-core-modules">sanger-tol/nf-core-modules</a> repository. For guidance on writing subworkflows, see the <a href="https://nf-co.re/docs">nf-core documentation</a>.</p>
     <form action="/subworkflows" method="get" class="btn-toolbar mb-4" role="search">
         <div class="input-group input-group-sm subworkflow-filters">
             <label for="subworkflow-search" class="visually-hidden">Search subworkflows</label>
