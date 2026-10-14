@@ -121,6 +121,23 @@ function update_subworkflow_details($conn, callable $query) {
             );
             $statement->execute();
         }
+        $paths = array_column($subworkflows, 'github_path');
+        $stale_condition = $paths
+            ? 'github_path NOT IN (' . implode(', ', array_fill(0, count($paths), '?')) . ')'
+            : '1 = 1';
+        foreach ([
+            'DELETE pipeline_subworkflows FROM pipeline_subworkflows
+                INNER JOIN nfcore_suworkflows ON pipeline_subworkflows.subworkflow_id = nfcore_suworkflows.id
+                WHERE ' . $stale_condition,
+            'DELETE FROM nfcore_suworkflows WHERE ' . $stale_condition,
+        ] as $delete_sql) {
+            $delete_statement = $conn->prepare($delete_sql);
+            if ($paths) {
+                $delete_statement->bind_param(str_repeat('s', count($paths)), ...$paths);
+            }
+            $delete_statement->execute();
+            $delete_statement->close();
+        }
         $conn->commit();
     } catch (Throwable $error) {
         $conn->rollback();

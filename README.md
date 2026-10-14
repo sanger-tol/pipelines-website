@@ -107,6 +107,10 @@ To update the modules database (from within the docker container) run:
 php update_module_details.php
 ```
 
+Module imports match existing records by GitHub path. Paths absent from the complete repository
+tree and their pipeline relationships are removed in the same transaction as metadata updates.
+Incomplete trees or invalid metadata abort the import before reconciliation.
+
 After the modules update has populated `nfcore_pipelines`, import subworkflows with:
 
 ```bash
@@ -121,7 +125,9 @@ or subworkflow pages; upstream nf-core modules link to their nf-core documentati
 
 Run this command from the CLI, optionally on a schedule after `update_module_details.php`.
 Repeated runs update existing records and refresh pipeline relationships without duplicating them.
-Failed or missing pipeline manifests leave that pipeline's existing relationships untouched.
+Paths absent from the complete repository tree and their pipeline relationships are removed in the
+same transaction as metadata updates. Failed or missing pipeline manifests leave that pipeline's
+existing relationships to retained subworkflows untouched.
 
 Optionally, once you've done that, you can grab the pipeline traffic, issue statistics and font awesome icons:
 
