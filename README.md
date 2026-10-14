@@ -107,6 +107,22 @@ To update the modules database (from within the docker container) run:
 php update_module_details.php
 ```
 
+After the modules update has populated `nfcore_pipelines`, import subworkflows with:
+
+```bash
+php update_subworkflow_details.php
+```
+
+This creates and updates `nfcore_suworkflows` (the table name intentionally uses this spelling)
+and `pipeline_subworkflows`. The `components` JSON field preserves component names and their
+repository metadata. Browse `/subworkflows` for the list and `/subworkflows/<name>` for component
+links, inputs, outputs, authors, and pipeline usage. Local components link to this site's module
+or subworkflow pages; upstream nf-core modules link to their nf-core documentation.
+
+Run this command from the CLI, optionally on a schedule after `update_module_details.php`.
+Repeated runs update existing records and refresh pipeline relationships without duplicating them.
+Failed or missing pipeline manifests leave that pipeline's existing relationships untouched.
+
 Optionally, once you've done that, you can grab the pipeline traffic, issue statistics and font awesome icons:
 
 ```bash

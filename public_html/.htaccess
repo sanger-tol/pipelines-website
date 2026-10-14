@@ -25,6 +25,8 @@
     RewriteCond %{REQUEST_URI} ^(.*)/{2,}(.*)$
     RewriteRule (.*) %1/%2 [R=301,L]
 
+    RewriteRule ^subworkflows/([^/]+)$ /_routes.php?path=subworkflows/$1 [L,QSA]
+
     # Run PHP without filename extension
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME}.php -f
