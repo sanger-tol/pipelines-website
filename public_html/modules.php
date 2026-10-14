@@ -5,7 +5,14 @@ $config = parse_ini_file('../config.ini');
 $conn = mysqli_connect($config['host'], $config['username'], $config['password'], $config['dbname'], $config['port']);
 
 // get all modules
-$sql = 'SELECT * FROM nfcore_modules ORDER BY LOWER(name)';
+$sql = 'SELECT nfcore_modules.*, COALESCE(pipeline_counts.pipeline_count, 0) AS pipeline_count
+    FROM nfcore_modules
+    LEFT JOIN (
+        SELECT module_id, COUNT(DISTINCT pipeline_id) AS pipeline_count
+        FROM pipelines_modules
+        GROUP BY module_id
+    ) AS pipeline_counts ON pipeline_counts.module_id = nfcore_modules.id
+    ORDER BY LOWER(nfcore_modules.name)';
 $modules = [];
 if ($result = mysqli_query($conn, $sql)) {
     if (mysqli_num_rows($result) > 0) {
@@ -185,6 +192,7 @@ echo $msg;
                                 ?>
                             </div>
                         </div>
+                        <p class="small text-muted mb-0 module-pipeline-count"><?php echo (int) $module['pipeline_count']; ?> pipelines</p>
                     </div>
                 </div>
             <?php endforeach; ?>
