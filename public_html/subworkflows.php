@@ -4,11 +4,6 @@ require_once __DIR__ . '/../includes/functions.php';
 $escape = function ($value) {
     return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
 };
-$update_output = [];
-$update_status = null;
-if (!isset($subworkflow_name) && isset($_GET['update'])) {
-    exec('php ' . escapeshellarg(__DIR__ . '/../update_subworkflow_details.php') . ' 2>&1', $update_output, $update_status);
-}
 $markdown = new ParsedownExtra();
 $markdown->setSafeMode(true);
 $subworkflows = [];
@@ -137,12 +132,6 @@ include __DIR__ . '/../includes/header.php';
     .subworkflow-facets .facet-value { align-self: start; }
 </style>
 <div class="subworkflow-list">
-    <?php if ($update_status !== null): ?>
-        <div class="alert alert-<?php echo $update_status === 0 ? 'success' : 'danger'; ?>" role="status">
-            <?php echo $update_status === 0 ? 'Subworkflow update completed.' : 'Subworkflow update failed or completed with errors.'; ?>
-            <pre class="mb-0"><?php echo $escape(implode("\n", $update_output)); ?></pre>
-        </div>
-    <?php endif; ?>
     <h1>Available Subworkflows</h1>
     <p class="mb-3">Subworkflows combine modules into reusable groups of processes for Nextflow DSL2 pipelines. These subworkflows are maintained in the <a href="https://github.com/sanger-tol/nf-core-modules">sanger-tol/nf-core-modules</a> repository. For guidance on writing subworkflows, see the <a href="https://nf-co.re/docs">nf-core documentation</a>.</p>
     <form action="/subworkflows" method="get" class="btn-toolbar mb-4" role="search">
@@ -200,8 +189,5 @@ include __DIR__ . '/../includes/header.php';
             </div>
         </div>
     <?php endif; ?>
-    <p class="mt-5 small text-muted">
-        <a href="/subworkflows?update">Click here</a> to trigger an update.
-    </p>
 </div>
 <?php include __DIR__ . '/../includes/footer.php';

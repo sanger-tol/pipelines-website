@@ -71,17 +71,10 @@ function add_update_url_param($param_key, $param_value) {
     return http_build_query($params);
 }
 
-$msg = '';
-if (isset($_GET['update'])) {
-    $output = shell_exec('php ../update_module_details.php 2>&1 | tee -a /home/nfcore/update.log');
-    $msg = '<div class="alert alert-success">Manual modules update sync triggered: <pre>' . $output . '</pre></div>';
-}
-
 $title = 'Modules';
 $subtitle =
     'Browse the <strong>' . count($modules) . '</strong> modules from the sanger-tol/nf-core-modules repository.';
 include '../includes/header.php';
-echo $msg;
 ?>
 
 <style>
@@ -230,7 +223,4 @@ echo $msg;
         </ul>
     </nav>
 </div>
-<p class="mt-5 small text-muted">
-    <a href="/modules?update">Click here</a> to trigger an update.
-</p>
 <?php include '../includes/footer.php';
