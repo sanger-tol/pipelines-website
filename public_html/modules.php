@@ -121,7 +121,7 @@ echo $msg;
         -->
     </div>
     <div class="col-12 col-lg-9">
-        <p class="no-modules text-muted mt-5" style="display: none;">No modules found..</p>
+        <p class="no-modules text-muted mt-5" style="display: none;">No modules found.</p>
         <div class="modules-container modules-container-list">
             <?php foreach ($current_modules as $idx => $module): ?>
                 <div class="card pipeline module mb-2">
