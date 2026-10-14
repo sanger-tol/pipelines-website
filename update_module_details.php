@@ -78,7 +78,7 @@ function github_query($gh_query_url) {
 //  nf-core modules table
 //
 
-$gh_modules = github_query('https://api.github.com/repos/nf-core/modules/git/trees/master?recursive=1');
+$gh_modules = github_query('https://api.github.com/repos/sanger-tol/nf-core-modules/git/trees/main?recursive=1');
 $modules = [];
 foreach ($gh_modules['tree'] as $f) {
     if (substr($f['path'], -8) == 'meta.yml' && substr($f['path'], 0, 8) == 'modules/') {
@@ -98,7 +98,7 @@ foreach ($gh_modules['tree'] as $f) {
     }
 }
 
-echo "\nModules in nf-core in total: " . count($modules) . "\n\n";
+echo "\nModules in sanger-tol/nf-core-modules in total: " . count($modules) . "\n\n";
 
 $sql = "CREATE TABLE IF NOT EXISTS  nfcore_modules (
             id           INT             AUTO_INCREMENT PRIMARY KEY,
@@ -429,7 +429,7 @@ foreach ($pipelines as $pipeline) {
     );
     $modules_json = json_decode(base64_decode($modules_json['content']), true);
 
-    $modules = $modules_json['repos']['https://github.com/nf-core/modules.git']['modules']['nf-core'];
+    $modules = $modules_json['repos']['https://github.com/sanger-tol/nf-core-modules.git']['modules']['sanger-tol'];
  
 
     // catch repos with no modules.json
