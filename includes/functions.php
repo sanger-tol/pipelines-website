@@ -620,6 +620,7 @@ function get_modules() {
                 $row['tools'] = json_decode($row['tools'], true);
                 $row['input'] = json_decode($row['input'], true);
                 $row['output'] = json_decode($row['output'], true);
+                $row['topics'] = json_decode($row['topics'] ?? '[]', true) ?? [];
                 $modules[] = $row;
             }
             // Free result set

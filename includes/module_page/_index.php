@@ -23,8 +23,8 @@ if ($result = mysqli_query($conn, $sql)) {
 }
 mysqli_close($conn);
 // function to create bootstrap row with the first column for the name and type and the second for the description
-function create_row($name, $type, $description, $pattern) {
-    $id = strtolower(preg_replace('/[^\w\-\.]+/', '', str_replace(' ', '-', $name)));
+function create_row($name, $type, $description, $pattern, $id_prefix = '') {
+    $id = strtolower(preg_replace('/[^\w\-\.]+/', '', str_replace(' ', '-', $id_prefix . $name)));
     $id = str_replace('.', '-', $id); // periods break the js code, because they are not valid in selector ids
 
     $row = '<div class="row border-bottom align-items-center">';
@@ -188,6 +188,35 @@ include '../includes/header.php';
                 echo $output_text;
                 ?>
             </div>
+            <?php $topic_fields = module_parameter_fields($module['topics'] ?? []); ?>
+            <?php if (!empty($topic_fields)): ?>
+            <div class="module-topics mt-5">
+                <h2 id="topics" class="text-success ms-n3"><i class="fad fa-sign-out fa-fw"></i> Topics
+                    <a href="#topics" class="header-link scroll_to_link"><span class="fas fa-link" aria-hidden="true"></span></a>
+                </h2>
+
+                <?php
+                $topics_text = '<div class="">';
+                $topics_text .= $header;
+                $topic_channel = '';
+                foreach ($topic_fields as $topic) {
+                    if ($topic['channel'] !== '' && $topic['channel'] !== $topic_channel) {
+                        $topics_text .= '<h3 class="h5 mt-3">' . htmlspecialchars($topic['channel'], ENT_QUOTES, 'UTF-8') . '</h3>';
+                    }
+                    $topic_channel = $topic['channel'];
+                    $topics_text .= create_row(
+                        htmlspecialchars($topic['name'], ENT_QUOTES, 'UTF-8'),
+                        htmlspecialchars($topic['type'], ENT_QUOTES, 'UTF-8'),
+                        $topic['description'],
+                        htmlspecialchars($topic['pattern'], ENT_QUOTES, 'UTF-8'),
+                        'topic-' . $topic_channel . '-',
+                    );
+                }
+                $topics_text .= '</div>';
+                echo $topics_text;
+                ?>
+            </div>
+            <?php endif; ?>
             <div class="module-tools mt-5">
                 <?php
                 $tool_text = '<div class="">';

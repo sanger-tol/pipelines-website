@@ -97,7 +97,7 @@ foreach ($gh_modules['tree'] as $f) {
         if (!is_array($meta_content) || empty($meta_content['name']) || !is_string($meta_content['name'])) {
             throw new RuntimeException('Missing module name in ' . $f['path']);
         }
-        foreach (['tools', 'input', 'output'] as $field) {
+        foreach (['tools', 'input', 'output', 'topics'] as $field) {
             if (isset($meta_content[$field]) && !is_array($meta_content[$field])) {
                 throw new RuntimeException('Invalid ' . $field . ' in ' . $f['path']);
             }
@@ -127,6 +127,7 @@ $sql = "CREATE TABLE IF NOT EXISTS  nfcore_modules (
             tools	     JSON            NOT NULL,
             input	     JSON            NOT NULL,
             output	     JSON            NOT NULL,
+            topics       JSON            DEFAULT NULL,
             authors	     VARCHAR (2000)  NOT NULL,
             date_added   TIMESTAMP       DEFAULT CURRENT_TIMESTAMP,
             date_updated TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -142,10 +143,10 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $conn->begin_transaction();
 try {
     $insert_statement = $conn->prepare('INSERT INTO nfcore_modules
-        (github_sha, github_path, api_url, name, description, keywords, tools, input, output, authors)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        (github_sha, github_path, api_url, name, description, keywords, tools, input, output, topics, authors)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     $update_statement = $conn->prepare('UPDATE nfcore_modules SET github_sha = ?, github_path = ?,
-        api_url = ?, name = ?, description = ?, keywords = ?, tools = ?, input = ?, output = ?, authors = ?
+        api_url = ?, name = ?, description = ?, keywords = ?, tools = ?, input = ?, output = ?, topics = ?, authors = ?
         WHERE github_path = ?');
     $check_statement = $conn->prepare('SELECT id FROM nfcore_modules WHERE github_path = ?');
     foreach ($modules as $module) {
@@ -159,6 +160,7 @@ try {
             json_encode($module['tools'], JSON_THROW_ON_ERROR),
             json_encode($module['input'], JSON_THROW_ON_ERROR),
             json_encode($module['output'], JSON_THROW_ON_ERROR),
+            json_encode($module['topics'], JSON_THROW_ON_ERROR),
             $module['authors'],
         ];
         $check_statement->bind_param('s', $module['github_path']);

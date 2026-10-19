@@ -111,6 +111,10 @@ Module imports match existing records by GitHub path. Paths absent from the comp
 tree and their pipeline relationships are removed in the same transaction as metadata updates.
 Incomplete trees or invalid metadata abort the import before reconciliation.
 
+The module table schema includes a `topics` column for topic channels imported from module YAML.
+The module update populates the Topics section on module pages.
+Modules without topics omit this section; legacy `versions_*` channels remain under Output.
+
 After the modules update has populated `nfcore_pipelines`, import subworkflows with:
 
 ```bash
