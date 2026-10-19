@@ -305,7 +305,7 @@ include '../includes/header.php';
             <?php if (count($pipelines) > 0): ?>
                 <div class="row border-bottom">
                     <div class="col-12">
-                        <h6>nf-core pipelines with this module</h6>
+                        <h6>Pipelines with this module</h6>
                         <?php foreach ($pipelines as $pipeline) {
                             echo '<a class="badge bg-light text-dark me-1 mb-1" href="/' .
                                 $pipeline['name'] .
