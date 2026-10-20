@@ -41,6 +41,7 @@ function github_query($gh_query_url) {
         'http' => [
             'method' => 'GET',
             'header' => ['User-Agent: PHP', "Authorization: Basic $gh_auth"],
+            'ignore_errors' => true,
         ],
     ]);
 
@@ -55,20 +56,20 @@ function github_query($gh_query_url) {
             $gh_query_url = $next_page;
         }
         $tmp_results = json_decode(file_get_contents($gh_query_url, false, $gh_api_opts), true);
+        $http_status = $http_response_header[0] ?? 'No HTTP response';
         // If the data hasn't been cached when you query a repository's statistics, you'll receive a 202 response;
         // a background job is also fired to start compiling these statistics.
         // Give the job a few moments to complete, and then submit the request again
         // HTTP/1.0 202 Accepted
-        if ( preg_match('/HTTP\/\d\.?\d? 202/', $http_response_header[0]) ) {
+        if ( preg_match('/HTTP\/\d\.?\d? 202/', $http_status) ) {
             echo "Waiting for GitHub API to return results for $gh_query_url \n";
             sleep(10);
             $first_page = true;
             continue;
         }
-        if (!preg_match('/HTTP\/\d\.?\d? 200/', $http_response_header[0])) {
-            var_dump($http_response_header);        
-            echo "\nCould not fetch $gh_query_url";
-            continue;
+        if (!preg_match('/HTTP\/\d\.?\d? 200/', $http_status)) {
+            echo "Could not fetch $gh_query_url ($http_status); skipping this request.\n";
+            return [];
         }
         if (substr($gh_query_url, 0, 29) == 'https://api.github.com/repos/') {
             $res = $tmp_results;
@@ -133,9 +134,13 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
             'https://api.github.com/repos/sanger-tol/' . $pipeline['name'] . '/stats/contributors',
         );
         foreach ($gh_contributors as $contributor) {
+            $author = $contributor['author']['login'] ?? null;
+            if (!is_string($author) || $author === '') {
+                echo "Skipping contributor without a GitHub login for pipeline " . $pipeline['name'] . "\n";
+                continue;
+            }
             $pipeline_id = $pipeline['id'];
-            $author = $contributor['author']['login'];
-            $avatar_url = $contributor['author']['avatar_url'];
+            $avatar_url = $contributor['author']['avatar_url'] ?? '';
             foreach ($contributor['weeks'] as $week) {
                 $week_date = date('Y-m-d', $week['w']);
                 //check if entry for this pipeline_id and week_date already exists and skip if so
@@ -195,6 +200,9 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
         echo "Get traffic views and clones for pipeline ". $pipeline['name'] . "\n";
         $gh_views = github_query('https://api.github.com/repos/sanger-tol/' . $pipeline['name'] . '/traffic/views');
         $gh_clones = github_query('https://api.github.com/repos/sanger-tol/' . $pipeline['name'] . '/traffic/clones');
+        if ($gh_views === [] || $gh_clones === []) {
+            continue;
+        }
         foreach ($gh_views['views'] as $gh_view) {
             $timestamp = date('Y-m-d H:i:s', strtotime($gh_view['timestamp']));
             $check =
