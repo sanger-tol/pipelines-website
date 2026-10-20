@@ -200,6 +200,9 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
         echo "Get traffic views and clones for pipeline ". $pipeline['name'] . "\n";
         $gh_views = github_query('https://api.github.com/repos/sanger-tol/' . $pipeline['name'] . '/traffic/views');
         $gh_clones = github_query('https://api.github.com/repos/sanger-tol/' . $pipeline['name'] . '/traffic/clones');
+        if ($gh_views === [] || $gh_clones === []) {
+            continue;
+        }
         foreach ($gh_views['views'] as $gh_view) {
             $timestamp = date('Y-m-d H:i:s', strtotime($gh_view['timestamp']));
             $check =
