@@ -23,8 +23,8 @@ if ($result = mysqli_query($conn, $sql)) {
 }
 mysqli_close($conn);
 // function to create bootstrap row with the first column for the name and type and the second for the description
-function create_row($name, $type, $description, $pattern) {
-    $id = strtolower(preg_replace('/[^\w\-\.]+/', '', str_replace(' ', '-', $name)));
+function create_row($name, $type, $description, $pattern, $id_prefix = '') {
+    $id = strtolower(preg_replace('/[^\w\-\.]+/', '', str_replace(' ', '-', $id_prefix . $name)));
     $id = str_replace('.', '-', $id); // periods break the js code, because they are not valid in selector ids
 
     $row = '<div class="row border-bottom align-items-center">';
@@ -71,7 +71,7 @@ $content = '';
 $schema_content = '';
 $import_chartjs = true;
 $no_auto_toc = true;
-$gh_url = 'https://github.com/nf-core/modules/tree/master/' . str_replace('/meta.yml', '', $module['github_path']);
+$gh_url = 'https://github.com/sanger-tol/nf-core-modules/tree/main/' . str_replace('/meta.yml', '', $module['github_path']);
 
 # Header - keywords
 $header_html = '<p class="mb-0">';
@@ -106,7 +106,7 @@ include '../includes/header.php';
         <div class="input-group input-group module-install-cmd w-50">
             <span class="input-group-text"><i class="fas fa-terminal"></i></span>
             <input type="text" class="form-control input code" id="module-install-cmd-text" data-autoselect=""
-            value="nf-core modules install <?php echo str_replace('_', '/', $module['name']); ?>"
+            value="nf-core modules --git-remote https://github.com/sanger-tol/nf-core-modules.git install <?php echo str_replace('_', '/', $module['name']); ?>"
             aria-h3="Copy install command" readonly="">
             <button class="btn btn-outline-secondary copy-txt" data-bs-target="module-install-cmd-text" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy to clipboard" type="button"><i class="fas fa-clipboard px-1"></i></button>
         </div>
@@ -151,11 +151,13 @@ include '../includes/header.php';
                 <?php
                 $input_text = '<div class="">';
                 $input_text .= $header;
-                foreach ($module['input'] as $input) {
-                    foreach ($input as $name => $input_value) {
-                        $description = $input_value['description'];
-                        $input_text .= create_row($name, $input_value['type'], $description, $input_value['pattern']);
+                $input_channel = '';
+                foreach (module_parameter_fields($module['input']) as $input) {
+                    if ($input['channel'] !== '' && $input['channel'] !== $input_channel) {
+                        $input_text .= '<h3 class="h5 mt-3">' . htmlspecialchars($input['channel'], ENT_QUOTES, 'UTF-8') . '</h3>';
                     }
+                    $input_channel = $input['channel'];
+                    $input_text .= create_row($input['name'], $input['type'], $input['description'], $input['pattern']);
                 }
                 $input_text .= '</div>';
                 echo $input_text;
@@ -169,21 +171,52 @@ include '../includes/header.php';
                 <?php
                 $output_text = '<div class="">';
                 $output_text .= $header;
-                foreach ($module['output'] as $output) {
-                    foreach ($output as $name => $output_value) {
-                        $description = $output_value['description'];
-                        $output_text .= create_row(
-                            $name,
-                            $output_value['type'],
-                            $description,
-                            $output_value['pattern'],
-                        );
+                $output_channel = '';
+                foreach (module_parameter_fields($module['output']) as $output) {
+                    if ($output['channel'] !== '' && $output['channel'] !== $output_channel) {
+                        $output_text .= '<h3 class="h5 mt-3">' . htmlspecialchars($output['channel'], ENT_QUOTES, 'UTF-8') . '</h3>';
                     }
+                    $output_channel = $output['channel'];
+                    $output_text .= create_row(
+                        $output['name'],
+                        $output['type'],
+                        $output['description'],
+                        $output['pattern'],
+                    );
                 }
                 $output_text .= '</div>';
                 echo $output_text;
                 ?>
             </div>
+            <?php $topic_fields = module_parameter_fields($module['topics'] ?? []); ?>
+            <?php if (!empty($topic_fields)): ?>
+            <div class="module-topics mt-5">
+                <h2 id="topics" class="text-success ms-n3"><i class="fad fa-sign-out fa-fw"></i> Topics
+                    <a href="#topics" class="header-link scroll_to_link"><span class="fas fa-link" aria-hidden="true"></span></a>
+                </h2>
+
+                <?php
+                $topics_text = '<div class="">';
+                $topics_text .= $header;
+                $topic_channel = '';
+                foreach ($topic_fields as $topic) {
+                    if ($topic['channel'] !== '' && $topic['channel'] !== $topic_channel) {
+                        $topics_text .= '<h3 class="h5 mt-3">' . htmlspecialchars($topic['channel'], ENT_QUOTES, 'UTF-8') . '</h3>';
+                    }
+                    $topic_channel = $topic['channel'];
+                    $topics_text .= create_row(
+                        htmlspecialchars($topic['name'], ENT_QUOTES, 'UTF-8'),
+                        htmlspecialchars($topic['type'], ENT_QUOTES, 'UTF-8'),
+                        $topic['description'],
+                        htmlspecialchars($topic['pattern'], ENT_QUOTES, 'UTF-8'),
+                        'topic-' . $topic_channel . '-',
+                    );
+                }
+                $topics_text .= '</div>';
+                echo $topics_text;
+                ?>
+            </div>
+            <?php endif; ?>
             <div class="module-tools mt-5">
                 <?php
                 $tool_text = '<div class="">';
@@ -272,7 +305,7 @@ include '../includes/header.php';
             <?php if (count($pipelines) > 0): ?>
                 <div class="row border-bottom">
                     <div class="col-12">
-                        <h6>nf-core pipelines with this module</h6>
+                        <h6>Pipelines with this module</h6>
                         <?php foreach ($pipelines as $pipeline) {
                             echo '<a class="badge bg-light text-dark me-1 mb-1" href="/' .
                                 $pipeline['name'] .
@@ -295,8 +328,7 @@ include '../includes/header.php';
             </div>
             <div>
                 <h6>get in touch</h6>
-                <p><a class="btn btn-sm btn-outline-info" href="https://nfcore.slack.com/channels/modules"><i class="fab fa-slack me-1"></i> Ask a question on Slack</a></p>
-                <p><a class="btn btn-sm btn-outline-secondary" href="https://github.com/nf-core/modules/issues"><i class="fab fa-github me-1"></i> Open an issue on GitHub</a></p>
+                <p><a class="btn btn-sm btn-outline-secondary" href="https://github.com/sanger-tol/nf-core-modules/issues"><i class="fab fa-github me-1"></i> Open an issue on GitHub</a></p>
             </div>
         </div>
     <?php }

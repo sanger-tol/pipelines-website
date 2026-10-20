@@ -53,6 +53,12 @@ if (file_exists($docs_md_base . $md_fn)) {
 
 # is it the new docs location
 
+if (strtolower($path_parts[0]) == 'subworkflows' && count($path_parts) === 2) {
+    $subworkflow_name = $path_parts[1];
+    include 'subworkflows.php';
+    exit();
+}
+
 # is it a module?
 if (strtolower($path_parts[0]) == 'modules') {
     require_once '../includes/functions.php';
