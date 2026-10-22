@@ -445,13 +445,14 @@ foreach ($pipelines as $pipeline) {
     $modules_json = github_query(
         'https://api.github.com/repos/sanger-tol/' . basename($pipeline['name']) . '/contents/modules.json',
     );
-    $modules_json = json_decode(base64_decode($modules_json['content']), true);
-
-    $modules = $modules_json['repos']['https://github.com/sanger-tol/nf-core-modules.git']['modules']['sanger-tol'];
- 
+    $modules_json = json_decode(
+        base64_decode($modules_json['content'] ?? '', true) ?: '',
+        true,
+    );
+    $modules = $modules_json['repos']['https://github.com/sanger-tol/nf-core-modules.git']['modules']['sanger-tol'] ?? null;
 
     // catch repos with no modules.json
-    if ($modules == null) {
+    if (!is_array($modules) || $modules === []) {
         echo "No nf-core modules for pipeline " . htmlspecialchars($pipeline['name'], ENT_QUOTES, 'UTF-8') . "\n";
         continue;
     }

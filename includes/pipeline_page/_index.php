@@ -66,7 +66,7 @@ if (count($path_parts) > 1) {
     foreach ($pipeline->releases as $r) {
         if ($path_parts[1] === $r->tag_name) {
             $release = $r->tag_name;
-            $release_url = $releases->html_url;
+            $release_url = $r->html_url;
             $release_hash = $r->tag_sha;
         }
     }
@@ -487,4 +487,3 @@ if ($pipeline->archived) {
   echo '</div></div>'; # end of the sidebar col
   echo '</div>'; # end of the row
   include '../includes/footer.php';
-

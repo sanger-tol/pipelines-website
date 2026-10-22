@@ -23,8 +23,8 @@ $event_type_icons = [
 ];
 
 function create_event_download_button($event, $button_style) {
-    $start_ts = htmlspecialchars($event['start_ts'], ENT_QUOTES, 'UTF-8');
-    $end_ts = htmlspecialchars($event['end_ts'], ENT_QUOTES, 'UTF-8');
+    $start_ts = $event['start_ts'];
+    $end_ts = $event['end_ts'];
     $start = DateTime::createFromFormat('U', $start_ts);
     $start->setTimezone(new DateTimeZone('Europe/Amsterdam'));
     $end = DateTime::createFromFormat('U', $end_ts);
@@ -69,8 +69,8 @@ function print_events($events, $is_past_event) {
     foreach ($events as $idx => $event):
 
         # Nice date strings
-        $start_ts = htmlspecialchars($event['start_ts'], ENT_QUOTES, 'UTF-8');
-        $end_ts = htmlspecialchars($event['end_ts'], ENT_QUOTES, 'UTF-8');
+        $start_ts = $event['start_ts'];
+        $end_ts = $event['end_ts'];
         $date_string =
             date('j<\s\u\p>S</\s\u\p> M Y', $start_ts) .
             ' - ' .

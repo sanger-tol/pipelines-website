@@ -17,6 +17,7 @@ $sidebar_nav_elements = [];
 # function to generate an array of the file structure
 function dir_tree($dir) {
     global $docs_md_base;
+    $tree = [];
     $files = array_map('basename', glob("$dir/*"));
     foreach ($files as $file) {
         if (is_dir("$dir/$file")) {
@@ -26,12 +27,20 @@ function dir_tree($dir) {
             $fm = parse_md_front_matter($fm);
             $tree[] = [
                 'title' => $fm['meta']['title'],
-                'weight' => $fm['meta']['menu']['main']['weight'] ? $fm['meta']['menu']['main']['weight'] : 100,
+                'weight' => $fm['meta']['menu']['main']['weight'] ?? 100,
                 'url' => str_replace($docs_md_base, '', preg_replace('/\.md$/', '', "$dir/$file")),
             ];
         }
-        # have items with lower weight come first, rest sort by title
-        array_multisort(array_column($tree, 'weight'), SORT_ASC, array_column($tree, 'title'), SORT_ASC, $tree);
+    }
+    # Include directory branches in each sort column as well as page entries.
+    if ($tree !== []) {
+        array_multisort(
+            array_map(static fn ($entry) => $entry['weight'] ?? 100, $tree),
+            SORT_ASC,
+            array_map(static fn ($entry) => $entry['title'] ?? '', $tree),
+            SORT_ASC,
+            $tree,
+        );
     }
     return $tree;
 }
@@ -100,7 +109,7 @@ $toc_nav .=
     '<p class="small text-end mt-3 d-none d-lg-block"><a href="#" class="text-muted"><i class="fas fa-arrow-to-top"></i> Back to top</a></p>';
 $toc_nav .= '</nav>';
 
-$md_content_replace[] = ['<!-- usage_toc -->'];
+$md_content_replace[] = ['/<!-- usage_toc -->/', ''];
 if (in_array($_GET['path'], ['docs'])) {
     $inline_toc = '<div class="row"><div class="col-12 col-md-6"><div class="mb-3 h3">Usage</div><ul>';
     foreach ($sidebar_nav_elements['usage'] as $mdfile => $mdcontent) {
@@ -130,7 +139,7 @@ if (in_array($_GET['path'], ['docs'])) {
             $inline_toc .= '<ul>';
             foreach ($mdcontent as $dropfile => $dropcontent) {
                 $dropcontent['url'] = str_replace('docs/', '', $dropcontent['url']);
-                if (is_array($dropcontent[0])) {
+                if (isset($dropcontent[0]) && is_array($dropcontent[0])) {
                     $dropcontent[0]['url'] = str_replace('docs/', '', $dropcontent[0]['url']);
                     $inline_toc .= '<ul>';
                     $inline_toc .=

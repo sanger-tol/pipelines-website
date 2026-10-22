@@ -337,8 +337,8 @@ function generate_toc($html_string) {
     $is_active = true;
     $id_regex = "~<h([1-3])([^>]*)id\s*=\s*['\"]([^'\"]*)['\"]([^>]*)>(.*)</h[1-3]>~Uis";
     preg_match_all($id_regex, $html_string, $matches, PREG_SET_ORDER);
+    $counter = $curr_level = 0;
     if ($matches) {
-        $counter = $curr_level = 0;
         $shift = min(array_column($matches, 1)) - 1; # get the highest heading level and shift levels to start from 1
         foreach ($matches as $match) {
             $whole_str = $match[0];
