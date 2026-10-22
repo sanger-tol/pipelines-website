@@ -542,7 +542,13 @@ foreach (['pipelines'] as $repo_type) {
         echo " Process contributors for " . $repo_name . "\n";
         foreach ($results[$repo_type][$repo_name]['contributors'] as $idx => $contributor) {
             // Count how many total contributors and contributions we have per week
-            echo "  " . $contributor->author->login . "\n";
+            $login = $contributor->author->login ?? null;
+            if (!is_string($login) || $login === '') {
+                $login = null;
+                echo "  Contributor without a GitHub login; retaining weekly totals only.\n";
+            } else {
+                echo "  " . $login . "\n";
+            }
             // Skip if no weeks
             if (!isset($contributor->weeks) || count($contributor->weeks) == 0) {
                 continue;
@@ -553,13 +559,15 @@ foreach (['pipelines'] as $repo_type) {
                     continue;
                 }
                 // Find earliest contribution per author
-                if (!isset($results['gh_contributors'][$contributor->author->login])) {
-                    $results['gh_contributors'][$contributor->author->login] = $w->w;
+                if ($login !== null) {
+                    if (!isset($results['gh_contributors'][$login])) {
+                        $results['gh_contributors'][$login] = $w->w;
+                    }
+                    $results['gh_contributors'][$login] = min(
+                        $w->w,
+                        $results['gh_contributors'][$login],
+                    );
                 }
-                $results['gh_contributors'][$contributor->login] = min(
-                    $w->w,
-                    $results['gh_contributors'][$contributor->login],
-                );
                 // Sum total contributions for everyone
                 if (!isset($results['gh_commits'][$w->w])) {
                     $results['gh_commits'][$w->w] = 0;
@@ -649,5 +657,3 @@ $results_json = json_encode($results, JSON_PRETTY_PRINT) . "\n";
 file_put_contents($results_fn, $results_json);
 
 echo 'update_stats done ' . date('Y-m-d h:i:s') . "\n\n";
-
-

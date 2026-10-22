@@ -198,7 +198,7 @@ foreach ($repos as $repo) {
                 if (!isset($results['stats'][$issue_type]['daily_closed'][$closed_at_day])) {
                     $results['stats'][$issue_type]['daily_closed'][$closed_at_day] = 0;
                 }
-                $results['stats'][$issue_type]['daily_closed'][$created_at_day] += 1;
+                $results['stats'][$issue_type]['daily_closed'][$closed_at_day] += 1;
             }
         }
         // Look for URL to next page of API results
