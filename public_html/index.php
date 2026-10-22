@@ -471,7 +471,7 @@ pip install nf-core
 
 <script type="text/javascript">
 // List of remaining contributor logos which have not yet been shown
-var contributors_imgs = <?php echo json_encode(array_slice($contributors_img_list, 8)); ?>;
+var contributors_imgs = <?php /* echo json_encode(array_slice($contributors_img_list, 8)); */ ?>;
 
 <?php // Javascript for moment time zone support
 /*

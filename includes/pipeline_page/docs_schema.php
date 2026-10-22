@@ -11,6 +11,11 @@ if (file_exists($gh_pipeline_schema_fn)) {
     $schema = json_decode(file_get_contents($gh_pipeline_schema_fn), true);
     $hidden_params = [];
 
+    function format_schema_value($value) {
+        $text = is_string($value) ? "'" . $value . "'" : json_encode($value, JSON_THROW_ON_ERROR);
+        return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    }
+
     function print_param($is_group, $param_id, $param, $is_required = false) {
         global $hidden_params;
         // Is this parameter hidden?
@@ -35,7 +40,7 @@ if (file_exists($gh_pipeline_schema_fn)) {
         } else {
             $fa_icon = '<i class="fad fa-circle fa-fw text-muted"></i> ';
         }
-        $h_text = $param['title'];
+        $h_text = $param['title'] ?? $param_id;
         if (!$is_group) {
             $h_text = '<code>' . $param_id . '</code>';
         }
@@ -48,8 +53,8 @@ if (file_exists($gh_pipeline_schema_fn)) {
 
         # parameter type
         $type = '';
-        if (array_key_exists('type', $param) && strlen(trim($param['type'])) > 0 && $param['type'] != 'object') {
-            $type = is_string($param['type']) ? "'" . $param['type'] . "'" : $param['type'];
+        if (isset($param['type']) && $param['type'] !== '' && $param['type'] !== 'object') {
+            $type = format_schema_value($param['type']);
             $type =
                 '<span class="text-small overflow-scroll w-100"><span class="text-muted">type: </span>' .
                 $type .
@@ -57,8 +62,8 @@ if (file_exists($gh_pipeline_schema_fn)) {
         }
         # default value
         $default_val = '';
-        if (array_key_exists('default', $param) && strlen(trim($param['default'])) > 0) {
-            $default_val = is_string($param['default']) ? "'" . $param['default'] . "'" : $param['default'];
+        if (array_key_exists('default', $param) && $param['default'] !== '') {
+            $default_val = format_schema_value($param['default']);
             $default_val =
                 '<code class="text-small overflow-scroll w-100"><span class="text-muted">default: </span>' .
                 $default_val .
@@ -89,10 +94,10 @@ if (file_exists($gh_pipeline_schema_fn)) {
             if (count($param['enum']) == 1) {
                 $enum_val =
                     '<code class="text-small"><span class="text-muted">Options: </span>' .
-                    implode(' ', $param['enum']) .
+                    format_schema_value($param['enum'][0]) .
                     '</code>';
             } else {
-                $param_default = is_string($param['default']) ? "'" . $param['default'] . "'" : $param['default'];
+                $param_default = array_key_exists('default', $param) ? format_schema_value($param['default']) : '';
                 $dropdown_label =
                     $default_val != ''
                         ? 'Options: <code class="text-small">' . $param_default . '</code> (default)'
@@ -106,8 +111,8 @@ if (file_exists($gh_pipeline_schema_fn)) {
 
                 foreach ($param['enum'] as $key => $param_enum) {
                     $enum_val .= '<a class="dropdown-item"><code class="text-small">';
-                    $enum_val .= is_string($param_enum) ? "'" . $param_enum . "'" : $param_enum;
-                    if ($param_enum == $param['default']) {
+                    $enum_val .= format_schema_value($param_enum);
+                    if (array_key_exists('default', $param) && $param_enum === $param['default']) {
                         $enum_val .= ' (default)';
                         $default_val = '';
                     }
